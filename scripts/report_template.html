@@ -378,16 +378,25 @@ demoted and labelled, not hidden.</p>
 
 <p>Rent is a geographic question and a ranked list hides that. The shortlist is
 therefore drawn on an OpenStreetMap view of New Haven: numbered pins matching the list,
-a marker on the address the person typed, and a popup on each pin with the real monthly
+a marker on the place the person typed, and a popup on each pin with the real monthly
 cost. Clicking a pin selects that listing, so the list and the map are two views of one
-answer. Destinations resolve through the Census geocoder for street addresses and
-OpenStreetMap for names - neighbourhoods such as East Rock, landmarks such as Yale Bowl,
-a hospital, a supermarket. Neither service needs an API key.</p>
+answer, and a full-screen view docks the list beside the map for comparing them.</p>
+
+<p>Getting there also has to accept what people actually type. An earlier version asked
+only the Census geocoder, which resolves numbered street addresses and nothing else:
+against sixteen real Yale queries it found four. The app now carries a committed
+gazetteer of <strong>{{N_PLACES}} named places</strong> &mdash; {{N_PLACES_CURATED}} of them
+Yale's own schools, residential colleges, libraries and landmarks, resolved and
+bounds-checked at build time, the rest harvested from OpenStreetMap &mdash; matched
+without a network call and forgivingly enough that <em>med school</em>, <em>divinity
+school</em> and <em>peabody</em> all land. Anything still unmatched is geocoded live.
+Neither geocoder needs an API key, so the app's requirement stays at one.</p>
 
 <figure>
-  <img src="{{IMG:13-map}}" alt="Ranked listings on a map of New Haven">
-  <figcaption><b>The shortlist, and where it is.</b> Blue pins are within budget and
-  grey ones are not; the black marker is the destination. Each card below gives the real
+  <img src="{{IMG:14-map-fullscreen}}" alt="Full-screen map with the ranked list beside it">
+  <figcaption><b>The shortlist, and where it is.</b> Full screen, with the ranked list
+  docked alongside. Blue pins are within budget and grey ones are not; the black marker
+  is the destination &mdash; here Yale Divinity School, typed as &ldquo;Divinity School&rdquo;. Each card below gives the real
   monthly cost next to the advertised one, the walk, and how the price sits against
   census rents for its own tract, with the ranking's own reasons underneath &mdash; a score
   nobody can interrogate is a score nobody should trust. Seeing that the cheapest options

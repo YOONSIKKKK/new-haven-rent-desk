@@ -68,6 +68,51 @@ def weights() -> dict:
 
 
 @lru_cache(maxsize=1)
+def places() -> list[dict]:
+    """The committed gazetteer: Yale's buildings plus everything else named here."""
+    path = DATA_DIR / "places.json"
+    if not path.is_file():
+        return []
+    return json.loads(path.read_text(encoding="utf-8"))["places"]
+
+
+def search_places(query: str, limit: int = 8) -> list[dict]:
+    """Rank gazetteer entries against what someone has typed so far.
+
+    Deliberately forgiving. People type "divinity school", "med school",
+    "peabody" and "ysm"; none of those is the official string, and all of them
+    should land. Curated entries win ties because they are the names Yale
+    itself uses.
+    """
+    target = _normalise(query)
+    if not target:
+        return []
+    tokens = target.split()
+
+    scored = []
+    for place in places():
+        label = _normalise(place["label"])
+        if label == target:
+            rank = 0
+        elif label.startswith(target):
+            rank = 1
+        elif target in label:
+            rank = 2
+        elif all(any(w.startswith(t) for w in label.split()) for t in tokens):
+            rank = 3
+        else:
+            continue
+        # A bare neighbourhood name means the neighbourhood, not a venue that
+        # happens to contain the word.
+        is_area = place.get("category") in ("neighbourhood", "area")
+        scored.append((rank, place["source"] != "curated",
+                       0 if is_area else 1, len(label), place))
+
+    scored.sort(key=lambda row: row[:4])
+    return [row[4] for row in scored[:limit]]
+
+
+@lru_cache(maxsize=1)
 def quick_picks() -> list[dict]:
     path = DATA_DIR / "destinations.json"
     if not path.is_file():
@@ -177,15 +222,16 @@ def resolve_destination(text: str) -> tuple[Destination | None, str | None]:
     if not query:
         return None, "Enter the address or place you need to get to every day."
 
-    target = _normalise(query)
-    for place in quick_picks():
-        label = _normalise(place["label"])
-        if target == label or target in label or label in target:
-            return Destination(
-                label=place["label"], address=place["address"],
-                lat=place["lat"], lng=place["lng"],
-                resolved_by="quick_pick", matched_address=place.get("matched_address"),
-            ), None
+    # The gazetteer first: 724 named places, matched without a network call.
+    hits = search_places(query, limit=1)
+    if hits:
+        place = hits[0]
+        return Destination(
+            label=place["label"], address=place.get("address"),
+            lat=place["lat"], lng=place["lng"],
+            resolved_by="quick_pick",
+            matched_address=place.get("matched_address") or place.get("address"),
+        ), None
 
     found = _lookup(query)
     if found is None:

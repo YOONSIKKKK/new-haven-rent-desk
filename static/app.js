@@ -91,6 +91,7 @@ function toggleMapFullscreen(force) {
   const on = force !== undefined ? force : !wrap.classList.contains("fullscreen");
   wrap.classList.toggle("fullscreen", on);
   document.body.classList.toggle("map-open", on);
+  $("map-expand").textContent = on ? "Close map" : "Full screen";
   // Leaflet sizes its canvas once; it has to be told the box changed.
   setTimeout(() => {
     if (map) {
@@ -161,11 +162,21 @@ document.querySelectorAll(".tab").forEach((tab) => {
 });
 
 /* ------------------------------------------------------------ destinations */
-async function loadDestinations() {
+let destTimer = null;
+
+async function loadDestinations(query = "") {
   try {
-    const d = await (await fetch("/api/destinations")).json();
+    const d = await (await fetch("/api/destinations?" +
+      new URLSearchParams({ q: query, limit: "12" }))).json();
     $("destination-list").innerHTML = d.destinations
-      .map((x) => `<option value="${esc(x.label)}">${esc(x.address)}</option>`).join("");
+      .map((x) => `<option value="${esc(x.label)}">${
+        esc(x.address || x.category || "")}</option>`).join("");
+    if (d.total_known) {
+      $("dest-hint").textContent =
+        `${d.total_known.toLocaleString()} places known by name — Yale's schools, ` +
+        `colleges, libraries and landmarks, plus neighbourhoods, parks and stations. ` +
+        `Any other address is looked up as you search.`;
+    }
   } catch (e) { /* the box still accepts a typed address */ }
 }
 
@@ -256,6 +267,11 @@ async function rankListings() {
 }
 $("f-apply").addEventListener("click", rankListings);
 $("destination").addEventListener("change", rankListings);
+$("destination").addEventListener("input", (e) => {
+  clearTimeout(destTimer);
+  const q = e.target.value.trim();
+  destTimer = setTimeout(() => loadDestinations(q), 180);
+});
 
 /* ------------------------------------------------------------ image */
 $("ad-image").addEventListener("change", (e) => {

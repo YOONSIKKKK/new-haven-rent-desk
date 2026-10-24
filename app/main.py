@@ -85,11 +85,23 @@ class RecommendRequest(BaseModel):
 
 
 @app.get("/api/destinations")
-def destinations() -> dict:
-    """Quick picks for the destination box; these need no network call."""
-    return {"destinations": [
-        {"label": d["label"], "address": d["address"]} for d in rec.quick_picks()
-    ]}
+def destinations(q: str = "", limit: int = 10) -> dict:
+    """Type-ahead over the committed gazetteer. No network call, no key.
+
+    With no query it returns the handful of places most people want, so the box
+    is useful before anyone types.
+    """
+    if q.strip():
+        hits = rec.search_places(q, limit=max(1, min(limit, 25)))
+    else:
+        hits = [p for p in rec.places() if p["source"] == "curated"][:limit]
+    return {
+        "total_known": len(rec.places()),
+        "destinations": [
+            {"label": p["label"], "address": p.get("address"), "category": p["category"]}
+            for p in hits
+        ],
+    }
 
 
 @app.post("/api/recommend", response_model=RecommendationResult)

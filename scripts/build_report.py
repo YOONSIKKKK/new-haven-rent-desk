@@ -328,6 +328,7 @@ def collect_values() -> dict:
     baseline = load(ROOT / "data" / "rent_baseline.json")
     cost = load(ROOT / "output" / "cost_test.json")
     assumptions = load(ROOT / "data" / "cost_assumptions.json")
+    places_payload = load(ROOT / "data" / "places.json")
 
     listings = listings_payload["listings"]
     city = baseline["city"]
@@ -417,6 +418,8 @@ def collect_values() -> dict:
         "MAX_OUT": f"{config.MAX_OUTPUT_TOKENS_PER_RUN:,}",
         "MAX_CHARS": f"{config.MAX_AD_TEXT_CHARS:,}",
 
+        "N_PLACES": f"{len(places_payload['places']):,}",
+        "N_PLACES_CURATED": f"{places_payload['curated_count']}",
         "DIAGRAM": diagram(),
     }
 

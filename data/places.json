@@ -1,0 +1,5423 @@
+{
+  "note": "Searchable destinations. Curated entries are Yale's schools, libraries, residential colleges and landmarks, each resolved to coordinates at build time and checked to be inside New Haven. OSM entries add everything else named in the area. Anything not here is geocoded live at request time.",
+  "bbox": {
+    "south": 41.22,
+    "west": -73.05,
+    "north": 41.4,
+    "east": -72.83
+  },
+  "sources": [
+    "Curated by hand, resolved via the U.S. Census geocoder and OpenStreetMap",
+    "OpenStreetMap via the Overpass API"
+  ],
+  "count": 758,
+  "curated_count": 50,
+  "places": [
+    {
+      "label": "Albertus Magnus College",
+      "address": "700 Prospect St, New Haven, CT 06511",
+      "lat": 41.331548,
+      "lng": -72.921196,
+      "category": "school",
+      "source": "curated",
+      "matched_address": "700 PROSPECT ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Bass Library",
+      "address": "110 Wall St, New Haven, CT 06511",
+      "lat": 41.310409,
+      "lng": -72.925615,
+      "category": "library",
+      "source": "curated",
+      "matched_address": "110 WALL ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Beinecke Rare Book and Manuscript Library",
+      "address": "121 Wall St, New Haven, CT 06511",
+      "lat": 41.311445,
+      "lng": -72.927734,
+      "category": "library",
+      "source": "curated",
+      "matched_address": "121 WALL ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Benjamin Franklin College",
+      "address": "260 Prospect St, New Haven, CT 06511",
+      "lat": 41.318582,
+      "lng": -72.92376,
+      "category": "college",
+      "source": "curated",
+      "matched_address": "260 PROSPECT ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Berkeley College",
+      "address": "205 Elm St, New Haven, CT 06511",
+      "lat": 41.310104,
+      "lng": -72.928514,
+      "category": "college",
+      "source": "curated",
+      "matched_address": "205 ELM ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Branford College",
+      "address": "74 High St, New Haven, CT 06511",
+      "lat": 41.308776,
+      "lng": -72.929799,
+      "category": "college",
+      "source": "curated",
+      "matched_address": "74 HIGH ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Davenport College",
+      "address": "248 York St, New Haven, CT 06511",
+      "lat": 41.310059,
+      "lng": -72.930516,
+      "category": "college",
+      "source": "curated",
+      "matched_address": "248 YORK ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Downtown New Haven",
+      "address": "900 Chapel St, New Haven, CT 06510",
+      "lat": 41.306091,
+      "lng": -72.926027,
+      "category": "area",
+      "source": "curated",
+      "matched_address": "900 CHAPEL ST, NEW HAVEN, CT, 06510"
+    },
+    {
+      "label": "Ezra Stiles College",
+      "address": "302 York St, New Haven, CT 06511",
+      "lat": 41.31168,
+      "lng": -72.929305,
+      "category": "college",
+      "source": "curated",
+      "matched_address": "302 YORK ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Grace Hopper College",
+      "address": "189 Elm St, New Haven, CT 06511",
+      "lat": 41.309674,
+      "lng": -72.927469,
+      "category": "college",
+      "source": "curated",
+      "matched_address": "189 ELM ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Ingalls Rink",
+      "address": "73 Sachem St, New Haven, CT 06511",
+      "lat": 41.316273,
+      "lng": -72.92532,
+      "category": "landmark",
+      "source": "curated",
+      "matched_address": "73 SACHEM ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Jonathan Edwards College",
+      "address": "68 High St, New Haven, CT 06511",
+      "lat": 41.308443,
+      "lng": -72.930039,
+      "category": "college",
+      "source": "curated",
+      "matched_address": "68 HIGH ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Kline Tower",
+      "address": "219 Prospect St, New Haven, CT 06511",
+      "lat": 41.318728,
+      "lng": -72.923562,
+      "category": "landmark",
+      "source": "curated",
+      "matched_address": "219 PROSPECT ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Marx Science and Social Science Library",
+      "address": "219 Prospect St, New Haven, CT 06511",
+      "lat": 41.318728,
+      "lng": -72.923562,
+      "category": "library",
+      "source": "curated",
+      "matched_address": "219 PROSPECT ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Morse College",
+      "address": "304 York St, New Haven, CT 06511",
+      "lat": 41.311752,
+      "lng": -72.92925,
+      "category": "college",
+      "source": "curated",
+      "matched_address": "304 YORK ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "New Haven Green",
+      "address": "250 Temple St, New Haven, CT 06511",
+      "lat": 41.307715,
+      "lng": -72.926267,
+      "category": "area",
+      "source": "curated",
+      "matched_address": "250 TEMPLE ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Old Campus",
+      "address": "344 College St, New Haven, CT 06511",
+      "lat": 41.308289,
+      "lng": -72.928039,
+      "category": "landmark",
+      "source": "curated",
+      "matched_address": "344 COLLEGE ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Pauli Murray College",
+      "address": "130 Prospect St, New Haven, CT 06511",
+      "lat": 41.315027,
+      "lng": -72.924766,
+      "category": "college",
+      "source": "curated",
+      "matched_address": "130 PROSPECT ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Payne Whitney Gymnasium",
+      "address": "70 Tower Pkwy, New Haven, CT 06511",
+      "lat": 41.313312,
+      "lng": -72.931164,
+      "category": "landmark",
+      "source": "curated",
+      "matched_address": "70 TOWER PKWY, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Pierson College",
+      "address": "261 Park St, New Haven, CT 06511",
+      "lat": 41.309932,
+      "lng": -72.932668,
+      "category": "college",
+      "source": "curated",
+      "matched_address": "261 PARK ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Saybrook College",
+      "address": "242 Elm St, New Haven, CT 06511",
+      "lat": 41.310428,
+      "lng": -72.929597,
+      "category": "college",
+      "source": "curated",
+      "matched_address": "242 ELM ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Silliman College",
+      "address": "505 College St, New Haven, CT 06511",
+      "lat": 41.310757,
+      "lng": -72.926,
+      "category": "college",
+      "source": "curated",
+      "matched_address": "505 COLLEGE ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Smilow Cancer Hospital",
+      "address": "35 Park St, New Haven, CT 06519",
+      "lat": 41.304516,
+      "lng": -72.936704,
+      "category": "health",
+      "source": "curated",
+      "matched_address": "35 PARK ST, NEW HAVEN, CT, 06519"
+    },
+    {
+      "label": "Southern Connecticut State University",
+      "address": "501 Crescent St, New Haven, CT 06515",
+      "lat": 41.330507,
+      "lng": -72.944594,
+      "category": "school",
+      "source": "curated",
+      "matched_address": "501 CRESCENT ST, NEW HAVEN, CT, 06515"
+    },
+    {
+      "label": "Sterling Memorial Library",
+      "address": "120 High St, New Haven, CT 06511",
+      "lat": 41.310454,
+      "lng": -72.928607,
+      "category": "library",
+      "source": "curated",
+      "matched_address": "120 HIGH ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Timothy Dwight College",
+      "address": "345 Temple St, New Haven, CT 06511",
+      "lat": 41.310292,
+      "lng": -72.92416,
+      "category": "college",
+      "source": "curated",
+      "matched_address": "345 TEMPLE ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Trumbull College",
+      "address": "241 Elm St, New Haven, CT 06511",
+      "lat": 41.310381,
+      "lng": -72.929174,
+      "category": "college",
+      "source": "curated",
+      "matched_address": "241 ELM ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Union Station",
+      "address": "50 Union Ave, New Haven, CT 06519",
+      "lat": 41.297004,
+      "lng": -72.927556,
+      "category": "transport",
+      "source": "curated",
+      "matched_address": "50 UNION AVE, NEW HAVEN, CT, 06519"
+    },
+    {
+      "label": "Woolsey Hall",
+      "address": "500 College St, New Haven, CT 06511",
+      "lat": 41.310779,
+      "lng": -72.926158,
+      "category": "landmark",
+      "source": "curated",
+      "matched_address": "500 COLLEGE ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Yale Bowl",
+      "address": "81 Central Ave, New Haven, CT 06515",
+      "lat": 41.311337,
+      "lng": -72.963548,
+      "category": "landmark",
+      "source": "curated",
+      "matched_address": "81 CENTRAL AVE, NEW HAVEN, CT, 06515"
+    },
+    {
+      "label": "Yale College",
+      "address": "344 College St, New Haven, CT 06511",
+      "lat": 41.308289,
+      "lng": -72.928039,
+      "category": "school",
+      "source": "curated",
+      "matched_address": "344 COLLEGE ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Yale Divinity School",
+      "address": "409 Prospect St, New Haven, CT 06511",
+      "lat": 41.324044,
+      "lng": -72.923233,
+      "category": "school",
+      "source": "curated",
+      "matched_address": "409 PROSPECT ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Yale Graduate School of Arts and Sciences",
+      "address": "320 York St, New Haven, CT 06511",
+      "lat": 41.312063,
+      "lng": -72.929025,
+      "category": "school",
+      "source": "curated",
+      "matched_address": "320 YORK ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Yale Health",
+      "address": "55 Lock St, New Haven, CT 06511",
+      "lat": 41.315498,
+      "lng": -72.927957,
+      "category": "health",
+      "source": "curated",
+      "matched_address": "55 LOCK ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Yale Jackson School of Global Affairs",
+      "address": "55 Hillhouse Ave, New Haven, CT 06511",
+      "lat": 41.314509,
+      "lng": -72.923102,
+      "category": "school",
+      "source": "curated",
+      "matched_address": "55 HILLHOUSE AVE, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Yale Law School",
+      "address": "127 Wall St, New Haven, CT 06511",
+      "lat": 41.311524,
+      "lng": -72.927924,
+      "category": "school",
+      "source": "curated",
+      "matched_address": "127 WALL ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Yale New Haven Hospital",
+      "address": "20 York St, New Haven, CT 06510",
+      "lat": 41.303347,
+      "lng": -72.936143,
+      "category": "health",
+      "source": "curated",
+      "matched_address": "20 YORK ST, NEW HAVEN, CT, 06510"
+    },
+    {
+      "label": "Yale Peabody Museum",
+      "address": "170 Whitney Ave, New Haven, CT 06511",
+      "lat": 41.316704,
+      "lng": -72.920349,
+      "category": "landmark",
+      "source": "curated",
+      "matched_address": "170 WHITNEY AVE, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Yale School of Architecture",
+      "address": "180 York St, New Haven, CT 06511",
+      "lat": 41.308539,
+      "lng": -72.931601,
+      "category": "school",
+      "source": "curated",
+      "matched_address": "180 YORK ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Yale School of Art",
+      "address": "1156 Chapel St, New Haven, CT 06510",
+      "lat": 41.308608,
+      "lng": -72.932752,
+      "category": "school",
+      "source": "curated",
+      "matched_address": "1156 CHAPEL ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Yale School of Drama",
+      "address": "222 York St, New Haven, CT 06511",
+      "lat": 41.309478,
+      "lng": -72.930931,
+      "category": "school",
+      "source": "curated",
+      "matched_address": "222 YORK ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Yale School of Management",
+      "address": "165 Whitney Ave, New Haven, CT 06511",
+      "lat": 41.317277,
+      "lng": -72.91992,
+      "category": "school",
+      "source": "curated",
+      "matched_address": "165 WHITNEY AVE, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Yale School of Medicine",
+      "address": "333 Cedar St, New Haven, CT 06510",
+      "lat": 41.302177,
+      "lng": -72.933599,
+      "category": "school",
+      "source": "curated",
+      "matched_address": "333 CEDAR ST, NEW HAVEN, CT, 06510"
+    },
+    {
+      "label": "Yale School of Music",
+      "address": "165 Elm St, New Haven, CT 06511",
+      "lat": 41.309238,
+      "lng": -72.926413,
+      "category": "school",
+      "source": "curated",
+      "matched_address": "165 ELM ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Yale School of Nursing",
+      "address": "400 West Campus Dr, Orange, CT 06477",
+      "lat": 41.253344,
+      "lng": -72.998329,
+      "category": "school",
+      "source": "curated",
+      "matched_address": "400 W CAMPUS DR, ORANGE, CT, 06477"
+    },
+    {
+      "label": "Yale School of Public Health",
+      "address": "60 College St, New Haven, CT 06510",
+      "lat": 41.303474,
+      "lng": -72.931611,
+      "category": "school",
+      "source": "curated",
+      "matched_address": "60 COLLEGE ST, NEW HAVEN, CT, 06520"
+    },
+    {
+      "label": "Yale School of the Environment",
+      "address": "195 Prospect St, New Haven, CT 06511",
+      "lat": 41.318535,
+      "lng": -72.923617,
+      "category": "school",
+      "source": "curated",
+      "matched_address": "195 PROSPECT ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Yale Science Hill",
+      "address": "260 Whitney Ave, New Haven, CT 06511",
+      "lat": 41.318386,
+      "lng": -72.919566,
+      "category": "landmark",
+      "source": "curated",
+      "matched_address": "260 WHITNEY AVE, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Yale University Art Gallery",
+      "address": "1111 Chapel St, New Haven, CT 06510",
+      "lat": 41.308441,
+      "lng": -72.931499,
+      "category": "landmark",
+      "source": "curated",
+      "matched_address": "1111 CHAPEL ST, NEW HAVEN, CT, 06510"
+    },
+    {
+      "label": "Yale West Campus",
+      "address": "800 West Campus Dr, Orange, CT 06477",
+      "lat": 41.254251,
+      "lng": -72.994392,
+      "category": "landmark",
+      "source": "curated",
+      "matched_address": "Yale West Woods Trails, West Campus Drive, Orange, South Central Connecticut Planning Region, Connecticut, 06477, United States"
+    },
+    {
+      "label": "Amity",
+      "lat": 41.332171,
+      "lng": -72.977562,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "Annex",
+      "lat": 41.292272,
+      "lng": -72.894231,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "Augerville",
+      "lat": 41.372042,
+      "lng": -72.905935,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "Beaver Hills",
+      "lat": 41.324503,
+      "lng": -72.946094,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "Beecher Heights",
+      "lat": 41.384959,
+      "lng": -72.911948,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "Centerville",
+      "lat": 41.383213,
+      "lng": -72.901685,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "Dixwell",
+      "lat": 41.318701,
+      "lng": -72.935108,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "Downtown",
+      "lat": 41.308647,
+      "lng": -72.926822,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "Dwight",
+      "lat": 41.310657,
+      "lng": -72.938427,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "East Rock",
+      "lat": 41.320591,
+      "lng": -72.911844,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "East Shore",
+      "lat": 41.269377,
+      "lng": -72.899315,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "East Side",
+      "lat": 41.335185,
+      "lng": -72.900083,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "Edgewood",
+      "lat": 41.313104,
+      "lng": -72.94732,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "Fair Haven",
+      "lat": 41.311208,
+      "lng": -72.895657,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "Fair Haven Heights",
+      "lat": 41.30862,
+      "lng": -72.878786,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "Goatville",
+      "lat": 41.316954,
+      "lng": -72.91032,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "Hamden Plains",
+      "lat": 41.353808,
+      "lng": -72.930026,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "Highwood",
+      "lat": 41.342556,
+      "lng": -72.93493,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "Long Wharf",
+      "lat": 41.29461,
+      "lng": -72.922323,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "Milford Downtown",
+      "lat": 41.232327,
+      "lng": -73.044709,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "Mill River",
+      "lat": 41.307604,
+      "lng": -72.911734,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "Newhallville",
+      "lat": 41.329898,
+      "lng": -72.934532,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "Orange Center Historic District",
+      "lat": 41.276764,
+      "lng": -73.025105,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "Pine Rock",
+      "lat": 41.346148,
+      "lng": -72.9459,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "Pines Bridge Historic District",
+      "lat": 41.389542,
+      "lng": -72.870934,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "Prospect Hill",
+      "lat": 41.326052,
+      "lng": -72.921952,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "Quinnipiac Meadows",
+      "lat": 41.326245,
+      "lng": -72.875013,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "Short Beach",
+      "lat": 41.258372,
+      "lng": -72.848179,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "Short Beach Historic District",
+      "lat": 41.258589,
+      "lng": -72.848361,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "Spring Glen",
+      "lat": 41.36343,
+      "lng": -72.908713,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "The Hill",
+      "lat": 41.294648,
+      "lng": -72.940533,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "West River",
+      "lat": 41.30178,
+      "lng": -72.94986,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "Westville",
+      "lat": 41.327151,
+      "lng": -72.970413,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "Woodmont",
+      "lat": 41.228142,
+      "lng": -72.991461,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "Wooster Square",
+      "lat": 41.304762,
+      "lng": -72.917777,
+      "category": "neighbourhood",
+      "source": "osm"
+    },
+    {
+      "label": "ACES Mill Road School",
+      "lat": 41.384005,
+      "lng": -72.840587,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "ACES Schools",
+      "lat": 41.346755,
+      "lng": -72.923598,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Achievement First Amistad High School",
+      "lat": 41.329044,
+      "lng": -72.93657,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "All Saints Catholic Academy",
+      "lat": 41.311405,
+      "lng": -72.895599,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Allington Public Library",
+      "lat": 41.296224,
+      "lng": -72.959138,
+      "category": "library",
+      "source": "osm"
+    },
+    {
+      "label": "Alma E. Pagels Elementary School",
+      "lat": 41.242805,
+      "lng": -72.987017,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Amistad Academy Middle School",
+      "lat": 41.311076,
+      "lng": -72.937815,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Amity Middle School-Orange",
+      "lat": 41.302742,
+      "lng": -73.006743,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Amity Regional High School",
+      "lat": 41.357808,
+      "lng": -73.005044,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Augusta Lewis Troup School",
+      "lat": 41.313765,
+      "lng": -72.941977,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "B'nail Jacob School",
+      "lat": 41.337924,
+      "lng": -73.003366,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Baldwin School",
+      "lat": 41.320653,
+      "lng": -72.937047,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Barack H. Obama Magnet University School",
+      "lat": 41.329661,
+      "lng": -72.952808,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Barnard Environmental Studies Magnet School",
+      "lat": 41.309639,
+      "lng": -72.952083,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Bear Path School",
+      "lat": 41.389462,
+      "lng": -72.926452,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Beecher Road School",
+      "lat": 41.335698,
+      "lng": -73.010079,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Benjamin Jepson Magnet School",
+      "lat": 41.299237,
+      "lng": -72.886904,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Beth Chana-Hannah Academy",
+      "lat": 41.299541,
+      "lng": -73.00816,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Betsy Ross Arts Magnet School",
+      "lat": 41.323406,
+      "lng": -72.878521,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Bishop Woods Architecture and Design Magnet School",
+      "lat": 41.327151,
+      "lng": -72.869316,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Booker T Washington Academy",
+      "lat": 41.312651,
+      "lng": -72.915155,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Booker T. Washington Academy Middle School",
+      "lat": 41.35435,
+      "lng": -72.937501,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Boy Torah High School",
+      "lat": 41.299517,
+      "lng": -73.007801,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Brennan - Rogers Magnet School",
+      "lat": 41.344449,
+      "lng": -72.958008,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Brundage Community Branch Library",
+      "lat": 41.348512,
+      "lng": -72.934376,
+      "category": "library",
+      "source": "osm"
+    },
+    {
+      "label": "Case Memorial Library",
+      "lat": 41.278873,
+      "lng": -73.023997,
+      "category": "library",
+      "source": "osm"
+    },
+    {
+      "label": "Celentano Biotech, Health and Medical Magnet School",
+      "lat": 41.324896,
+      "lng": -72.921969,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Center School",
+      "lat": 41.353708,
+      "lng": -73.012327,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Children's Center of Hamden",
+      "lat": 41.351516,
+      "lng": -72.915181,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Church Street School",
+      "lat": 41.354536,
+      "lng": -72.933485,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Clinton Avenue School",
+      "lat": 41.318186,
+      "lng": -72.89118,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Clintonville Elementary School",
+      "lat": 41.389963,
+      "lng": -72.831338,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Common Ground High School",
+      "lat": 41.33818,
+      "lng": -72.959778,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Cooperative Arts Magnet School",
+      "lat": 41.305412,
+      "lng": -72.929719,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Davis Academy for Arts and Design Innovation Magnet School",
+      "lat": 41.328573,
+      "lng": -72.973369,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Deer Run School",
+      "lat": 41.328316,
+      "lng": -72.834907,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Department of Veterans Affairs Medical Center Library",
+      "lat": 41.282597,
+      "lng": -72.960659,
+      "category": "library",
+      "source": "osm"
+    },
+    {
+      "label": "Dominick H. Ferrara Elementary School",
+      "lat": 41.334086,
+      "lng": -72.854198,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Donald Mitchell Library",
+      "lat": 41.327857,
+      "lng": -72.961812,
+      "category": "library",
+      "source": "osm"
+    },
+    {
+      "label": "Dr. Reginald Mayo Early Learning Center",
+      "lat": 41.317366,
+      "lng": -72.936183,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Dunbar Hill School",
+      "lat": 41.365522,
+      "lng": -72.939682,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "East Haven Academy",
+      "lat": 41.286086,
+      "lng": -72.866243,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "East Haven High School",
+      "lat": 41.329071,
+      "lng": -72.831655,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "East Rock Community Magnet School",
+      "lat": 41.319513,
+      "lng": -72.907244,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "East Shore Middle School",
+      "lat": 41.227339,
+      "lng": -73.002027,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Edgewood Magnet School",
+      "lat": 41.318202,
+      "lng": -72.960702,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Edith E. Mackrille Elementary School",
+      "lat": 41.259603,
+      "lng": -72.968462,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Educational Center for the Arts",
+      "lat": 41.311173,
+      "lng": -72.920326,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Eli Whitney Technical School",
+      "lat": 41.341269,
+      "lng": -72.942586,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Ellen Aftenow Volunteer Library",
+      "lat": 41.226745,
+      "lng": -72.994066,
+      "category": "library",
+      "source": "osm"
+    },
+    {
+      "label": "Elliott Learning Center",
+      "lat": 41.307597,
+      "lng": -72.915657,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Elm City College Preparatory Elementary School",
+      "lat": 41.313695,
+      "lng": -72.903443,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Esther Swinkin Memorial Library",
+      "lat": 41.365021,
+      "lng": -72.90812,
+      "category": "library",
+      "source": "osm"
+    },
+    {
+      "label": "Ezra Academy",
+      "lat": 41.338313,
+      "lng": -73.002994,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Fair Haven School",
+      "lat": 41.308487,
+      "lng": -72.893319,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Family Academy of Multilingual Exploration",
+      "lat": 41.309539,
+      "lng": -72.898816,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "First Avenue School",
+      "lat": 41.28593,
+      "lng": -72.954547,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Flex School",
+      "lat": 41.313343,
+      "lng": -72.921498,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Forest Elementary School",
+      "lat": 41.299009,
+      "lng": -72.96907,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Foxon School",
+      "lat": 41.323598,
+      "lng": -72.84043,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Gateway Community College",
+      "lat": 41.304001,
+      "lng": -72.927869,
+      "category": "college",
+      "source": "osm"
+    },
+    {
+      "label": "Grove J. Tuttle School",
+      "lat": 41.273214,
+      "lng": -72.874167,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Hagaman Memorial Library",
+      "lat": 41.27776,
+      "lng": -72.870232,
+      "category": "library",
+      "source": "osm"
+    },
+    {
+      "label": "Hamden Hall Country Day School",
+      "lat": 41.341754,
+      "lng": -72.91391,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Hamden Hall Country Day School Davis Street Campus",
+      "lat": 41.342807,
+      "lng": -72.911079,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Hamden High School",
+      "lat": 41.367701,
+      "lng": -72.923115,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Hamden Middle School",
+      "lat": 41.378646,
+      "lng": -72.91139,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Harra A. Conte West Hills Magnet School",
+      "lat": 41.304699,
+      "lng": -72.915771,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Harris and Tucker School",
+      "lat": 41.334796,
+      "lng": -72.926586,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Harry M. Bailey Middle School",
+      "lat": 41.253312,
+      "lng": -72.978792,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Harvey Cushing/John Hay Whitney Medical Library",
+      "lat": 41.303002,
+      "lng": -72.933244,
+      "category": "library",
+      "source": "osm"
+    },
+    {
+      "label": "Head Start",
+      "lat": 41.299547,
+      "lng": -72.926215,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Helen Street School",
+      "lat": 41.350076,
+      "lng": -72.943316,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "High School in the Community",
+      "lat": 41.301882,
+      "lng": -72.922081,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Highville Charter School",
+      "lat": 41.323271,
+      "lng": -72.926258,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Hill Central School",
+      "lat": 41.295457,
+      "lng": -72.93625,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Hill Regional Career High School",
+      "lat": 41.30536,
+      "lng": -72.941062,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Hilton C Buley Library",
+      "lat": 41.333207,
+      "lng": -72.948054,
+      "category": "library",
+      "source": "osm"
+    },
+    {
+      "label": "Hopkins School",
+      "lat": 41.316568,
+      "lng": -72.973299,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Human Relations Area Files at Yale University",
+      "lat": 41.332191,
+      "lng": -72.920188,
+      "category": "library",
+      "source": "osm"
+    },
+    {
+      "label": "James Hillhouse High School",
+      "lat": 41.321783,
+      "lng": -72.939584,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "John C. Daniels School of International Communication",
+      "lat": 41.300887,
+      "lng": -72.938509,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "John S. Martinez School",
+      "lat": 41.305192,
+      "lng": -72.903374,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Joseph Melillo Middle School",
+      "lat": 41.286543,
+      "lng": -72.866861,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Joseph Melillo Middle School and East Haven Academy",
+      "lat": 41.286363,
+      "lng": -72.866588,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "King/Robinson Interdistrict Magnet School",
+      "lat": 41.333297,
+      "lng": -72.940034,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "L.W. Beecher School",
+      "lat": 41.326382,
+      "lng": -72.953864,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Lincoln-Bassett School",
+      "lat": 41.33071,
+      "lng": -72.931234,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Live Oaks School",
+      "lat": 41.237914,
+      "lng": -72.994425,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Marvin K. Peterson Library",
+      "lat": 41.290617,
+      "lng": -72.961165,
+      "category": "library",
+      "source": "osm"
+    },
+    {
+      "label": "Mary L. Tracy School",
+      "lat": 41.280042,
+      "lng": -73.025465,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Mary and James Dimeo Library",
+      "lat": 41.366761,
+      "lng": -72.9484,
+      "category": "library",
+      "source": "osm"
+    },
+    {
+      "label": "Mauro-Sheridan Interdistrict Magnet School",
+      "lat": 41.32764,
+      "lng": -72.966218,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "May V. Carrigan Intermediate School",
+      "lat": 41.292078,
+      "lng": -72.970805,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Milford Academy",
+      "lat": 41.221274,
+      "lng": -73.047313,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Mill Academy",
+      "lat": 41.37117,
+      "lng": -72.909292,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Miller Memorial Library",
+      "lat": 41.383268,
+      "lng": -72.904552,
+      "category": "library",
+      "source": "osm"
+    },
+    {
+      "label": "Momauguin School",
+      "lat": 41.248383,
+      "lng": -72.872989,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Montowese Elementary School",
+      "lat": 41.356,
+      "lng": -72.850815,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Nathan Hale School",
+      "lat": 41.269571,
+      "lng": -72.898147,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "New Haven Academy",
+      "lat": 41.313125,
+      "lng": -72.919129,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "New Haven County Fire School",
+      "lat": 41.287061,
+      "lng": -72.938562,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "New Haven Free Public Library",
+      "lat": 41.309072,
+      "lng": -72.924764,
+      "category": "library",
+      "source": "osm"
+    },
+    {
+      "label": "New Haven Free Public Library Stetson Branch",
+      "lat": 41.318187,
+      "lng": -72.933277,
+      "category": "library",
+      "source": "osm"
+    },
+    {
+      "label": "New Haven Free Public Library Wilson Branch",
+      "lat": 41.299062,
+      "lng": -72.935303,
+      "category": "library",
+      "source": "osm"
+    },
+    {
+      "label": "New Haven Jobs Corps",
+      "lat": 41.342676,
+      "lng": -72.960528,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "New Haven Public Library",
+      "lat": 41.308774,
+      "lng": -72.894265,
+      "category": "library",
+      "source": "osm"
+    },
+    {
+      "label": "North Haven Memorial Library",
+      "lat": 41.387686,
+      "lng": -72.863184,
+      "category": "library",
+      "source": "osm"
+    },
+    {
+      "label": "North Haven Public Schools",
+      "lat": 41.373759,
+      "lng": -72.860861,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Ora M. Mason Library",
+      "lat": 41.24995,
+      "lng": -72.98313,
+      "category": "library",
+      "source": "osm"
+    },
+    {
+      "label": "Orchard Hills School",
+      "lat": 41.220286,
+      "lng": -73.023696,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Osborne Library",
+      "lat": 41.330741,
+      "lng": -72.919047,
+      "category": "library",
+      "source": "osm"
+    },
+    {
+      "label": "Overbrook Early Learning Center",
+      "lat": 41.280205,
+      "lng": -72.880232,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Pathways Academy",
+      "lat": 41.277528,
+      "lng": -72.875493,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Peck Place School",
+      "lat": 41.265167,
+      "lng": -73.030642,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Piantino Library",
+      "lat": 41.296147,
+      "lng": -72.959082,
+      "category": "library",
+      "source": "osm"
+    },
+    {
+      "label": "Platt Technical High School",
+      "lat": 41.249189,
+      "lng": -73.046392,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Prince School",
+      "lat": 41.302319,
+      "lng": -72.934269,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Race Brook School",
+      "lat": 41.291398,
+      "lng": -73.003261,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Ridge Hill School",
+      "lat": 41.346554,
+      "lng": -72.896655,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Ridge Road Elementary School",
+      "lat": 41.370734,
+      "lng": -72.893451,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Roberto Clemente Leadership Academy For Global Awareness",
+      "lat": 41.296981,
+      "lng": -72.935868,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Rosary Hall Library",
+      "lat": 41.331611,
+      "lng": -72.922692,
+      "category": "library",
+      "source": "osm"
+    },
+    {
+      "label": "Sacred Heart Academy",
+      "lat": 41.366764,
+      "lng": -72.948437,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Saint Aedan School",
+      "lat": 41.325781,
+      "lng": -72.963115,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Saint Lawrence School",
+      "lat": 41.274238,
+      "lng": -72.946034,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Saint Martin de Porres Academy",
+      "lat": 41.297843,
+      "lng": -72.931359,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Saint Mary School",
+      "lat": 41.226286,
+      "lng": -73.047374,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Saint Rita School",
+      "lat": 41.358119,
+      "lng": -72.908958,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Saint Rose School",
+      "lat": 41.305653,
+      "lng": -72.897601,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Saint Thomas's Day School",
+      "lat": 41.331929,
+      "lng": -72.913625,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Savin Rock Community School",
+      "lat": 41.261246,
+      "lng": -72.940308,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Seth G. Haley Elementary School",
+      "lat": 41.241089,
+      "lng": -72.979558,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Shepherd Glen School",
+      "lat": 41.378937,
+      "lng": -72.921795,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Sound School",
+      "lat": 41.283708,
+      "lng": -72.926322,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Spring Glen School",
+      "lat": 41.368666,
+      "lng": -72.90821,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "State Street School",
+      "lat": 41.33843,
+      "lng": -72.896768,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Sterling Library",
+      "lat": 41.311226,
+      "lng": -72.928747,
+      "category": "library",
+      "source": "osm"
+    },
+    {
+      "label": "Sterling School",
+      "lat": 41.32343,
+      "lng": -72.921248,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Temple Emanuel Library",
+      "lat": 41.299923,
+      "lng": -73.007087,
+      "category": "library",
+      "source": "osm"
+    },
+    {
+      "label": "The Foote School",
+      "lat": 41.32736,
+      "lng": -72.919985,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "The Institute Library",
+      "lat": 41.305879,
+      "lng": -72.925078,
+      "category": "library",
+      "source": "osm"
+    },
+    {
+      "label": "Truman School",
+      "lat": 41.292694,
+      "lng": -72.940807,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Turkey Hill School",
+      "lat": 41.289152,
+      "lng": -73.045605,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Urban Youth Center Elementary School",
+      "lat": 41.322153,
+      "lng": -72.936095,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Washington Elementary School (temporary location)",
+      "lat": 41.276907,
+      "lng": -72.974297,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Welch School",
+      "lat": 41.301208,
+      "lng": -72.936769,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "West Haven High School",
+      "lat": 41.258793,
+      "lng": -72.959193,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "West Haven Public Library",
+      "lat": 41.275612,
+      "lng": -72.951993,
+      "category": "library",
+      "source": "osm"
+    },
+    {
+      "label": "Wexler-Grant Community School",
+      "lat": 41.319224,
+      "lng": -72.931209,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Whitney Academy Explore and Create",
+      "lat": 41.346648,
+      "lng": -72.923468,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Whitney High School North",
+      "lat": 41.346814,
+      "lng": -72.922356,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Whitneyville Branch Library",
+      "lat": 41.345337,
+      "lng": -72.914901,
+      "category": "library",
+      "source": "osm"
+    },
+    {
+      "label": "Wilbur Cross High School",
+      "lat": 41.322619,
+      "lng": -72.906443,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Wintergreen Interdistrict Magnet School",
+      "lat": 41.356837,
+      "lng": -72.961539,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Woodbridge Town Library",
+      "lat": 41.353846,
+      "lng": -73.011813,
+      "category": "library",
+      "source": "osm"
+    },
+    {
+      "label": "Woolsey School",
+      "lat": 41.307875,
+      "lng": -72.897046,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Worthington Hooker School",
+      "lat": 41.32372,
+      "lng": -72.914162,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Yale School of Medicine (Cedarhurst School)",
+      "lat": 41.335191,
+      "lng": -72.918678,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Yeshivas Beis Dovid Shlomo Mesivta",
+      "lat": 41.319591,
+      "lng": -72.947305,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "Young Men's Institute",
+      "lat": 41.305702,
+      "lng": -72.924279,
+      "category": "school",
+      "source": "osm"
+    },
+    {
+      "label": "25 Science Park at Yale",
+      "lat": 41.321016,
+      "lng": -72.929076,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "258 Church Street / 96 Grove Street",
+      "lat": 41.310415,
+      "lng": -72.922918,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "A&A/180 York",
+      "lat": 41.308653,
+      "lng": -72.931516,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Abbott Park",
+      "lat": 41.247104,
+      "lng": -72.965608,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Act 2 Theater",
+      "lat": 41.332233,
+      "lng": -72.924558,
+      "category": "theatre",
+      "source": "osm"
+    },
+    {
+      "label": "Adams Hometown Market",
+      "lat": 41.227382,
+      "lng": -72.996619,
+      "category": "supermarket",
+      "source": "osm"
+    },
+    {
+      "label": "Adams Neuroscience Center",
+      "lat": 41.310405,
+      "lng": -72.944133,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Administrative Office North",
+      "lat": 41.253792,
+      "lng": -72.997025,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Administrative Office South",
+      "lat": 41.253289,
+      "lng": -72.997807,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Advanced Biosciences Center",
+      "lat": 41.256911,
+      "lng": -72.989647,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Air Rights Garage",
+      "lat": 41.305231,
+      "lng": -72.934028,
+      "category": "parking",
+      "source": "osm"
+    },
+    {
+      "label": "Aldi",
+      "lat": 41.321513,
+      "lng": -72.869397,
+      "category": "supermarket",
+      "source": "osm"
+    },
+    {
+      "label": "All Saints Memorial Park",
+      "lat": 41.370928,
+      "lng": -72.833679,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Alliance Theatre",
+      "lat": 41.309264,
+      "lng": -72.922047,
+      "category": "theatre",
+      "source": "osm"
+    },
+    {
+      "label": "Allingtown Green",
+      "lat": 41.295396,
+      "lng": -72.958539,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Allwin Hall",
+      "lat": 41.313941,
+      "lng": -72.923084,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Amistad Park",
+      "lat": 41.300855,
+      "lng": -72.932061,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Amistad Street Building",
+      "lat": 41.300112,
+      "lng": -72.931868,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Amistad Street Garage",
+      "lat": 41.29986,
+      "lng": -72.931722,
+      "category": "parking",
+      "source": "osm"
+    },
+    {
+      "label": "Amistad/Cedar",
+      "lat": 41.300347,
+      "lng": -72.932185,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Anderson Ave. Beach",
+      "lat": 41.232641,
+      "lng": -72.987822,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Anderson Avenue Playground",
+      "lat": 41.235222,
+      "lng": -72.998631,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Arch Street Community Greenspace",
+      "lat": 41.29895,
+      "lng": -72.938364,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Arnold Hall",
+      "lat": 41.31104,
+      "lng": -72.931411,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Art Center Mini-Park",
+      "lat": 41.311108,
+      "lng": -72.921766,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Artemis Sporting Arms",
+      "lat": 41.253913,
+      "lng": -73.018616,
+      "category": "sports_centre",
+      "source": "osm"
+    },
+    {
+      "label": "Arthur K. Watson Hall",
+      "lat": 41.313107,
+      "lng": -72.92485,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Ascent Climbing Gym",
+      "lat": 41.315582,
+      "lng": -72.90526,
+      "category": "sports_centre",
+      "source": "osm"
+    },
+    {
+      "label": "Audubon Court Garage",
+      "lat": 41.310788,
+      "lng": -72.921206,
+      "category": "parking",
+      "source": "osm"
+    },
+    {
+      "label": "Audubon/Orange",
+      "lat": 41.311002,
+      "lng": -72.920111,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Augur Field",
+      "lat": 41.343035,
+      "lng": -72.915557,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "BOM PRECO 3 SUPERMARKET",
+      "lat": 41.269384,
+      "lng": -72.948605,
+      "category": "supermarket",
+      "source": "osm"
+    },
+    {
+      "label": "Baker Hall",
+      "lat": 41.313786,
+      "lng": -72.929175,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Bass Center",
+      "lat": 41.318095,
+      "lng": -72.921885,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Bass Center-Yale Science Building Connector",
+      "lat": 41.317899,
+      "lng": -72.921527,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Bass Library (North)",
+      "lat": 41.310785,
+      "lng": -72.927324,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Bass Library (South)",
+      "lat": 41.310431,
+      "lng": -72.927608,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Bass Library Underground",
+      "lat": 41.310647,
+      "lng": -72.92759,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Bassett Park",
+      "lat": 41.354449,
+      "lng": -72.90449,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Battell Chapel",
+      "lat": 41.309424,
+      "lng": -72.927565,
+      "category": "place_of_worship",
+      "source": "osm"
+    },
+    {
+      "label": "Bayview Park",
+      "lat": 41.276211,
+      "lng": -72.93734,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Beaver Pond Park",
+      "lat": 41.329284,
+      "lng": -72.943783,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Beckerman Athletic Center",
+      "lat": 41.370506,
+      "lng": -72.91166,
+      "category": "sports_centre",
+      "source": "osm"
+    },
+    {
+      "label": "Becton",
+      "lat": 41.312748,
+      "lng": -72.925353,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Becton Center",
+      "lat": 41.312622,
+      "lng": -72.925143,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Becton Plaza",
+      "lat": 41.312552,
+      "lng": -72.924876,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Beecher Park",
+      "lat": 41.327811,
+      "lng": -72.961572,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Beinecke Golf House",
+      "lat": 41.31856,
+      "lng": -72.985452,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Bellamy Hall",
+      "lat": 41.324608,
+      "lng": -72.92051,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Betts House",
+      "lat": 41.322524,
+      "lng": -72.922124,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Beverly Hills Triangle",
+      "lat": 41.329013,
+      "lng": -72.979036,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Big Y",
+      "lat": 41.27455,
+      "lng": -72.831931,
+      "category": "supermarket",
+      "source": "osm"
+    },
+    {
+      "label": "Bikram Joga",
+      "lat": 41.307873,
+      "lng": -72.922847,
+      "category": "sports_centre",
+      "source": "osm"
+    },
+    {
+      "label": "Bingham Hall",
+      "lat": 41.30771,
+      "lng": -72.928779,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Bixler/Gerber Quad",
+      "lat": 41.290536,
+      "lng": -72.962405,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Blake St Pocket Park",
+      "lat": 41.324817,
+      "lng": -72.951854,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Blood Draw Station",
+      "lat": 41.268676,
+      "lng": -72.99817,
+      "category": "doctors",
+      "source": "osm"
+    },
+    {
+      "label": "Blue Line (Weekend)",
+      "lat": 41.311073,
+      "lng": -72.925405,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Boardman Building",
+      "lat": 41.302894,
+      "lng": -72.934375,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Borough Hall Park",
+      "lat": 41.227144,
+      "lng": -72.995504,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Boscov's",
+      "lat": 41.235455,
+      "lng": -73.034891,
+      "category": "department_store",
+      "source": "osm"
+    },
+    {
+      "label": "Bowen Field Football Stadium",
+      "lat": 41.326084,
+      "lng": -72.939912,
+      "category": "stadium",
+      "source": "osm"
+    },
+    {
+      "label": "Bowling Green",
+      "lat": 41.332913,
+      "lng": -72.955844,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Boyer Center",
+      "lat": 41.302503,
+      "lng": -72.932789,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Boyer Center/Hope",
+      "lat": 41.301918,
+      "lng": -72.933392,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Bradley Point Park",
+      "lat": 41.253446,
+      "lng": -72.958262,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Brady Memorial Laboratory",
+      "lat": 41.30232,
+      "lng": -72.934056,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Branford Court",
+      "lat": 41.309818,
+      "lng": -72.929854,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Brewster Field",
+      "lat": 41.231067,
+      "lng": -73.005871,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Broadway Island",
+      "lat": 41.31129,
+      "lng": -72.93087,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Broadway Triangle",
+      "lat": 41.311329,
+      "lng": -72.931278,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Broadway/York",
+      "lat": 41.310823,
+      "lng": -72.930478,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Brothers in Unity Court",
+      "lat": 41.309652,
+      "lng": -72.930347,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Burlington",
+      "lat": 41.276668,
+      "lng": -72.987465,
+      "category": "department_store",
+      "source": "osm"
+    },
+    {
+      "label": "Burr Community Park",
+      "lat": 41.279352,
+      "lng": -72.883462,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "C-Town",
+      "lat": 41.308439,
+      "lng": -72.894665,
+      "category": "supermarket",
+      "source": "osm"
+    },
+    {
+      "label": "Calliope Court",
+      "lat": 41.309525,
+      "lng": -72.930029,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Calvin Hill Day Care Center",
+      "lat": 41.328208,
+      "lng": -72.920869,
+      "category": "kindergarten",
+      "source": "osm"
+    },
+    {
+      "label": "Canner/Whitney",
+      "lat": 41.324669,
+      "lng": -72.916718,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Carina Park",
+      "lat": 41.383534,
+      "lng": -72.845153,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Cedarhurst School",
+      "lat": 41.33517,
+      "lng": -72.918663,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Center Podiatry",
+      "lat": 41.276783,
+      "lng": -72.990732,
+      "category": "clinic",
+      "source": "osm"
+    },
+    {
+      "label": "Central Power Plant",
+      "lat": 41.313111,
+      "lng": -72.928892,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Chapel-Day Sitting Plaza",
+      "lat": 41.310354,
+      "lng": -72.938723,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Chapel-York Garage",
+      "lat": 41.307992,
+      "lng": -72.932534,
+      "category": "parking",
+      "source": "osm"
+    },
+    {
+      "label": "Chapel/Church",
+      "lat": 41.306026,
+      "lng": -72.925551,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Chapel/College",
+      "lat": 41.307268,
+      "lng": -72.928374,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Charger Gymnasium",
+      "lat": 41.296764,
+      "lng": -72.963437,
+      "category": "sports_centre",
+      "source": "osm"
+    },
+    {
+      "label": "Chatham Square",
+      "lat": 41.31445,
+      "lng": -72.890906,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Chemistry/225 Prospect",
+      "lat": 41.318392,
+      "lng": -72.923685,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Cherry Ann Park",
+      "lat": 41.335012,
+      "lng": -72.940319,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Child Care & Community Education Center, West Campus",
+      "lat": 41.252749,
+      "lng": -72.997603,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "City Climb",
+      "lat": 41.32468,
+      "lng": -72.932153,
+      "category": "sports_centre",
+      "source": "osm"
+    },
+    {
+      "label": "Class of 1954 Environmental Science Center",
+      "lat": 41.316133,
+      "lng": -72.921799,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Clinic Building",
+      "lat": 41.3027,
+      "lng": -72.93487,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Clinton Park",
+      "lat": 41.317771,
+      "lng": -72.891078,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "College Place",
+      "lat": 41.303033,
+      "lng": -72.931479,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "College Street Music Hall",
+      "lat": 41.306665,
+      "lng": -72.92931,
+      "category": "theatre",
+      "source": "osm"
+    },
+    {
+      "label": "College Woods",
+      "lat": 41.325916,
+      "lng": -72.910784,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "College/Crown",
+      "lat": 41.305203,
+      "lng": -72.930313,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "College/Wall",
+      "lat": 41.310806,
+      "lng": -72.926079,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Columbus Park",
+      "lat": 41.302306,
+      "lng": -72.927224,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Columbus Plaza",
+      "lat": 41.303373,
+      "lng": -72.927289,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Congress Place",
+      "lat": 41.30175,
+      "lng": -72.933179,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Connecticut Hall",
+      "lat": 41.308176,
+      "lng": -72.928852,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Connecticut Mental Health Center",
+      "lat": 41.305385,
+      "lng": -72.936792,
+      "category": "hospital",
+      "source": "osm"
+    },
+    {
+      "label": "Cornell Scott-Hill Health Center",
+      "lat": 41.29755,
+      "lng": -72.939401,
+      "category": "clinic",
+      "source": "osm"
+    },
+    {
+      "label": "Cortina Park",
+      "lat": 41.340335,
+      "lng": -72.835972,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Cosgrove Marcus Messer Sports Center",
+      "lat": 41.327041,
+      "lng": -72.924547,
+      "category": "sports_centre",
+      "source": "osm"
+    },
+    {
+      "label": "Courtyard New Haven at Yale",
+      "lat": 41.31309,
+      "lng": -72.933863,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Coxe Cage",
+      "lat": 41.311045,
+      "lng": -72.961962,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Cretaceous Garden",
+      "lat": 41.316109,
+      "lng": -72.920767,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Criscuolo Park",
+      "lat": 41.302233,
+      "lng": -72.903422,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Cross Campus",
+      "lat": 41.310466,
+      "lng": -72.927274,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Cullman-Heyman Tennis Center",
+      "lat": 41.310245,
+      "lng": -72.96206,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Curtis Hall",
+      "lat": 41.324549,
+      "lng": -72.919971,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Cynthia Circle Park",
+      "lat": 41.27652,
+      "lng": -72.981563,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Dana Building",
+      "lat": 41.302467,
+      "lng": -72.935695,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Davenport Playground",
+      "lat": 41.220931,
+      "lng": -73.014549,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "De Gale Field",
+      "lat": 41.320021,
+      "lng": -72.938833,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "DeWitt Family Stadium",
+      "lat": 41.312686,
+      "lng": -72.968537,
+      "category": "stadium",
+      "source": "osm"
+    },
+    {
+      "label": "Defender's Park",
+      "lat": 41.297807,
+      "lng": -72.947088,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Department of Anthropology",
+      "lat": 41.315298,
+      "lng": -72.921557,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Department of Economics",
+      "lat": 41.314499,
+      "lng": -72.922815,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Display Greenhouse",
+      "lat": 41.321873,
+      "lng": -72.925139,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Divinity",
+      "lat": 41.32357,
+      "lng": -72.92328,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Dixson Street End",
+      "lat": 41.225558,
+      "lng": -72.991972,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Dover Beach",
+      "lat": 41.319217,
+      "lng": -72.888869,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Dow Hall",
+      "lat": 41.311352,
+      "lng": -72.923869,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Dunham Laboratory",
+      "lat": 41.312325,
+      "lng": -72.924525,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Durfee Building",
+      "lat": 41.309665,
+      "lng": -72.928081,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Dwight Hall & Memorial Chapel",
+      "lat": 41.308949,
+      "lng": -72.929287,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Dwyer Track",
+      "lat": 41.308272,
+      "lng": -72.960618,
+      "category": "track",
+      "source": "osm"
+    },
+    {
+      "label": "East Haven Town Beach",
+      "lat": 41.245522,
+      "lng": -72.86872,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "East Haven Town Green",
+      "lat": 41.275476,
+      "lng": -72.867435,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "East Haven Town Hall",
+      "lat": 41.277548,
+      "lng": -72.871724,
+      "category": "townhall",
+      "source": "osm"
+    },
+    {
+      "label": "East Rock Park",
+      "lat": 41.32981,
+      "lng": -72.904536,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "East Rock Park-Blake Field",
+      "lat": 41.318254,
+      "lng": -72.905684,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "East Shore Park",
+      "lat": 41.277604,
+      "lng": -72.901447,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Eastview Public Housing Playground",
+      "lat": 41.313166,
+      "lng": -72.873199,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Economic Growth Center",
+      "lat": 41.31373,
+      "lng": -72.923134,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Edge of the Woods",
+      "lat": 41.318151,
+      "lng": -72.945305,
+      "category": "supermarket",
+      "source": "osm"
+    },
+    {
+      "label": "Edgecomb Park",
+      "lat": 41.352519,
+      "lng": -72.893388,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Edgerton Park",
+      "lat": 41.334029,
+      "lng": -72.91421,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Edgewood Mall",
+      "lat": 41.315095,
+      "lng": -72.950778,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Edgewood Park",
+      "lat": 41.319383,
+      "lng": -72.955533,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Edward S. Harkness Building A",
+      "lat": 41.304389,
+      "lng": -72.934308,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Edward S. Harkness Building D",
+      "lat": 41.304413,
+      "lng": -72.933786,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Edwards/Orange",
+      "lat": 41.318342,
+      "lng": -72.914675,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Eli Whitney Park",
+      "lat": 41.342568,
+      "lng": -72.912192,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Eli Yale Terrace",
+      "lat": 41.271888,
+      "lng": -72.833379,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Elizabethan Club",
+      "lat": 41.31034,
+      "lng": -72.926143,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Ella P. Scantlebury Park",
+      "lat": 41.316996,
+      "lng": -72.92848,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Elm City Market",
+      "lat": 41.305271,
+      "lng": -72.923448,
+      "category": "supermarket",
+      "source": "osm"
+    },
+    {
+      "label": "Elm Haven Public Housing Playground",
+      "lat": 41.317801,
+      "lng": -72.931589,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Elm/York",
+      "lat": 41.310546,
+      "lng": -72.930066,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "English Mall",
+      "lat": 41.316765,
+      "lng": -72.894008,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Episcopal Church at Yale",
+      "lat": 41.307161,
+      "lng": -72.931883,
+      "category": "place_of_worship",
+      "source": "osm"
+    },
+    {
+      "label": "Ernest McClain Park",
+      "lat": 41.291108,
+      "lng": -72.940532,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Esplanade Apartments",
+      "lat": 41.322598,
+      "lng": -72.924386,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Experimental Greenhouse",
+      "lat": 41.321753,
+      "lng": -72.925131,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Eye Physicians & Surgeons, PC",
+      "lat": 41.229677,
+      "lng": -73.048917,
+      "category": "clinic",
+      "source": "osm"
+    },
+    {
+      "label": "Fairmont Park",
+      "lat": 41.310578,
+      "lng": -72.880386,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Fannie Beach Community Center",
+      "lat": 41.226944,
+      "lng": -72.993999,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Farmer's India Market",
+      "lat": 41.27644,
+      "lng": -72.988803,
+      "category": "supermarket",
+      "source": "osm"
+    },
+    {
+      "label": "Farnam Hall",
+      "lat": 41.309077,
+      "lng": -72.927674,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Farnam Memorial Gardens",
+      "lat": 41.321503,
+      "lng": -72.922351,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Farnam Wing",
+      "lat": 41.302138,
+      "lng": -72.934609,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Fisher Hall",
+      "lat": 41.325103,
+      "lng": -72.920151,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Fitkin Building",
+      "lat": 41.302841,
+      "lng": -72.93554,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Fort Wooster Park",
+      "lat": 41.283629,
+      "lng": -72.892556,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Foster/Cottage",
+      "lat": 41.318866,
+      "lng": -72.911033,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Foster/Edwards",
+      "lat": 41.31707,
+      "lng": -72.912388,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Founders Hall",
+      "lat": 41.315718,
+      "lng": -72.924162,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Frank Field",
+      "lat": 41.308255,
+      "lng": -72.960616,
+      "category": "pitch",
+      "source": "osm"
+    },
+    {
+      "label": "Freedom Park",
+      "lat": 41.38321,
+      "lng": -72.901296,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "G Mart",
+      "lat": 41.227438,
+      "lng": -73.049768,
+      "category": "supermarket",
+      "source": "osm"
+    },
+    {
+      "label": "G.Carl Veith Memorial Park",
+      "lat": 41.39023,
+      "lng": -72.864024,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Garden Street Park`",
+      "lat": 41.312464,
+      "lng": -72.938038,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Genome Analysis Center",
+      "lat": 41.257891,
+      "lng": -72.987764,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "GoHealth Urgent Care",
+      "lat": 41.273446,
+      "lng": -72.831756,
+      "category": "clinic",
+      "source": "osm"
+    },
+    {
+      "label": "Grand Medical",
+      "lat": 41.308727,
+      "lng": -72.897632,
+      "category": "clinic",
+      "source": "osm"
+    },
+    {
+      "label": "Greeley Greenhouse",
+      "lat": 41.322384,
+      "lng": -72.924651,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Greeley Memorial Laboratory",
+      "lat": 41.321947,
+      "lng": -72.924519,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Green Hall",
+      "lat": 41.308318,
+      "lng": -72.932992,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Greenberg Conference Center",
+      "lat": 41.322267,
+      "lng": -72.921901,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Grimes Center",
+      "lat": 41.309716,
+      "lng": -72.940392,
+      "category": "hospital",
+      "source": "osm"
+    },
+    {
+      "label": "Griswold Triangle",
+      "lat": 41.293683,
+      "lng": -72.892664,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Grove/Temple",
+      "lat": 41.310929,
+      "lng": -72.923673,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Grove/Whitney",
+      "lat": 41.310355,
+      "lng": -72.922307,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Hamden Town Hall",
+      "lat": 41.383834,
+      "lng": -72.902235,
+      "category": "townhall",
+      "source": "osm"
+    },
+    {
+      "label": "Hamilton Street Walkway",
+      "lat": 41.3099,
+      "lng": -72.912049,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Harkness Memorial Auditorium",
+      "lat": 41.303452,
+      "lng": -72.933823,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Harkness Tower",
+      "lat": 41.309399,
+      "lng": -72.929472,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Hartford HealthCare",
+      "lat": 41.229279,
+      "lng": -73.048096,
+      "category": "clinic",
+      "source": "osm"
+    },
+    {
+      "label": "Head of College Courtyard",
+      "lat": 41.310626,
+      "lng": -72.928705,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Hendrie Hall",
+      "lat": 41.309528,
+      "lng": -72.926083,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Hilltop Playground",
+      "lat": 41.336073,
+      "lng": -72.969625,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Hope Memorial Building-Brady Memorial Lab connecting bridge;Hope Memorial Building",
+      "lat": 41.302157,
+      "lng": -72.933556,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Horchow Hall",
+      "lat": 41.315449,
+      "lng": -72.922402,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Howard Avenue Garage",
+      "lat": 41.301845,
+      "lng": -72.936173,
+      "category": "parking",
+      "source": "osm"
+    },
+    {
+      "label": "Howe Street Garage",
+      "lat": 41.309903,
+      "lng": -72.934695,
+      "category": "parking",
+      "source": "osm"
+    },
+    {
+      "label": "Human Resources",
+      "lat": 41.31677,
+      "lng": -72.919824,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Humanities Quadrangle",
+      "lat": 41.312306,
+      "lng": -72.929361,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Hunter Building",
+      "lat": 41.303351,
+      "lng": -72.93504,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Ingalls Ice Rink",
+      "lat": 41.316801,
+      "lng": -72.925005,
+      "category": "sports_centre",
+      "source": "osm"
+    },
+    {
+      "label": "Institution for Social and Policy Studies",
+      "lat": 41.314039,
+      "lng": -72.924638,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Integrated Science & Technology Center",
+      "lat": 41.25746,
+      "lng": -72.990292,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "International Center for Yale Students and Scholars",
+      "lat": 41.312263,
+      "lng": -72.922304,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Intramural Practice Field A",
+      "lat": 41.313256,
+      "lng": -72.957435,
+      "category": "pitch",
+      "source": "osm"
+    },
+    {
+      "label": "Isadore L. Wexler Memorial Park",
+      "lat": 41.323215,
+      "lng": -72.940689,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Iseman Theater",
+      "lat": 41.308557,
+      "lng": -72.932905,
+      "category": "theatre",
+      "source": "osm"
+    },
+    {
+      "label": "James Dwight Dana House",
+      "lat": 41.313456,
+      "lng": -72.924147,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Jean Pope Memorial Park",
+      "lat": 41.312729,
+      "lng": -72.9278,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Jerry Juliano Park",
+      "lat": 41.255728,
+      "lng": -72.893648,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Jocelyn Square",
+      "lat": 41.31276,
+      "lng": -72.910006,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "John L. Carusone Field",
+      "lat": 41.341725,
+      "lng": -72.944569,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "John P. De Nicola Park",
+      "lat": 41.348799,
+      "lng": -72.91928,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Johnson Stadium",
+      "lat": 41.31235,
+      "lng": -72.967334,
+      "category": "stadium",
+      "source": "osm"
+    },
+    {
+      "label": "Jonathan Edwards Courtyard",
+      "lat": 41.309086,
+      "lng": -72.930454,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Jones Auditorium",
+      "lat": 41.331109,
+      "lng": -72.919477,
+      "category": "theatre",
+      "source": "osm"
+    },
+    {
+      "label": "Ken Strong Stadium",
+      "lat": 41.257319,
+      "lng": -72.95927,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Kensington Street Playground",
+      "lat": 41.311067,
+      "lng": -72.939614,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Kid Sense Pediatric Therapy",
+      "lat": 41.228664,
+      "lng": -73.047408,
+      "category": "clinic",
+      "source": "osm"
+    },
+    {
+      "label": "Killingworth Court",
+      "lat": 41.31003,
+      "lng": -72.929317,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Kimberly Triangle",
+      "lat": 41.290985,
+      "lng": -72.933611,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Kirtland Hall",
+      "lat": 41.31189,
+      "lng": -72.924635,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Kline Geology Laboratory",
+      "lat": 41.316582,
+      "lng": -72.9211,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Kohl's",
+      "lat": 41.376101,
+      "lng": -72.917323,
+      "category": "department_store",
+      "source": "osm"
+    },
+    {
+      "label": "Krauszer's Food Stores",
+      "lat": 41.338748,
+      "lng": -72.864711,
+      "category": "supermarket",
+      "source": "osm"
+    },
+    {
+      "label": "Kroon Hall",
+      "lat": 41.316795,
+      "lng": -72.923352,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "LEPH/60 College",
+      "lat": 41.303251,
+      "lng": -72.931717,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "La Supermarqueta",
+      "lat": 41.308714,
+      "lng": -72.897992,
+      "category": "supermarket",
+      "source": "osm"
+    },
+    {
+      "label": "Laboratory for Medicine & Pediatrics",
+      "lat": 41.303244,
+      "lng": -72.935302,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Laboratory for Surgery, Obstetrics & Gynecology",
+      "lat": 41.301701,
+      "lng": -72.934945,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Laboratory of Epidemiology and Public Health",
+      "lat": 41.303735,
+      "lng": -72.932157,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Lanman Center",
+      "lat": 41.314568,
+      "lng": -72.930383,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Lanman-Wright Hall",
+      "lat": 41.309785,
+      "lng": -72.928683,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Lapham Field House",
+      "lat": 41.310504,
+      "lng": -72.960579,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "LasikPlus",
+      "lat": 41.260801,
+      "lng": -73.009322,
+      "category": "clinic",
+      "source": "osm"
+    },
+    {
+      "label": "Lauder Hall",
+      "lat": 41.301916,
+      "lng": -72.934189,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Lawrence Hall",
+      "lat": 41.308702,
+      "lng": -72.927949,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Leet Oliver Memorial Hall",
+      "lat": 41.312745,
+      "lng": -72.924317,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Leigh Hall",
+      "lat": 41.309856,
+      "lng": -72.926363,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Leitner Family Observatory and Planetarium",
+      "lat": 41.321128,
+      "lng": -72.921947,
+      "category": "planetarium",
+      "source": "osm"
+    },
+    {
+      "label": "Lenzi Park",
+      "lat": 41.307364,
+      "lng": -72.915628,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Lighthouse Point Park",
+      "lat": 41.250396,
+      "lng": -72.900404,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Linonia Court",
+      "lat": 41.309394,
+      "lng": -72.929715,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Linsly-Chittenden Hall",
+      "lat": 41.308596,
+      "lng": -72.929503,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Lions Park",
+      "lat": 41.271364,
+      "lng": -72.846323,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Lippard Laboratory",
+      "lat": 41.303201,
+      "lng": -72.935643,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Little Nash Gardens",
+      "lat": 41.316296,
+      "lng": -72.910424,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Little Theatre",
+      "lat": 41.311764,
+      "lng": -72.919824,
+      "category": "theatre",
+      "source": "osm"
+    },
+    {
+      "label": "Liuzzi Gourmet Food Market",
+      "lat": 41.371888,
+      "lng": -72.886357,
+      "category": "supermarket",
+      "source": "osm"
+    },
+    {
+      "label": "Lock Street Garage",
+      "lat": 41.316213,
+      "lng": -72.928057,
+      "category": "parking",
+      "source": "osm"
+    },
+    {
+      "label": "Long Wharf Theatre",
+      "lat": 41.294375,
+      "lng": -72.922766,
+      "category": "theatre",
+      "source": "osm"
+    },
+    {
+      "label": "Loria Center",
+      "lat": 41.309025,
+      "lng": -72.931741,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Lyman Center for the Performing Arts",
+      "lat": 41.331601,
+      "lng": -72.946839,
+      "category": "theatre",
+      "source": "osm"
+    },
+    {
+      "label": "Macy's",
+      "lat": 41.236676,
+      "lng": -73.036175,
+      "category": "department_store",
+      "source": "osm"
+    },
+    {
+      "label": "Main Court",
+      "lat": 41.310835,
+      "lng": -72.929082,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Malone Center",
+      "lat": 41.313394,
+      "lng": -72.924735,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Mansfield Street Apartments",
+      "lat": 41.323208,
+      "lng": -72.924832,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Margaret Tucker Park",
+      "lat": 41.278466,
+      "lng": -72.872412,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Marlin Estate",
+      "lat": 41.281149,
+      "lng": -72.892764,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Marquand Chapel",
+      "lat": 41.323387,
+      "lng": -72.921306,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Marsh Botanical Gardens",
+      "lat": 41.321727,
+      "lng": -72.924628,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Marsh Hall",
+      "lat": 41.321722,
+      "lng": -72.923817,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Marshalls",
+      "lat": 41.238768,
+      "lng": -73.029266,
+      "category": "department_store",
+      "source": "osm"
+    },
+    {
+      "label": "Mary Harkness Auditorium",
+      "lat": 41.303464,
+      "lng": -72.933841,
+      "category": "theatre",
+      "source": "osm"
+    },
+    {
+      "label": "Mason Laboratory",
+      "lat": 41.312132,
+      "lng": -72.923597,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Maurice P. Quigley Memorial Stadium",
+      "lat": 41.293509,
+      "lng": -72.95575,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Mauro Park (Warwick Lane)",
+      "lat": 41.318886,
+      "lng": -72.836246,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "McCann Natatorium",
+      "lat": 41.221182,
+      "lng": -73.047573,
+      "category": "sports_centre",
+      "source": "osm"
+    },
+    {
+      "label": "McClellan Hall",
+      "lat": 41.308359,
+      "lng": -72.929296,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Mechanic Street Triangle Dog Park",
+      "lat": 41.316529,
+      "lng": -72.90858,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Medi Weightloss Clinic",
+      "lat": 41.277024,
+      "lng": -72.99042,
+      "category": "clinic",
+      "source": "osm"
+    },
+    {
+      "label": "Medical Center of West Haven",
+      "lat": 41.272058,
+      "lng": -72.951179,
+      "category": "clinic",
+      "source": "osm"
+    },
+    {
+      "label": "Michael Street Park",
+      "lat": 41.323135,
+      "lng": -72.86424,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Middletown Avenue Park",
+      "lat": 41.334902,
+      "lng": -72.868463,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Minore's Market",
+      "lat": 41.316301,
+      "lng": -72.94399,
+      "category": "supermarket",
+      "source": "osm"
+    },
+    {
+      "label": "Molecular Innovations Center",
+      "lat": 41.25687,
+      "lng": -72.990793,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Monitor Square",
+      "lat": 41.311604,
+      "lng": -72.946561,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Montowese Park",
+      "lat": 41.354327,
+      "lng": -72.863125,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Moore Field",
+      "lat": 41.336338,
+      "lng": -72.951825,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Moore Field House",
+      "lat": 41.335435,
+      "lng": -72.951416,
+      "category": "sports_centre",
+      "source": "osm"
+    },
+    {
+      "label": "Morris Triangle",
+      "lat": 41.251208,
+      "lng": -72.901768,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Morse Park",
+      "lat": 41.263424,
+      "lng": -72.935116,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Mulberry Jam Parklet",
+      "lat": 41.311683,
+      "lng": -72.916607,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Munson Street Triangle",
+      "lat": 41.321579,
+      "lng": -72.930383,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Nathan Hale Park",
+      "lat": 41.267472,
+      "lng": -72.899795,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Nathan Smith Building",
+      "lat": 41.303629,
+      "lng": -72.934513,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "New England Spine & Disc",
+      "lat": 41.260869,
+      "lng": -73.009409,
+      "category": "clinic",
+      "source": "osm"
+    },
+    {
+      "label": "New Haven City Hall",
+      "lat": 41.307374,
+      "lng": -72.924283,
+      "category": "townhall",
+      "source": "osm"
+    },
+    {
+      "label": "New Haven Medical",
+      "lat": 41.309312,
+      "lng": -72.93492,
+      "category": "clinic",
+      "source": "osm"
+    },
+    {
+      "label": "New Haven Union Station",
+      "lat": 41.297523,
+      "lng": -72.926621,
+      "category": "station",
+      "source": "osm"
+    },
+    {
+      "label": "New Haven Weightlifting",
+      "lat": 41.315634,
+      "lng": -72.905135,
+      "category": "sports_centre",
+      "source": "osm"
+    },
+    {
+      "label": "New Haven-State Street",
+      "lat": 41.305098,
+      "lng": -72.921765,
+      "category": "station",
+      "source": "osm"
+    },
+    {
+      "label": "Nielson and Irving Harris Building",
+      "lat": 41.304187,
+      "lng": -72.933452,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Nike Site Park",
+      "lat": 41.271486,
+      "lng": -72.981215,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "North Haven Athletic Complex",
+      "lat": 41.373532,
+      "lng": -72.854914,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "North Haven Sports Complex",
+      "lat": 41.373648,
+      "lng": -72.855379,
+      "category": "sports_centre",
+      "source": "osm"
+    },
+    {
+      "label": "North Haven Town Green",
+      "lat": 41.387188,
+      "lng": -72.86046,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "North Haven Town Hall",
+      "lat": 41.387887,
+      "lng": -72.861485,
+      "category": "townhall",
+      "source": "osm"
+    },
+    {
+      "label": "North Haven Town Hall Annex",
+      "lat": 41.38675,
+      "lng": -72.86255,
+      "category": "townhall",
+      "source": "osm"
+    },
+    {
+      "label": "Norton Parkway",
+      "lat": 41.324008,
+      "lng": -72.942427,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Ocean State Job Lot",
+      "lat": 41.260765,
+      "lng": -73.009988,
+      "category": "department_store",
+      "source": "osm"
+    },
+    {
+      "label": "Off Broadway Theater",
+      "lat": 41.311767,
+      "lng": -72.930187,
+      "category": "theatre",
+      "source": "osm"
+    },
+    {
+      "label": "Office",
+      "lat": 41.321669,
+      "lng": -72.925398,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Office Complex South",
+      "lat": 41.255289,
+      "lng": -72.992408,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Old Grive Park",
+      "lat": 41.257024,
+      "lng": -72.950396,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Old Grove Park",
+      "lat": 41.258348,
+      "lng": -72.949061,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Old Tavern Road Recreation Area",
+      "lat": 41.263136,
+      "lng": -73.010075,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Omni New Haven Hotel at Yale",
+      "lat": 41.305677,
+      "lng": -72.927325,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Orange Heath & Rehabilitation Center",
+      "lat": 41.269728,
+      "lng": -72.998396,
+      "category": "clinic",
+      "source": "osm"
+    },
+    {
+      "label": "Orange Line (Day)",
+      "lat": 41.313274,
+      "lng": -72.922119,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Orange Town Hall",
+      "lat": 41.279165,
+      "lng": -73.025792,
+      "category": "townhall",
+      "source": "osm"
+    },
+    {
+      "label": "Orange/Canner",
+      "lat": 41.323166,
+      "lng": -72.911125,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Orange/Cottage",
+      "lat": 41.320063,
+      "lng": -72.913368,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Orange/Humphrey",
+      "lat": 41.316323,
+      "lng": -72.916195,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Orange/Pearl",
+      "lat": 41.314462,
+      "lng": -72.917511,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Orange/Trumbull",
+      "lat": 41.312306,
+      "lng": -72.919188,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Orchard Medical Center",
+      "lat": 41.310509,
+      "lng": -72.941749,
+      "category": "clinic",
+      "source": "osm"
+    },
+    {
+      "label": "Orchard Street Greenspace",
+      "lat": 41.320195,
+      "lng": -72.935986,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Orchard-Gilbert Neighborhood Park",
+      "lat": 41.307872,
+      "lng": -72.942132,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Osborn Memorial Laboratories",
+      "lat": 41.316423,
+      "lng": -72.923605,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Painter Park",
+      "lat": 41.264052,
+      "lng": -72.958249,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Pardee Park",
+      "lat": 41.260218,
+      "lng": -72.847807,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Pardee Seawall Park",
+      "lat": 41.263407,
+      "lng": -72.89564,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Passport Health New Haven Travel Clinic",
+      "lat": 41.309525,
+      "lng": -72.923538,
+      "category": "clinic",
+      "source": "osm"
+    },
+    {
+      "label": "Paul Russo Memorial Park",
+      "lat": 41.303384,
+      "lng": -72.917811,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Peabody Museum of Natural History",
+      "lat": 41.315999,
+      "lng": -72.921257,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Pearl Harbor Memorial Park",
+      "lat": 41.301076,
+      "lng": -72.910162,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Peat Meadow Park",
+      "lat": 41.291927,
+      "lng": -72.887314,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Pelz Gymnasium",
+      "lat": 41.335056,
+      "lng": -72.943949,
+      "category": "sports_centre",
+      "source": "osm"
+    },
+    {
+      "label": "Phelps",
+      "lat": 41.30845,
+      "lng": -72.927919,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Phelps Hall",
+      "lat": 41.30844,
+      "lng": -72.92815,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Phelps Triangle",
+      "lat": 41.313437,
+      "lng": -72.921876,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Phyllis Bodel Childcare Center",
+      "lat": 41.304403,
+      "lng": -72.933783,
+      "category": "kindergarten",
+      "source": "osm"
+    },
+    {
+      "label": "Pierce Laboratory",
+      "lat": 41.301929,
+      "lng": -72.932627,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Pilates",
+      "lat": 41.307428,
+      "lng": -72.922613,
+      "category": "sports_centre",
+      "source": "osm"
+    },
+    {
+      "label": "Planned Parenthood of Connecticut",
+      "lat": 41.319745,
+      "lng": -72.91832,
+      "category": "clinic",
+      "source": "osm"
+    },
+    {
+      "label": "Plymouth Congregational Church",
+      "lat": 41.311603,
+      "lng": -72.944123,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Potty Court",
+      "lat": 41.310904,
+      "lng": -72.929514,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "President's House",
+      "lat": 41.314688,
+      "lng": -72.922652,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Price Rite",
+      "lat": 41.36271,
+      "lng": -72.922121,
+      "category": "supermarket",
+      "source": "osm"
+    },
+    {
+      "label": "Primary Care Center",
+      "lat": 41.302055,
+      "lng": -72.934987,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Priority Urgent Care",
+      "lat": 41.27805,
+      "lng": -72.866992,
+      "category": "clinic",
+      "source": "osm"
+    },
+    {
+      "label": "Prospect Garden Apartments",
+      "lat": 41.325522,
+      "lng": -72.923834,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Prospect/Canner",
+      "lat": 41.3255,
+      "lng": -72.922663,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Prospect/Edwards",
+      "lat": 41.320138,
+      "lng": -72.923255,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Prospect/Sachem",
+      "lat": 41.316042,
+      "lng": -72.924417,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Prospect/Sachem Garage",
+      "lat": 41.31792,
+      "lng": -72.924706,
+      "category": "parking",
+      "source": "osm"
+    },
+    {
+      "label": "Psychotheraputic Center",
+      "lat": 41.229743,
+      "lng": -73.048519,
+      "category": "clinic",
+      "source": "osm"
+    },
+    {
+      "label": "Quinnipiac River Park",
+      "lat": 41.30697,
+      "lng": -72.890182,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Rainbow Park",
+      "lat": 41.310853,
+      "lng": -72.935483,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Ralph Eberle Park",
+      "lat": 41.267468,
+      "lng": -72.938966,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Ralph Walker Ice Skating Rink",
+      "lat": 41.31725,
+      "lng": -72.906062,
+      "category": "sports_centre",
+      "source": "osm"
+    },
+    {
+      "label": "Reactions Research Lab",
+      "lat": 41.257482,
+      "lng": -72.991094,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Reese Stadium",
+      "lat": 41.311682,
+      "lng": -72.962151,
+      "category": "stadium",
+      "source": "osm"
+    },
+    {
+      "label": "Reese Stadium Building",
+      "lat": 41.312065,
+      "lng": -72.962248,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Rochford Field",
+      "lat": 41.338875,
+      "lng": -72.925613,
+      "category": "sports_centre",
+      "source": "osm"
+    },
+    {
+      "label": "Rose Alumni House",
+      "lat": 41.309931,
+      "lng": -72.931106,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Rose Center",
+      "lat": 41.315991,
+      "lng": -72.928725,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Rosenfeld Hall",
+      "lat": 41.311104,
+      "lng": -72.923307,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Rosenkranz Hall",
+      "lat": 41.314689,
+      "lng": -72.924348,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Rudolph Hall",
+      "lat": 41.30877,
+      "lng": -72.931852,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "SHM B-Wing",
+      "lat": 41.303606,
+      "lng": -72.933251,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "SHM I-Wing",
+      "lat": 41.303627,
+      "lng": -72.933824,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "SHM L-Wing",
+      "lat": 41.303014,
+      "lng": -72.933368,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Sachem/Whitney",
+      "lat": 41.315626,
+      "lng": -72.920869,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Sage Hall",
+      "lat": 41.317142,
+      "lng": -72.923667,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Saint Ronan Dog Park",
+      "lat": 41.324042,
+      "lng": -72.919302,
+      "category": "dog_park",
+      "source": "osm"
+    },
+    {
+      "label": "Saint Thomas More Catholic Chapel & Center at Yale University",
+      "lat": 41.310763,
+      "lng": -72.932501,
+      "category": "place_of_worship",
+      "source": "osm"
+    },
+    {
+      "label": "Savin Rock Park",
+      "lat": 41.254858,
+      "lng": -72.956157,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Saybrook Court",
+      "lat": 41.310257,
+      "lng": -72.929821,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "School of Medicine",
+      "lat": 41.303135,
+      "lng": -72.933862,
+      "category": "university",
+      "source": "osm"
+    },
+    {
+      "label": "School of Nursing",
+      "lat": 41.255831,
+      "lng": -72.992898,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Schwarzman Center",
+      "lat": 41.311806,
+      "lng": -72.926371,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Selin Courtyard",
+      "lat": 41.3113,
+      "lng": -72.928464,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Sheffield-Sterling-Strathcona Hall",
+      "lat": 41.311922,
+      "lng": -72.925099,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Shepard Street Greenspace",
+      "lat": 41.333941,
+      "lng": -72.927937,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Sherman Triangle",
+      "lat": 41.305497,
+      "lng": -72.947089,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "ShopRite",
+      "lat": 41.369614,
+      "lng": -72.922158,
+      "category": "supermarket",
+      "source": "osm"
+    },
+    {
+      "label": "Shubert Performing Arts Center",
+      "lat": 41.306351,
+      "lng": -72.928849,
+      "category": "theatre",
+      "source": "osm"
+    },
+    {
+      "label": "Sleep Disorders Center of Connecticut",
+      "lat": 41.229097,
+      "lng": -73.049763,
+      "category": "clinic",
+      "source": "osm"
+    },
+    {
+      "label": "Smilow Field Center",
+      "lat": 41.311382,
+      "lng": -72.959822,
+      "category": "sports_centre",
+      "source": "osm"
+    },
+    {
+      "label": "Smith Palmieri Park",
+      "lat": 41.330773,
+      "lng": -72.86973,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "South Court",
+      "lat": 41.310403,
+      "lng": -72.928065,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "South Genesee Park",
+      "lat": 41.335185,
+      "lng": -72.973573,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Spencer Street Beach",
+      "lat": 41.231714,
+      "lng": -72.987726,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "State Street",
+      "lat": 41.305247,
+      "lng": -72.921818,
+      "category": "station",
+      "source": "osm"
+    },
+    {
+      "label": "Steinbach Hall",
+      "lat": 41.31545,
+      "lng": -72.923429,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Sterling Hall of Medicine",
+      "lat": 41.303187,
+      "lng": -72.933515,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Sterling Power Plant",
+      "lat": 41.302864,
+      "lng": -72.932775,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Sterling Power Plant Cogeneration",
+      "lat": 41.30321,
+      "lng": -72.932366,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Stoeckel Hall",
+      "lat": 41.310493,
+      "lng": -72.925954,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Stone Court",
+      "lat": 41.310493,
+      "lng": -72.928823,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Stop & Shop",
+      "lat": 41.336261,
+      "lng": -72.982033,
+      "category": "supermarket",
+      "source": "osm"
+    },
+    {
+      "label": "TJ Maxx",
+      "lat": 41.285528,
+      "lng": -72.881091,
+      "category": "supermarket",
+      "source": "osm"
+    },
+    {
+      "label": "Target",
+      "lat": 41.234555,
+      "lng": -73.038083,
+      "category": "department_store",
+      "source": "osm"
+    },
+    {
+      "label": "The Anlyan Center",
+      "lat": 41.301184,
+      "lng": -72.934177,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "The Crown Towers",
+      "lat": 41.306723,
+      "lng": -72.932555,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "The Gryphon",
+      "lat": 41.309308,
+      "lng": -72.931996,
+      "category": "bar",
+      "source": "osm"
+    },
+    {
+      "label": "The Meat King by CTown",
+      "lat": 41.308279,
+      "lng": -72.912888,
+      "category": "supermarket",
+      "source": "osm"
+    },
+    {
+      "label": "The Park on Nash",
+      "lat": 41.318112,
+      "lng": -72.908679,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "The Study at Yale",
+      "lat": 41.309106,
+      "lng": -72.932975,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "The Yale Bookstore",
+      "lat": 41.312017,
+      "lng": -72.931088,
+      "category": "books",
+      "source": "osm"
+    },
+    {
+      "label": "The Yale Herald",
+      "lat": 41.307281,
+      "lng": -72.931876,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Thomas Mellon Evans Hall",
+      "lat": 41.315738,
+      "lng": -72.923325,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Todd's Pond",
+      "lat": 41.378006,
+      "lng": -72.85592,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Tompkins Building",
+      "lat": 41.302306,
+      "lng": -72.935238,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Town Center Park",
+      "lat": 41.380878,
+      "lng": -72.909198,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Town Open Space (Skiff Street)",
+      "lat": 41.372485,
+      "lng": -72.910859,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Trader Joe's",
+      "lat": 41.251309,
+      "lng": -73.017729,
+      "category": "supermarket",
+      "source": "osm"
+    },
+    {
+      "label": "Trowbridge Square Park",
+      "lat": 41.296867,
+      "lng": -72.932179,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Trubee Doolittle Park",
+      "lat": 41.229975,
+      "lng": -72.989662,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Tsai CITY",
+      "lat": 41.312424,
+      "lng": -72.924899,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Undergraduate Admissions",
+      "lat": 41.314583,
+      "lng": -72.923749,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Union Street Parkway",
+      "lat": 41.303528,
+      "lng": -72.922349,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Union Street Small Dog Park",
+      "lat": 41.303251,
+      "lng": -72.922366,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "University Theater",
+      "lat": 41.309728,
+      "lng": -72.931185,
+      "category": "theatre",
+      "source": "osm"
+    },
+    {
+      "label": "University Towers",
+      "lat": 41.306965,
+      "lng": -72.93313,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "University of New Haven",
+      "lat": 41.290031,
+      "lng": -72.957143,
+      "category": "university",
+      "source": "osm"
+    },
+    {
+      "label": "Upper Court",
+      "lat": 41.310025,
+      "lng": -72.932144,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Urgent Care Center",
+      "lat": 41.27695,
+      "lng": -72.99055,
+      "category": "clinic",
+      "source": "osm"
+    },
+    {
+      "label": "Vanderbilt Hall",
+      "lat": 41.307923,
+      "lng": -72.929339,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Veterans Administration Medical Center",
+      "lat": 41.283726,
+      "lng": -72.961053,
+      "category": "hospital",
+      "source": "osm"
+    },
+    {
+      "label": "Vietnam Veterans Memorial Park",
+      "lat": 41.290591,
+      "lng": -72.920566,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Village Park",
+      "lat": 41.225149,
+      "lng": -72.995758,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Villano Park",
+      "lat": 41.338729,
+      "lng": -72.923434,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Walmart",
+      "lat": 41.281334,
+      "lng": -72.830856,
+      "category": "department_store",
+      "source": "osm"
+    },
+    {
+      "label": "Walmart Supercenter",
+      "lat": 41.320032,
+      "lng": -72.876769,
+      "category": "supermarket",
+      "source": "osm"
+    },
+    {
+      "label": "Walter Brennan Memorial Park",
+      "lat": 41.251467,
+      "lng": -72.968848,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Walter R. Gawrych Community Pool",
+      "lat": 41.386366,
+      "lng": -72.86334,
+      "category": "sports_centre",
+      "source": "osm"
+    },
+    {
+      "label": "Warner House",
+      "lat": 41.311445,
+      "lng": -72.924062,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Watson Center",
+      "lat": 41.315634,
+      "lng": -72.923675,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Watson and Bassett Community Greenspace",
+      "lat": 41.332408,
+      "lng": -72.93394,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Weir Hall",
+      "lat": 41.308956,
+      "lng": -72.930611,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Welch Hall",
+      "lat": 41.308171,
+      "lng": -72.928335,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "West Campus Main Entrance/ Welcome Center",
+      "lat": 41.254682,
+      "lng": -72.99656,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "West Campus Storage & Receiving Center",
+      "lat": 41.257773,
+      "lng": -72.985924,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "West Haven",
+      "lat": 41.270964,
+      "lng": -72.963265,
+      "category": "station",
+      "source": "osm"
+    },
+    {
+      "label": "West Haven City Hall",
+      "lat": 41.27259,
+      "lng": -72.950522,
+      "category": "townhall",
+      "source": "osm"
+    },
+    {
+      "label": "West Haven Green",
+      "lat": 41.271229,
+      "lng": -72.950455,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "West River Open Space",
+      "lat": 41.33143,
+      "lng": -72.970711,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Westville Music Bowl",
+      "lat": 41.311842,
+      "lng": -72.957396,
+      "category": "stadium",
+      "source": "osm"
+    },
+    {
+      "label": "Whitehall Apartments",
+      "lat": 41.325893,
+      "lng": -72.921419,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Whitney Avenue Garage",
+      "lat": 41.316553,
+      "lng": -72.919435,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Whitney Grove Square",
+      "lat": 41.310862,
+      "lng": -72.922895,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Whitney Water Purification Facility and Park",
+      "lat": 41.335958,
+      "lng": -72.913654,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Whitney/Cold Spring",
+      "lat": 41.326324,
+      "lng": -72.91584,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Whitney/Edwards",
+      "lat": 41.319469,
+      "lng": -72.919062,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Whitney/Humphrey",
+      "lat": 41.317972,
+      "lng": -72.919768,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Whitney/Linden",
+      "lat": 41.323057,
+      "lng": -72.917247,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Whitneyville Food Center",
+      "lat": 41.346529,
+      "lng": -72.91301,
+      "category": "supermarket",
+      "source": "osm"
+    },
+    {
+      "label": "Whole Foods Market",
+      "lat": 41.248232,
+      "lng": -73.025334,
+      "category": "supermarket",
+      "source": "osm"
+    },
+    {
+      "label": "Wilbur Cross Athletic Complex",
+      "lat": 41.322124,
+      "lng": -72.905114,
+      "category": "stadium",
+      "source": "osm"
+    },
+    {
+      "label": "Willis Street Playground",
+      "lat": 41.332325,
+      "lng": -72.939248,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Willow/Foster",
+      "lat": 41.321051,
+      "lng": -72.909342,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Willow/Orange",
+      "lat": 41.322197,
+      "lng": -72.911755,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Winchester Building",
+      "lat": 41.303354,
+      "lng": -72.934622,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Woodbridge Hall",
+      "lat": 41.311177,
+      "lng": -72.926688,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Woodbridge Town Hall",
+      "lat": 41.354548,
+      "lng": -73.013823,
+      "category": "townhall",
+      "source": "osm"
+    },
+    {
+      "label": "Woodruff Family YMCA",
+      "lat": 41.250155,
+      "lng": -73.042616,
+      "category": "sports_centre",
+      "source": "osm"
+    },
+    {
+      "label": "Wooster Memorial Park",
+      "lat": 41.3032,
+      "lng": -72.919224,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Wright Laboratory",
+      "lat": 41.318999,
+      "lng": -72.920724,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Wright Laboratory West",
+      "lat": 41.318515,
+      "lng": -72.921453,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Yale Avenue",
+      "lat": 41.312247,
+      "lng": -72.958247,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Yale Barn",
+      "lat": 41.253218,
+      "lng": -72.994834,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Yale Bookstore",
+      "lat": 41.312251,
+      "lng": -72.93121,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Yale Cabaret",
+      "lat": 41.30957,
+      "lng": -72.932714,
+      "category": "theatre",
+      "source": "osm"
+    },
+    {
+      "label": "Yale Center for British Art",
+      "lat": 41.307896,
+      "lng": -72.93086,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Yale Co-op",
+      "lat": 41.311764,
+      "lng": -72.948714,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Yale Collection of Musical Instruments",
+      "lat": 41.312404,
+      "lng": -72.923778,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Yale Corinthian Yacht Club",
+      "lat": 41.255608,
+      "lng": -72.850878,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Yale Corinthian Yacht Club Parking",
+      "lat": 41.255753,
+      "lng": -72.85104,
+      "category": "parking",
+      "source": "osm"
+    },
+    {
+      "label": "Yale Court",
+      "lat": 41.260879,
+      "lng": -72.851021,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Yale Farm",
+      "lat": 41.320491,
+      "lng": -72.921337,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Yale Field",
+      "lat": 41.309279,
+      "lng": -72.959256,
+      "category": "stadium",
+      "source": "osm"
+    },
+    {
+      "label": "Yale Golf Course",
+      "lat": 41.319465,
+      "lng": -72.98559,
+      "category": "golf_course",
+      "source": "osm"
+    },
+    {
+      "label": "Yale Health Center",
+      "lat": 41.315739,
+      "lng": -72.927477,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Yale LGBTQ Center",
+      "lat": 41.315733,
+      "lng": -72.924267,
+      "category": "community_centre",
+      "source": "osm"
+    },
+    {
+      "label": "Yale Landscape Lab",
+      "lat": 41.253236,
+      "lng": -72.99553,
+      "category": "garden",
+      "source": "osm"
+    },
+    {
+      "label": "Yale Nature Preserve",
+      "lat": 41.321694,
+      "lng": -72.986527,
+      "category": "nature_reserve",
+      "source": "osm"
+    },
+    {
+      "label": "Yale New Haven Children's Hospital",
+      "lat": 41.304241,
+      "lng": -72.936331,
+      "category": "hospital",
+      "source": "osm"
+    },
+    {
+      "label": "Yale New Haven Health",
+      "lat": 41.271195,
+      "lng": -72.958366,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Yale New Haven Hospital Heliport",
+      "lat": 41.304445,
+      "lng": -72.936483,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Yale New Haven Hospital Saint Raphael Campus",
+      "lat": 41.310151,
+      "lng": -72.942939,
+      "category": "hospital",
+      "source": "osm"
+    },
+    {
+      "label": "Yale New Haven Psychiatric Hospital",
+      "lat": 41.301595,
+      "lng": -72.932853,
+      "category": "hospital",
+      "source": "osm"
+    },
+    {
+      "label": "Yale New Haven Psychiatric Hospital 3",
+      "lat": 41.301218,
+      "lng": -72.932756,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Yale Physicians Building",
+      "lat": 41.301223,
+      "lng": -72.936372,
+      "category": "doctors",
+      "source": "osm"
+    },
+    {
+      "label": "Yale Police Department",
+      "lat": 41.315822,
+      "lng": -72.928726,
+      "category": "police",
+      "source": "osm"
+    },
+    {
+      "label": "Yale Post Office",
+      "lat": 41.309901,
+      "lng": -72.928555,
+      "category": "post_office",
+      "source": "osm"
+    },
+    {
+      "label": "Yale Printing Service",
+      "lat": 41.324266,
+      "lng": -72.929175,
+      "category": "printing",
+      "source": "osm"
+    },
+    {
+      "label": "Yale Repertory Theater",
+      "lat": 41.308135,
+      "lng": -72.931553,
+      "category": "theatre",
+      "source": "osm"
+    },
+    {
+      "label": "Yale Repertory Theatre",
+      "lat": 41.308122,
+      "lng": -72.931575,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Yale School of Management, Edward P. Evans Hall",
+      "lat": 41.315159,
+      "lng": -72.920156,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Yale School of Medicine Business Center",
+      "lat": 41.299588,
+      "lng": -72.930264,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Yale Science Building",
+      "lat": 41.317391,
+      "lng": -72.921609,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Yale Science Building Pavilion",
+      "lat": 41.317198,
+      "lng": -72.922239,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Yale University",
+      "lat": 41.313573,
+      "lng": -72.923173,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Yale University Art Gallery Sculpture Garden",
+      "lat": 41.308698,
+      "lng": -72.930735,
+      "category": "park",
+      "source": "osm"
+    },
+    {
+      "label": "Yale University West Campus",
+      "lat": 41.256655,
+      "lng": -72.991383,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Yale Visitor Center",
+      "lat": 41.309199,
+      "lng": -72.925644,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Yale West Woods Trails",
+      "lat": 41.254251,
+      "lng": -72.994392,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Yale Women's Center",
+      "lat": 41.309669,
+      "lng": -72.928016,
+      "category": "community_centre",
+      "source": "osm"
+    },
+    {
+      "label": "Yale-China Association",
+      "lat": 41.313078,
+      "lng": -72.922609,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "Yale-New Haven Long Warf Medical Center",
+      "lat": 41.292727,
+      "lng": -72.922044,
+      "category": "clinic",
+      "source": "osm"
+    },
+    {
+      "label": "York-Crown Apartments A",
+      "lat": 41.307277,
+      "lng": -72.932248,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "York-Crown Apartments B",
+      "lat": 41.307455,
+      "lng": -72.932182,
+      "category": "place",
+      "source": "osm"
+    },
+    {
+      "label": "active heath & wellness center, LLC.",
+      "lat": 41.230372,
+      "lng": -73.046459,
+      "category": "clinic",
+      "source": "osm"
+    },
+    {
+      "label": "mActivity",
+      "lat": 41.321541,
+      "lng": -72.907376,
+      "category": "sports_centre",
+      "source": "osm"
+    }
+  ]
+}

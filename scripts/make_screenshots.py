@@ -102,6 +102,16 @@ def main() -> None:
         shot(page, ".panel:nth-of-type(2)", "03-recommendations")
         shot(page, ".map-wrap", "13-map")
 
+        # Full screen: the map with the ranked list docked beside it.
+        page.locator("h1").click()          # close any open datalist popup
+        page.wait_for_timeout(200)
+        page.locator("#map-expand").click()
+        page.wait_for_timeout(2200)
+        page.screenshot(path=str(OUT / "14-map-fullscreen.png"))
+        print("  14-map-fullscreen.png")
+        page.locator("#map-expand").click()
+        page.wait_for_timeout(900)
+
         # ---------------------------------------------------- 3. a clean run
         print("running a real listing")
         page.locator(".rec-card").first.click()

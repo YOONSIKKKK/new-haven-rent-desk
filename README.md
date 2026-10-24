@@ -84,10 +84,13 @@ key was found before you try anything.
 Fill in **About you** — budget, when you actually arrive, whether you have a car.
 Every figure is scored against those, not against an average renter.
 
-Say **where you need to get to every day**. A quick pick, a street address, a
-neighbourhood (*East Rock*, *Westville*), or a landmark (*Yale Bowl*, *IKEA*, *Yale New
-Haven Hospital*). Street addresses resolve through the U.S. Census geocoder; names
-resolve through OpenStreetMap. Neither needs an API key.
+Say **where you need to get to every day**. The box knows **758 places by name**,
+including every Yale school, residential college, library and landmark — *Divinity
+School*, *Yale Health*, *Sterling Memorial Library*, *Pauli Murray*, even *med school*
+— plus neighbourhoods, parks, hospitals, supermarkets and stations. Type-ahead
+suggests as you go. Anything it does not know is geocoded live: street addresses
+through the U.S. Census geocoder, names through OpenStreetMap. Neither needs an
+API key.
 
 Then give it a listing, three ways:
 
@@ -136,7 +139,8 @@ gives the same numbers twice, and why hostile text in a listing cannot move a pr
 | `data/listings.json` | 152 New Haven listings, Yale off-campus marketplace, captured 2026-10-24 |
 | `data/rent_baseline.json` | U.S. Census ACS 2023, 133 tracts: median gross rent, contract rent, rent by bedroom count |
 | `data/ct_rental_rules.json` | The Connecticut rules the app is permitted to assert, with sources |
-| `data/destinations.json` | Pre-geocoded commute destinations, so the common choices need no network call |
+| `data/places.json` | 758 searchable destinations: 50 curated Yale places resolved and bounds-checked at build time, plus 708 harvested from OpenStreetMap |
+| `data/destinations.json` | The original six quick picks, kept as a fallback |
 | `data/listing_history.json` | One row per listing per refresh — how long it has been advertised, and whether the price moved |
 | `data/ranking_weights.json` | Every number the recommendation ranking uses, so it can be retuned without touching code |
 | `data/cost_assumptions.json` | Measured figures and assumptions, kept separate and labelled as such |
@@ -175,6 +179,7 @@ empty.
 Not needed to run the app. Included so every number is reproducible:
 
 ```bash
+.venv/Scripts/python.exe scripts/build_places.py          # rebuild the gazetteer
 .venv/Scripts/python.exe scripts/build_listings.py        # re-capture listings
 .venv/Scripts/python.exe scripts/fetch_rent_baseline.py   # needs CENSUS_API_KEY, build-time only
 .venv/Scripts/python.exe scripts/geocode_listings.py      # attach census tracts, no key needed
