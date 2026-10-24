@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>New Haven Rent Desk</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+:root{
+  --blue:#3182f6; --blue-deep:#1b64da; --blue-weak:#e8f3ff;
+  --bg:#ffffff; --surface:#f9fafb; --line:#e5e8eb;
+  --text:#191f28; --muted:#6b7684;
+  --green:#008550; --amber:#8a5a00; --red:#d8323f;
+}
+.reveal{
+  font-family:Pretendard,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color:var(--text);font-size:30px;letter-spacing:-.022em;
+}
+body{background:var(--bg)}
+.reveal .backgrounds{background:
+  radial-gradient(1200px 560px at 10% -10%, #3182f60e, transparent 62%),
+  radial-gradient(900px 460px at 100% 0%, #3182f608, transparent 58%), var(--bg)}
+.reveal .slides{text-align:left}
+
+.reveal h1,.reveal h2,.reveal h3{
+  color:var(--text);text-transform:none;letter-spacing:-.025em;font-weight:680;margin:0 0 .4em;
+}
+.reveal h1{font-size:2.05em;line-height:1.08}
+.reveal h2{font-size:1.5em;line-height:1.15}
+.reveal h3{font-size:1.05em;color:var(--blue-deep);font-weight:600}
+.reveal p{line-height:1.5;margin:0 0 .6em}
+.reveal strong{color:var(--blue-deep);font-weight:680}
+.reveal em{color:var(--muted);font-style:normal}
+.reveal a{color:var(--blue)}
+
+.eyebrow{
+  font-size:.46em;text-transform:uppercase;letter-spacing:.16em;
+  color:var(--blue);font-weight:700;margin-bottom:1.1em;
+}
+.pitch{font-size:.86em;color:var(--muted);line-height:1.45;max-width:20em}
+.byline{margin-top:1.6em;font-size:.5em;color:var(--muted);letter-spacing:.02em}
+
+.reveal ul{margin:0 0 .5em 1em;line-height:1.5}
+.reveal li{margin-bottom:.42em;font-size:.84em}
+.reveal li::marker{color:var(--blue)}
+
+/* big number strip */
+.nums{display:flex;gap:1.5em;margin:.7em 0;flex-wrap:wrap}
+.num{flex:1;min-width:3.4em}
+.num .v{font-size:1.5em;font-weight:720;color:var(--blue);
+  letter-spacing:-.03em;font-variant-numeric:tabular-nums;line-height:1.05}
+.num .v.white{color:var(--text)}
+.num .l{font-size:.42em;color:var(--muted);margin-top:.5em;line-height:1.35;
+  text-transform:uppercase;letter-spacing:.07em;font-weight:600}
+
+/* the before/after device */
+.arrow-row{display:flex;align-items:center;gap:.8em;margin:.5em 0}
+.strike{font-size:1.5em;font-weight:700;color:var(--muted);
+  text-decoration:line-through;text-decoration-thickness:3px}
+.arrow{color:var(--blue);font-size:1.1em}
+.after{font-size:1.5em;font-weight:720;color:var(--blue)}
+
+table{width:100%;border-collapse:collapse;font-size:.55em;margin:.5em 0}
+th{text-align:left;padding:.55em .6em;border-bottom:2px solid var(--line);
+  color:var(--muted);font-size:.82em;text-transform:uppercase;letter-spacing:.07em}
+td{padding:.5em .6em;border-bottom:1px solid var(--line);vertical-align:top}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.tot td{border-top:2px solid var(--line);border-bottom:0;font-weight:700}
+.win{color:var(--green);font-weight:700}
+.lose{color:var(--red);font-weight:700}
+
+.shot{border-radius:14px;box-shadow:0 2px 10px rgba(25,31,40,.09);display:block;
+  max-height:430px;width:auto;max-width:100%;margin:.3em auto}
+.shot-wide{max-height:360px}
+.cap{font-size:.42em;color:var(--muted);text-align:center;margin-top:.5em;line-height:1.4}
+
+.cols{display:flex;gap:1.6em;align-items:flex-start}
+.cols>div{flex:1;min-width:0}
+
+.callout{background:var(--blue-weak);border-left:4px solid var(--blue);
+  padding:.6em .9em;border-radius:0 8px 8px 0;font-size:.68em;line-height:1.45;margin:.5em 0}
+.callout strong{color:var(--blue-deep)}
+
+pre.term{background:var(--surface);border:1px solid var(--line);border-radius:12px;
+  padding:.8em 1em;font:400 .34em/1.65 ui-monospace,SFMono-Regular,Menlo,monospace;
+  color:var(--text);overflow:visible;box-shadow:none;width:100%}
+pre.term .hl{color:var(--blue-deep);font-weight:700}
+pre.term .ok{color:var(--green);font-weight:700}
+pre.term .dim{color:var(--muted)}
+
+.diagram{background:#fff;border-radius:16px;padding:10px 16px;display:flex;justify-content:center;box-shadow:0 2px 10px rgba(25,31,40,.07)}
+.diagram svg{height:600px;width:auto;max-width:100%}
+
+.reveal .progress{color:var(--blue)}
+.reveal .controls{color:var(--blue)}
+.tag{display:inline-block;padding:.2em .7em;border-radius:999px;font-size:.38em;
+  font-weight:700;letter-spacing:.04em;text-transform:uppercase;vertical-align:middle;
+  background:var(--blue-weak);color:var(--blue-deep);margin-left:.6em}
+</style>
+</head>
+<body>
+<div class="reveal"><div class="slides">
+
+<!-- 1 ---------------------------------------------------------------- -->
+<section data-auto-animate>
+  <div class="eyebrow">MGT 409 &middot; AI Foundations &middot; Final Project</div>
+  <h1>New Haven<br>Rent Desk</h1>
+  <p class="pitch">What an apartment actually costs &mdash; for the people who
+  have to choose one without ever seeing it.</p>
+  <div class="byline">Yunsik Jung &middot; {{DATE}}</div>
+</section>
+
+<!-- 2 ---------------------------------------------------------------- -->
+<section>
+  <div class="eyebrow">The problem</div>
+  <h2>You sign a year's lease<br>from six thousand miles away</h2>
+  <p style="font-size:.78em;color:var(--muted);max-width:24em">
+  Every August, thousands of incoming students pick a New Haven apartment from an
+  advertisement, in a second language, in a rental system nobody explained to them.</p>
+  <div class="nums">
+    <div class="num"><div class="v">${{CITY_UTIL}}</div>
+      <div class="l">median monthly utilities a listing never mentions</div></div>
+    <div class="num"><div class="v">${{UTIL_MIN}}&ndash;${{UTIL_MAX}}</div>
+      <div class="l">that burden across tracts of the same city</div></div>
+    <div class="num"><div class="v">{{PCT_NO_UTILS}}%</div>
+      <div class="l">of real listings name no utilities at all</div></div>
+  </div>
+  <div class="callout">The lease everyone signs starts <strong>1 June</strong>.
+  The academic year starts in <strong>late August</strong>. The default is paying
+  for two months of an empty apartment, and most people find out after signing.</div>
+</section>
+
+<!-- 3 ---------------------------------------------------------------- -->
+<section>
+  <div class="eyebrow">What is new</div>
+  <h2>The existing tools answer<br>a different question</h2>
+  <div class="cols">
+    <div>
+      <table>
+        <tr><th>Tool</th><th>Blind spot</th></tr>
+        <tr><td>Rentometer</td><td>advertised rent vs advertised rent</td></tr>
+        <tr><td>Zillow Rent Zestimate</td><td>same, thin on multi-family stock</td></tr>
+        <tr><td>Apartment List</td><td>neighbourhood medians</td></tr>
+        <tr><td>Yale Off-Campus</td><td>a directory, no judgement</td></tr>
+        <tr><td>ChatGPT + paste</td><td>confident, unsourceable numbers</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3>All five assume you&hellip;</h3>
+      <ul>
+        <li>understand US rental conventions</li>
+        <li>can go and view the apartment</li>
+        <li>should compare monthly rent</li>
+        <li>know the neighbourhood</li>
+      </ul>
+      <div class="callout">For someone deciding from abroad,
+      <strong>all four are false.</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 ---------------------------------------------------------------- -->
+<section>
+  <div class="eyebrow">How it works</div>
+  <h2 style="font-size:1.15em">No agent does arithmetic that matters<span class="tag">3 of 10 stages are model calls</span></h2>
+  <div class="diagram">{{DIAGRAM}}</div>
+</section>
+
+<!-- 5 ---------------------------------------------------------------- -->
+<section>
+  <div class="eyebrow">Demo &middot; a real listing</div>
+  <h2 style="font-size:1.1em">The advertised price is not the price</h2>
+  <img class="shot" src="{{IMG:04-verdict}}" alt="Verdict panel">
+  <div class="cap">17 Broadway, a two-bedroom advertised at $2,205 &mdash; for someone
+  on a $2,200 budget arriving in August.</div>
+</section>
+
+<!-- 6 ---------------------------------------------------------------- -->
+<section>
+  <div class="eyebrow">Demo &middot; what you do next</div>
+  <h2 style="font-size:1.1em">Every blank becomes a question</h2>
+  <div class="cols">
+    <div style="flex:1.35">
+      <img class="shot shot-wide" src="{{IMG:07-questions}}" alt="Generated viewing questions">
+    </div>
+    <div>
+      <p style="font-size:.72em;line-height:1.5">The parser admits
+      <strong>{{MEAN_UNKNOWN}} unknown fields per listing</strong> instead of guessing.</p>
+      <p style="font-size:.72em;line-height:1.5">Those gaps become questions
+      tied to <em>this</em> listing, each with the money the answer moves &mdash;
+      written to hand to whoever does the video walkthrough.</p>
+      <div class="callout">Admitting what it does not know is the feature,
+      not the limitation.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 ---------------------------------------------------------------- -->
+<section>
+  <div class="eyebrow">Cost to run</div>
+  <h2 style="font-size:1.15em">${{COST_PER_LISTING}} a listing &mdash; measured, not estimated</h2>
+  <div class="nums">
+    <div class="num"><div class="v">${{COST_PER_USER}}</div><div class="l">one student, 20 listings</div></div>
+    <div class="num"><div class="v">${{COST_100}}</div><div class="l">100 students a month</div></div>
+    <div class="num"><div class="v">${{COST_10K}}</div><div class="l">10,000 students a month</div></div>
+    <div class="num"><div class="v white">{{CACHE_RATE}}%</div><div class="l">of input served from cache</div></div>
+  </div>
+  <div class="cols" style="margin-top:.3em">
+    <div>
+      <table>
+        <tr><th>Per listing</th><th class="n">Shipped</th><th class="n">&ldquo;Lean&rdquo;</th></tr>
+        <tr><td>Input tokens sent</td><td class="n">{{MEAN_INPUT}}</td><td class="n">{{LEAN_INPUT}}</td></tr>
+        <tr><td>&hellip; cached</td><td class="n">{{MEAN_CACHED}}</td><td class="n">{{LEAN_CACHED}}</td></tr>
+        <tr class="tot"><td>Cost</td><td class="n win">${{COST_PER_LISTING}}</td><td class="n lose">${{LEAN_COST}}</td></tr>
+      </table>
+    </div>
+    <div>
+      <div class="callout">Cutting the prompt by <strong>{{LEAN_PCT_FEWER}}%</strong>
+      made it <strong>{{LEAN_PCT_MORE}}% more expensive</strong> &mdash; and the agent
+      invented <strong>{{SPEC_INCREASE}}% more</strong> unverified findings.
+      <br><br>Prompt size is not the cost. <em>Uncached</em> prompt size is.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 ---------------------------------------------------------------- -->
+<section>
+  <div class="eyebrow">Safety</div>
+  <h2 style="font-size:1.1em">The listing is written by whoever wants your money</h2>
+  <div class="cols">
+    <div style="flex:1.3">
+      <img class="shot shot-wide" src="{{IMG:10-attack-verdict}}" alt="Verdict under attack">
+      <div class="cap">The ad ordered: report $900, flag no risk. The desk reported
+      $1,728 and opened with &ldquo;Don't send money&rdquo;.</div>
+    </div>
+    <div>
+      <pre class="term">attack                 seen told cost same
+<span class="dim">------------------------------------------</span>
+control                   -    -   <span class="ok">2,510.28</span>
+direct override         <span class="hl">yes  yes</span>   <span class="ok">2,510.28</span>
+hidden CSS text         <span class="hl">yes  yes</span>   <span class="ok">2,510.28</span>
+zero-width override     <span class="hl">yes  yes</span>   <span class="ok">2,510.28</span>
+forged delimiter        <span class="hl">yes  yes</span>   <span class="ok">2,510.28</span>
+scam + suppression      <span class="hl">yes  yes</span>   <span class="ok">2,510.28</span>
+
+<span class="ok">5/5 detected  5/5 reported  0 figures moved</span></pre>
+      <div class="callout">The agent that reads the ad has
+      <strong>no tools</strong>, and every figure is computed in Python afterwards.
+      Not a filter you can argue with &mdash; an absence of capability.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 ---------------------------------------------------------------- -->
+<section>
+  <div class="eyebrow">Impact</div>
+  <h2 style="font-size:1.15em">What it changes, and what I can prove</h2>
+  <div class="cols">
+    <div>
+      <h3>Measured</h3>
+      <ul>
+        <li>Utility burden ranges <strong>${{UTIL_MIN}}&ndash;${{UTIL_MAX}}/mo</strong>
+        across {{N_TRACTS}} tracts &mdash; U.S. Census ACS</li>
+        <li>Advertised rent understated monthly cost by <strong>{{GAP_PCT}}%</strong>
+        on the worked example</li>
+        <li><strong>{{PCT_NO_DEPOSIT}}%</strong> of {{N_LISTINGS}} listings state no deposit</li>
+        <li>Analysis costs <strong>${{COST_PER_LISTING}}</strong></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Projected</h3>
+      <ul>
+        <li>One avoided mistake across 20 listings is worth
+        <strong>$1,300&ndash;$4,400</strong> to that student</li>
+        <li>Serving them costs <strong>${{COST_PER_USER}}</strong></li>
+      </ul>
+      <div class="callout">No real user has run it end to end yet.
+      The test that would settle it &mdash; prediction against what students
+      actually paid &mdash; is the next step, not a finished one.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 --------------------------------------------------------------- -->
+<section>
+  <div class="eyebrow">What's next</div>
+  <h2>Point it at the lease,<br>and at more than one apartment</h2>
+  <ul style="max-width:22em">
+    <li><strong>Accuracy test.</strong> Ten students who moved here this year:
+    prediction vs what they really paid</li>
+    <li><strong>Lease upload.</strong> The deposit rules already exist &mdash; the real
+    legal risk is in the lease, not the ad</li>
+    <li><strong>Translation.</strong> Korean, Mandarin, Hindi, Spanish. English-only is
+    the worst gap on the list</li>
+    <li><strong>Side-by-side.</strong> Nobody evaluates one apartment; they choose
+    between three</li>
+    <li><strong>Hand it to OISS.</strong> Strongest version is not a personal tool</li>
+  </ul>
+  <div class="byline" style="margin-top:1.2em">
+    {{REPO_URL}}<br>
+    Data: U.S. Census ACS 2023 &middot; CT Dept. of Banking &middot; Yale Off-Campus Housing &middot;
+    Model: gpt-6-luna
+  </div>
+</section>
+
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true, slideNumber: 'c/t', controls: true, progress: true, center: true,
+    transition: 'slide', transitionSpeed: 'fast',
+    width: 1360, height: 820, margin: 0.07,
+    minScale: 0.2, maxScale: 1.6,
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+{
+  "note": "Two tiers of number live here, and the app labels every line with which tier it came from. Tier 1 is MEASURED: the monthly utility total comes from Census ACS (median gross rent minus median contract rent) for the listing's own census tract. Tier 2 is ASSUMED: how that measured total splits across heat, electricity and the rest, plus the costs Census gross rent does not cover at all. Assumptions are shown to the user as assumptions.",
+  "last_reviewed": "2026-10-24",
+
+  "utility_component_shares": {
+    "_basis": "market_default",
+    "_why": "ACS gives the utility total but not its breakdown. These shares allocate that measured total so the app can credit what a listing says is included. New England weighting: heating dominates.",
+    "heat": 0.45,
+    "electric": 0.25,
+    "hot_water": 0.12,
+    "water_sewer": 0.10,
+    "trash": 0.08
+  },
+
+  "utility_term_map": {
+    "_why": "Listings name utilities inconsistently. Maps the wording found in real New Haven ads onto the components above.",
+    "heat included": ["heat"],
+    "heat": ["heat"],
+    "gas": ["heat", "hot_water"],
+    "hot water": ["hot_water"],
+    "electric": ["electric"],
+    "electric with reasonable cap": ["electric"],
+    "wifi": [],
+    "high speed internet": [],
+    "cable tv": [],
+    "water": ["water_sewer"],
+    "sewer": ["water_sewer"],
+    "water & sewer": ["water_sewer"],
+    "trash": ["trash"],
+    "recycling": ["trash"],
+    "snow removal": [],
+    "lawn care included": [],
+    "pest control": [],
+    "unlimited utilities included": ["heat", "electric", "hot_water", "water_sewer", "trash"]
+  },
+
+  "costs_outside_gross_rent": {
+    "_why": "Census gross rent covers rent plus utilities only. These are real monthly costs it never sees, and they are exactly what a first-time renter forgets to add.",
+    "internet": {
+      "monthly_usd": 70,
+      "basis": "market_default",
+      "applies_when": "not listed as an included utility",
+      "note": "Typical New Haven single-household broadband bill."
+    },
+    "laundry": {
+      "monthly_usd": 35,
+      "basis": "market_default",
+      "applies_when": "laundry is not in-unit",
+      "note": "Coin or card laundry, roughly two loads a week."
+    },
+    "parking": {
+      "monthly_usd": 150,
+      "basis": "market_default",
+      "applies_when": "renter has a car and parking is not included",
+      "note": "Paid off-street space near campus."
+    },
+    "renters_insurance": {
+      "monthly_usd": 15,
+      "basis": "market_default",
+      "applies_when": "always",
+      "note": "Commonly required by the lease."
+    },
+    "furnishing_amortised": {
+      "monthly_usd": 85,
+      "basis": "market_default",
+      "applies_when": "unit is unfurnished and the renter is arriving from abroad",
+      "note": "Bed, desk, basic kitchen spread over twelve months. Someone flying in owns nothing."
+    }
+  },
+
+  "academic_calendar": {
+    "_why": "The quiet cost nobody warns you about. New Haven student leases overwhelmingly run June 1 to May 31, while the academic year starts in late August. Sign the standard lease and you pay for months you are not in the country.",
+    "common_lease_start_months": ["June", "July", "September"],
+    "default_lease_start_month": "June",
+    "yale_term_start_month": "August",
+    "note": "Gap months are charged at full rent and are rarely recoverable unless the unit can be sublet."
+  },
+
+  "pricing": {
+    "_why": "For the token cost readout in the app and the report. The app multiplies MEASURED token counts by these rates; it never estimates a cost.",
+    "model": "gpt-6-luna",
+    "input_usd_per_1m": 0.1,
+    "cached_input_usd_per_1m": 0.01,
+    "cache_write_usd_per_1m": 0.125,
+    "output_usd_per_1m": 0.5,
+    "source": "OpenAI Standard pricing per 1M tokens, MGT 409 Lecture 11"
+  }
+}

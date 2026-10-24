@@ -1,0 +1,133 @@
+{
+  "jurisdiction": "Connecticut, USA",
+  "last_reviewed": "2026-10-24",
+  "note": "Rules the app is allowed to assert. The risk agent may only cite rule_ids from this file; it has no authority to state law that is not here. Statutory text summarised, not quoted. Not legal advice.",
+  "sources": [
+    {
+      "id": "ct-dob-deposits",
+      "title": "Connecticut Department of Banking - Rental Security Deposits",
+      "url": "https://portal.ct.gov/DOB/Rental-Security-Deposits/Rental-Security-Deposits/Rental-Security-Deposits"
+    },
+    {
+      "id": "cgs-47a-21",
+      "title": "Connecticut General Statutes Sec. 47a-21 - Security deposits",
+      "url": "https://www.cga.ct.gov/current/pub/chap_831.htm"
+    }
+  ],
+  "rules": [
+    {
+      "rule_id": "CT-DEP-CAP-2MO",
+      "severity": "illegal",
+      "title": "Security deposit above two months' rent",
+      "test": "security_deposit_months > 2",
+      "summary": "A Connecticut landlord may not require more than two months' rent as a security deposit for a tenant under 62.",
+      "what_to_do": "Ask the landlord in writing to bring the deposit within the statutory cap before you sign or send money.",
+      "source": "ct-dob-deposits"
+    },
+    {
+      "rule_id": "CT-DEP-CAP-1MO-62",
+      "severity": "illegal",
+      "title": "Security deposit above one month for a tenant aged 62 or older",
+      "test": "tenant_is_62_plus and security_deposit_months > 1",
+      "summary": "For a tenant who is 62 or older the cap drops to one month's rent, and any pet deposit counts toward it.",
+      "what_to_do": "Tell the landlord the one-month cap applies and ask for a corrected lease.",
+      "source": "ct-dob-deposits"
+    },
+    {
+      "rule_id": "CT-DEP-ESCROW",
+      "severity": "info",
+      "title": "Deposit must sit in a Connecticut escrow account",
+      "test": "always_inform",
+      "summary": "The deposit must be held in an escrow account at a financial institution located in Connecticut. It is not the landlord's money to spend.",
+      "what_to_do": "Ask which Connecticut institution holds the escrow account, and keep the answer in writing.",
+      "source": "ct-dob-deposits"
+    },
+    {
+      "rule_id": "CT-DEP-INTEREST",
+      "severity": "info",
+      "title": "Deposit earns interest you are owed",
+      "test": "always_inform",
+      "summary": "Landlords owe interest on security deposits at a rate the Banking Commissioner publishes each year. Many tenants never ask for it.",
+      "what_to_do": "At move-out, ask for the deposit plus accrued interest, and check the current published rate.",
+      "source": "ct-dob-deposits"
+    },
+    {
+      "rule_id": "CT-DEP-RETURN-30D",
+      "severity": "info",
+      "title": "Deposit must come back within 30 days",
+      "test": "always_inform",
+      "summary": "After the tenancy ends the landlord has 30 days to return the unused deposit with interest, or deliver an itemised list of deductions. A landlord who wrongfully withholds can be liable for twice the amount.",
+      "what_to_do": "Give a forwarding address in writing at move-out and diarise the 30-day deadline.",
+      "source": "ct-dob-deposits"
+    },
+    {
+      "rule_id": "CT-DEP-PET-COUNTS",
+      "severity": "risky",
+      "title": "Pet deposit charged on top of the cap",
+      "test": "pet_deposit_separate",
+      "summary": "A pet deposit counts toward the same two-month cap. It cannot be stacked on top of a full security deposit. Service and emotional support animals are exempt from pet charges.",
+      "what_to_do": "Add the deposits together and check the total against two months' rent.",
+      "source": "ct-dob-deposits"
+    }
+  ],
+  "scam_patterns": [
+    {
+      "rule_id": "SCAM-PAY-BEFORE-VIEW",
+      "severity": "risky",
+      "title": "Money requested before anyone has seen the unit",
+      "keywords": ["deposit to hold", "send deposit", "wire", "before viewing", "hold the apartment", "reserve the unit"],
+      "summary": "Being asked to send money before a viewing, or before a lease exists, is the single most common rental scam against students arriving from abroad.",
+      "what_to_do": "Never send money before a signed lease and a live video walkthrough of the actual unit."
+    },
+    {
+      "rule_id": "SCAM-CASH-ONLY",
+      "severity": "risky",
+      "title": "Cash, wire, gift card, or crypto demanded",
+      "keywords": ["cash only", "western union", "zelle only", "gift card", "bitcoin", "crypto", "money order only", "cashapp"],
+      "summary": "Untraceable payment methods are demanded precisely because they cannot be reversed.",
+      "what_to_do": "Insist on a method that leaves a record and is reversible."
+    },
+    {
+      "rule_id": "SCAM-LANDLORD-ABROAD",
+      "severity": "risky",
+      "title": "Landlord claims to be out of the country",
+      "keywords": ["out of the country", "overseas", "missionary", "abroad on business", "cannot show", "i am currently in"],
+      "summary": "A landlord who cannot meet, cannot show the unit, and wants the keys mailed is a standard scam script.",
+      "what_to_do": "Require a viewing by the landlord, an agent, or a current tenant before any payment."
+    },
+    {
+      "rule_id": "SCAM-PRICE-TOO-GOOD",
+      "severity": "risky",
+      "title": "Priced far below everything else nearby",
+      "test": "delta_pct < -35",
+      "summary": "A unit priced well under the neighbourhood baseline is more often a fake listing than a bargain.",
+      "what_to_do": "Verify the address exists, is actually for rent, and that the person has the right to rent it."
+    },
+    {
+      "rule_id": "SCAM-NO-LEASE",
+      "severity": "risky",
+      "title": "No written lease offered",
+      "keywords": ["no lease", "handshake", "verbal agreement", "month to month cash"],
+      "summary": "Without a written lease you have very little you can enforce, and no document to show an immigration or financial-aid office.",
+      "what_to_do": "Ask for the written lease before paying anything."
+    }
+  ],
+  "ambiguous_terms": [
+    {
+      "term": "reasonable cap",
+      "why": "An electricity allowance with a 'reasonable cap' does not say what the cap is in dollars. Overage is billed to the tenant."
+    },
+    {
+      "term": "utilities included",
+      "why": "Rarely means all of them. Ask which specific utilities, by name."
+    },
+    {
+      "term": "heat included",
+      "why": "Does not imply hot water or cooking gas are included."
+    },
+    {
+      "term": "available now",
+      "why": "May mean the lease starts immediately, charging you for months before you arrive."
+    }
+  ]
+}

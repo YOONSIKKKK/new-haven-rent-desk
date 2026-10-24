@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>New Haven Rent Desk</title>
+<link rel="stylesheet" href="/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>&#127968;</text></svg>">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="mark"></span>
+    <div>
+      <h1>New Haven Rent Desk</h1>
+      <p class="tagline">What the apartment actually costs &mdash; for people who cannot go and look at it.</p>
+    </div>
+  </div>
+  <div class="status" id="status">
+    <span class="pill pill-muted">checking setup&hellip;</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- ------------------------------------------------ profile -->
+  <section class="panel" id="profile-panel">
+    <div class="panel-head">
+      <h2>About you</h2>
+      <p>Every number below is scored against these, not against an average renter.</p>
+    </div>
+    <div class="grid grid-profile">
+      <label>Monthly budget (all in)
+        <div class="input-prefix"><span>$</span><input type="number" id="budget" value="2200" min="0" step="50"></div>
+      </label>
+      <label>You actually arrive in
+        <select id="arrival">
+          <option>January</option><option>February</option><option>March</option>
+          <option>April</option><option>May</option><option>June</option>
+          <option>July</option><option selected>August</option><option>September</option>
+          <option>October</option><option>November</option><option>December</option>
+        </select>
+      </label>
+      <label>People in the household
+        <input type="number" id="household" value="1" min="1" max="8">
+      </label>
+      <label>Longest walk you accept
+        <div class="input-suffix"><input type="number" id="walk" value="20" min="1" max="60"><span>min</span></div>
+      </label>
+    </div>
+    <div class="checks">
+      <label class="check"><input type="checkbox" id="intl" checked><span>I am moving from abroad and cannot view in person</span></label>
+      <label class="check"><input type="checkbox" id="car"><span>I will have a car</span></label>
+      <label class="check"><input type="checkbox" id="laundry"><span>I need in-unit laundry</span></label>
+      <label class="check"><input type="checkbox" id="furnished"><span>I need it furnished</span></label>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------ input -->
+  <section class="panel">
+    <div class="panel-head">
+      <h2>The listing</h2>
+      <p>Pick one from the New Haven snapshot, paste an advertisement, or drop in a screenshot.</p>
+    </div>
+
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-tab="browse" role="tab">Browse the snapshot</button>
+      <button class="tab" data-tab="paste" role="tab">Paste an advertisement</button>
+      <button class="tab" data-tab="image" role="tab">Upload a screenshot</button>
+    </div>
+
+    <div class="tabpane active" id="pane-browse">
+      <div class="filters">
+        <label>Max rent
+          <div class="input-prefix"><span>$</span><input type="number" id="f-rent" placeholder="any" step="100"></div>
+        </label>
+        <label>Min bedrooms <input type="number" id="f-beds" placeholder="any" min="0" max="6"></label>
+        <label>Max walk
+          <div class="input-suffix"><input type="number" id="f-walk" placeholder="any" min="1" max="60"><span>min</span></div>
+        </label>
+        <button class="btn btn-ghost" id="f-apply">Filter</button>
+      </div>
+      <div class="listing-list" id="listing-list"><p class="muted">Loading listings&hellip;</p></div>
+    </div>
+
+    <div class="tabpane" id="pane-paste">
+      <textarea id="ad-text" rows="9" placeholder="Paste the whole advertisement here &mdash; the messier the better. Anything it does not say will be reported as unknown rather than guessed."></textarea>
+      <p class="hint">Text from a stranger is treated as data, never as instructions. Hidden and invisible text is stripped before anything reads it.</p>
+    </div>
+
+    <div class="tabpane" id="pane-image">
+      <label class="dropzone" for="ad-image">
+        <input type="file" id="ad-image" accept="image/png,image/jpeg,image/webp" hidden>
+        <strong>Choose a screenshot</strong>
+        <span>A photo of a listing from a group chat works. PNG, JPG or WebP.</span>
+      </label>
+      <div id="image-preview"></div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-primary" id="run">Work out the real cost</button>
+      <span class="run-note" id="run-note">Three model calls. Typically under three seconds.</span>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------ results -->
+  <div id="results" hidden>
+
+    <section class="panel verdict" id="verdict-panel">
+      <div class="verdict-head">
+        <span class="pill" id="verdict-pill"></span>
+        <h2 id="verdict-address"></h2>
+      </div>
+      <p class="headline" id="headline"></p>
+      <div class="bignums">
+        <div class="bignum">
+          <span class="bignum-label">Advertised</span>
+          <span class="bignum-value muted-value" id="n-advertised"></span>
+          <span class="bignum-sub">per month</span>
+        </div>
+        <div class="bignum arrow">&rarr;</div>
+        <div class="bignum">
+          <span class="bignum-label">Actually</span>
+          <span class="bignum-value accent" id="n-real"></span>
+          <span class="bignum-sub" id="n-real-sub"></span>
+        </div>
+        <div class="bignum">
+          <span class="bignum-label">First year</span>
+          <span class="bignum-value" id="n-year"></span>
+          <span class="bignum-sub">total outlay</span>
+        </div>
+        <div class="bignum">
+          <span class="bignum-label">Before you move in</span>
+          <span class="bignum-value" id="n-upfront"></span>
+          <span class="bignum-sub" id="n-upfront-sub"></span>
+        </div>
+      </div>
+      <div class="gap-banner" id="gap-banner" hidden></div>
+    </section>
+
+    <div class="columns">
+      <section class="panel">
+        <div class="panel-head"><h2>Where the money goes</h2>
+          <p>Measured figures and assumptions are labelled differently on purpose.</p></div>
+        <table class="costs" id="cost-table"></table>
+        <div class="legend">
+          <span><i class="dot dot-measured"></i>measured from public data</span>
+          <span><i class="dot dot-assumed"></i>assumption, not a measurement</span>
+        </div>
+        <div class="assumptions" id="assumptions"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h2>Against the neighbourhood</h2>
+          <p>U.S. Census gross rent for this exact census tract.</p></div>
+        <div class="fairprice" id="fairprice"></div>
+      </section>
+    </div>
+
+    <section class="panel" id="risk-panel">
+      <div class="panel-head"><h2>Risk and the law</h2>
+        <p>Every claim here is tied to a rule in the reviewed Connecticut rule file.</p></div>
+      <div id="risk-list"></div>
+    </section>
+
+    <div class="columns">
+      <section class="panel">
+        <div class="panel-head"><h2>Fit for you</h2></div>
+        <div class="fit" id="fit"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h2>What the advertisement never says</h2>
+          <p>Left blank rather than guessed.</p></div>
+        <div id="unknowns"></div>
+      </section>
+    </div>
+
+    <section class="panel">
+      <div class="panel-head"><h2>Ask before you sign</h2>
+        <p>Written for a video walkthrough by someone other than you.</p></div>
+      <ol class="questions" id="questions"></ol>
+      <div id="walkaway"></div>
+    </section>
+
+    <section class="panel usage">
+      <div class="panel-head"><h2>What this run cost</h2>
+        <p>Measured token counts from this run, priced at the course rate.</p></div>
+      <table class="usage-table" id="usage-table"></table>
+    </section>
+
+  </div>
+
+  <div id="error" class="panel error" hidden></div>
+
+</main>
+
+<footer>
+  <span id="footer-data"></span>
+  <span>Not legal advice. Rules summarised from the Connecticut Department of Banking.</span>
+</footer>
+
+<script src="/app.js"></script>
+</body>
+</html>
