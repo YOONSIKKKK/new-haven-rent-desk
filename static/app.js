@@ -11,6 +11,90 @@ const esc = (s) => String(s ?? "").replace(/[&<>"']/g,
 let selectedListingId = null;
 let imageDataUrl = null;
 
+/* ------------------------------------------------------------ map */
+let map = null;
+let markerLayer = null;
+const markers = new Map();   // listing id -> leaflet marker
+
+function ensureMap() {
+  if (map) return map;
+  map = L.map("map", { scrollWheelZoom: false, zoomControl: true })
+    .setView([41.3083, -72.9279], 13);           // New Haven
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  }).addTo(map);
+  markerLayer = L.layerGroup().addTo(map);
+  return map;
+}
+
+function rankIcon(rank, overBudget, selected) {
+  const cls = `rank-marker ${overBudget ? "over" : "good"}${selected ? " selected" : ""}`;
+  return L.divIcon({
+    className: "",
+    html: `<div class="${cls}"><span>${rank}</span></div>`,
+    iconSize: [28, 28],
+    iconAnchor: [14, 28],
+    popupAnchor: [0, -26],
+  });
+}
+
+function highlightMarker(id) {
+  markers.forEach((entry, key) => {
+    entry.marker.setIcon(rankIcon(entry.rank, entry.over, key === id));
+  });
+}
+
+function drawMap(result) {
+  ensureMap();
+  markerLayer.clearLayers();
+  markers.clear();
+
+  const bounds = [];
+  const d = result.destination;
+  if (d) {
+    L.marker([d.lat, d.lng], {
+      icon: L.divIcon({ className: "", html: '<div class="dest-marker"></div>',
+                        iconSize: [22, 22], iconAnchor: [11, 11], popupAnchor: [0, -12] }),
+      zIndexOffset: 1000,
+    }).addTo(markerLayer)
+      .bindPopup(`<b>${esc(d.label)}</b><div class="pop-fig">where you need to get to</div>`);
+    bounds.push([d.lat, d.lng]);
+  }
+
+  result.recommendations.forEach((x, i) => {
+    if (x.lat == null || x.lng == null) return;
+    const over = !x.within_budget;
+    const marker = L.marker([x.lat, x.lng], { icon: rankIcon(i + 1, over, false) })
+      .addTo(markerLayer)
+      .bindPopup(
+        `<b>${esc(x.address)}</b>` +
+        `<div class="pop-fig"><strong>${money(x.real_monthly_usd)}</strong>/mo all in ` +
+        `&middot; ad ${money(x.advertised_rent_usd)}</div>` +
+        `<div class="pop-fig">${x.walk_minutes ?? "?"} min walk &middot; ` +
+        `${x.fair_price_delta_pct === null ? "&mdash;" :
+           (x.fair_price_delta_pct > 0 ? "+" : "") + x.fair_price_delta_pct + "% vs tract"}</div>`
+      );
+    marker.on("click", () => selectListing(x.listing_id));
+    markers.set(x.listing_id, { marker, rank: i + 1, over });
+    bounds.push([x.lat, x.lng]);
+  });
+
+  if (bounds.length) map.fitBounds(bounds, { padding: [34, 34], maxZoom: 15 });
+  setTimeout(() => map.invalidateSize(), 60);
+}
+
+function selectListing(id) {
+  selectedListingId = id;
+  document.querySelectorAll(".rec-card").forEach((c) =>
+    c.classList.toggle("selected", Number(c.dataset.id) === id));
+  highlightMarker(id);
+  const card = document.querySelector(`.rec-card[data-id="${id}"]`);
+  if (card) card.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  const entry = markers.get(id);
+  if (entry) entry.marker.openPopup();
+}
+
 /* ------------------------------------------------------------ setup */
 async function loadStatus() {
   try {
@@ -120,6 +204,10 @@ async function rankListings() {
         <div class="rec-top">
           <span class="rec-rank">${i + 1}</span>
           <span class="rec-addr">${esc(x.address)}</span>
+          ${x.rent_change_usd ? `<span class="rec-flag ${x.rent_change_usd < 0 ? "drop" : "rise"}">${
+            x.rent_change_usd < 0 ? "&darr;" : "&uarr;"} ${money(Math.abs(x.rent_change_usd))}</span>` : ""}
+          ${x.days_advertised !== null && x.days_advertised >= 30
+            ? `<span class="rec-flag stale">${x.days_advertised}d listed</span>` : ""}
           <span class="rec-score" title="fit score">${x.score}</span>
         </div>
         <div class="rec-figures">
@@ -141,13 +229,10 @@ async function rankListings() {
       </button>`;
     }).join("");
 
+    drawMap(d);
+
     box.querySelectorAll(".rec-card").forEach((card) => {
-      card.addEventListener("click", () => {
-        box.querySelectorAll(".rec-card").forEach((c) => c.classList.remove("selected"));
-        card.classList.add("selected");
-        selectedListingId = Number(card.dataset.id);
-        $("run").scrollIntoView({ behavior: "smooth", block: "center" });
-      });
+      card.addEventListener("click", () => selectListing(Number(card.dataset.id)));
     });
   } catch (e) {
     box.innerHTML = `<p class="muted">Could not rank listings: ${esc(e.message)}</p>`;
@@ -351,6 +436,36 @@ function render(d) {
     ? `<div class="walkaway"><h3>Walk away if</h3><ul>${
         adv.walk_away_if.map((w) => `<li>${esc(w)}</li>`).join("")}</ul></div>`
     : "";
+
+  // ---- agent trace
+  const fmtVal = (v) => Array.isArray(v)
+    ? (v.length ? v.map((x) => `<code>${esc(x)}</code>`).join(" ") : "<em>none</em>")
+    : (v === null || v === undefined || v === "" ? "<em>none</em>" : esc(v));
+
+  $("trace").innerHTML = d.steps.map((s, i) => `
+    <details class="trace-step"${i === 0 ? " open" : ""}>
+      <summary>
+        <span class="trace-n">${i + 1}</span>
+        <span class="trace-name">${esc(s.agent)}</span>
+        <span class="trace-sum">${esc(s.summary)}</span>
+        <span class="trace-tools ${s.tools_available.length ? "has" : "none"}">${
+          s.tools_available.length
+            ? (s.tools_called.length ? `called ${esc(s.tools_called.join(", "))}` :
+               `${s.tools_available.length} tool available`)
+            : "no tools"}</span>
+      </summary>
+      <div class="trace-body">
+        <div class="trace-meta">
+          <span>tools available: ${fmtVal(s.tools_available)}</span>
+          <span>tools called: ${fmtVal(s.tools_called)}</span>
+          <span>${s.usage.total_tokens.toLocaleString()} tokens &middot; ${s.seconds}s &middot; $${s.usage.estimated_cost_usd.toFixed(6)}</span>
+        </div>
+        ${s.output_preview ? `<dl class="trace-out">${
+          Object.entries(s.output_preview).map(([k, v]) =>
+            `<dt>${esc(k.replace(/_/g, " "))}</dt><dd>${fmtVal(v)}</dd>`).join("")
+        }</dl>` : ""}
+      </div>
+    </details>`).join("");
 
   // ---- usage
   const u = d.usage;

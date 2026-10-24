@@ -84,14 +84,18 @@ key was found before you try anything.
 Fill in **About you** — budget, when you actually arrive, whether you have a car.
 Every figure is scored against those, not against an average renter.
 
-Say **where you need to get to every day** — a quick pick, or any New Haven address.
+Say **where you need to get to every day**. A quick pick, a street address, a
+neighbourhood (*East Rock*, *Westville*), or a landmark (*Yale Bowl*, *IKEA*, *Yale New
+Haven Hospital*). Street addresses resolve through the U.S. Census geocoder; names
+resolve through OpenStreetMap. Neither needs an API key.
 
 Then give it a listing, three ways:
 
-- **Recommended for you** — all 152 snapshot listings ranked against your budget,
+- **Recommended for you** — all snapshot listings ranked against your budget,
   household and that commute, ordered by what twelve months actually costs rather
-  than by advertised rent. **No model call**: ranking is arithmetic, so it is free and
-  takes about 19 ms. Click one to spend the model on it.
+  than by advertised rent, and plotted on a map of New Haven. Numbered pins match the
+  list; click a pin or a card to select it. **No model call**: ranking is arithmetic,
+  so it is free and takes about 19 ms. Click one to spend the model on it.
 - **Paste an advertisement** — any listing text, however messy.
 - **Upload a screenshot** — a photo of a listing from a group chat works;
   `gpt-6-luna` reads the image.
@@ -132,6 +136,7 @@ gives the same numbers twice, and why hostile text in a listing cannot move a pr
 | `data/rent_baseline.json` | U.S. Census ACS 2023, 133 tracts: median gross rent, contract rent, rent by bedroom count |
 | `data/ct_rental_rules.json` | The Connecticut rules the app is permitted to assert, with sources |
 | `data/destinations.json` | Pre-geocoded commute destinations, so the common choices need no network call |
+| `data/listing_history.json` | One row per listing per refresh — how long it has been advertised, and whether the price moved |
 | `data/ranking_weights.json` | Every number the recommendation ranking uses, so it can be retuned without touching code |
 | `data/cost_assumptions.json` | Measured figures and assumptions, kept separate and labelled as such |
 
@@ -142,6 +147,27 @@ rent is $1,195, so the tenant's utility burden is **$247 a month**. Across the 1
 tracts that burden runs from **$0 to $579 a month**. That spread — up to 48% of the
 median rent — is invisible in every listing site, and it is the reason this app
 exists.
+
+### Keeping the snapshot current
+
+A rental market is not a static dataset, and silently overwriting a snapshot throws
+away the most useful signal a renter has: that a place has sat unrented for a month,
+or that its price just dropped.
+
+```bash
+.venv/Scripts/python.exe scripts/refresh_listings.py --dry-run   # show the diff only
+.venv/Scripts/python.exe scripts/refresh_listings.py             # apply it
+```
+
+It diffs rather than replaces — **new** listings are added and geocoded, **price moves**
+are recorded with the old figure kept, **vanished** listings are marked `inactive`
+rather than deleted, and everything else just has its `last_seen` bumped. Every
+observation is appended to `data/listing_history.json`.
+
+Two safeguards: geocoding only runs for genuinely new listings, since an address does
+not move; and if the source returns fewer than 40 listings the run aborts without
+writing, because a refresh that cannot see the market must not conclude the market is
+empty.
 
 ### Rebuilding the data
 
@@ -297,7 +323,8 @@ app/
   models.py                every structured output; unknown stays unknown
   data_store.py            loads the committed datasets
   tools.py                 ALL the arithmetic: utilities, cost, fair price, rules
-  recommend.py             ranks the whole snapshot against one person; no model call
+  recommend.py             ranks the whole snapshot against one person; no model call,
+                           and resolves destinations via Census + OpenStreetMap
   safety.py                sanitising, injection detection, untrusted-text fencing
   prompts.py               cached reference blocks, built from the data files
   agents.py                the three agents and the deterministic fit scorer

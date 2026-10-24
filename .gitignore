@@ -13,6 +13,9 @@ __pycache__/
 node_modules/
 dist/
 
+# Scratch from build and verification runs
+output/_*
+
 # OS
 Thumbs.db
 desktop.ini

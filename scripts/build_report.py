@@ -10,6 +10,7 @@ Run the tests and the screenshots first, then:
     .venv/Scripts/python.exe scripts/build_report.py
 """
 import base64
+import io
 import json
 import mimetypes
 import re
@@ -36,12 +37,45 @@ def load(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+MAX_EMBED_WIDTH = 1600
+JPEG_ABOVE_BYTES = 350_000
+JPEG_QUALITY = 84
+
+
 def embed(name: str) -> str:
+    """Base64-embed a screenshot, shrinking it first if it is large.
+
+    Screenshots are captured at 2x for sharpness, which is far more than a
+    printed page or a projected slide needs. Map screenshots are photographic
+    and enormous as PNG. Downscaling to a sensible width and switching the big
+    ones to JPEG keeps both deliverables small enough to email, which the brief
+    cares about, without a visible loss at the size they are shown.
+    """
     path = SHOTS / f"{name}.png"
     if not path.is_file():
         sys.exit(f"Missing screenshot {path}. Run scripts/make_screenshots.py first.")
-    mime = mimetypes.guess_type(path.name)[0] or "image/png"
-    return f"data:{mime};base64,{base64.b64encode(path.read_bytes()).decode()}"
+
+    raw = path.read_bytes()
+    try:
+        from PIL import Image
+    except ImportError:
+        return f"data:image/png;base64,{base64.b64encode(raw).decode()}"
+
+    image = Image.open(io.BytesIO(raw))
+    if image.width > MAX_EMBED_WIDTH:
+        ratio = MAX_EMBED_WIDTH / image.width
+        image = image.resize(
+            (MAX_EMBED_WIDTH, max(1, round(image.height * ratio))), Image.LANCZOS
+        )
+
+    buffer = io.BytesIO()
+    if len(raw) > JPEG_ABOVE_BYTES:
+        image.convert("RGB").save(buffer, format="JPEG", quality=JPEG_QUALITY, optimize=True)
+        mime = "image/jpeg"
+    else:
+        image.save(buffer, format="PNG", optimize=True)
+        mime = "image/png"
+    return f"data:{mime};base64,{base64.b64encode(buffer.getvalue()).decode()}"
 
 
 def esc(text) -> str:
@@ -362,6 +396,9 @@ def collect_values() -> dict:
         "LEAN_COST": f"{lean['steady_cost_usd']:.6f}",
         "LEAN_PCT_FEWER": f"{(1 - lean['mean_input'] / full['mean_input']) * 100:.0f}",
         "LEAN_PCT_MORE": f"{(lean['steady_cost_usd'] / per_listing - 1) * 100:.0f}",
+        "LEAN_DELTA_PER_1000": f"{(lean['steady_cost_usd'] - per_listing) * 1000:.2f}",
+        # Cost of ranking the snapshot with the agents instead of arithmetic.
+        "RANK_VS_AGENTS_USD": f"{147 * per_listing:.2f}",
 
         "MEAN_UTILS": f"{full['mean_utilities_found']}",
         "LEAN_UTILS": f"{lean['mean_utilities_found']}",

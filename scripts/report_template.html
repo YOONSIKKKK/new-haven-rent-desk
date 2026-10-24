@@ -110,25 +110,25 @@ footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--line);
   font-size:12.5px;color:var(--muted);}
 
 @media print{
-  body{background:#fff;font-size:13.5px;line-height:1.55}
+  body{background:#fff;font-size:12.8px;line-height:1.52}
   .page{max-width:none;padding:0}
   h1{font-size:28px}
   .subtitle{font-size:16px}
   .one-liner{font-size:15px}
   p.lead{font-size:15.5px}
-  h2{margin-top:26px}
-  h3{font-size:18.5px;margin-bottom:11px;page-break-after:avoid}
-  h4{margin:18px 0 6px;font-size:14.5px}
-  p{margin-bottom:10px}
+  h2{margin-top:21px}
+  h3{font-size:17px;margin-bottom:9px;page-break-after:avoid}
+  h4{margin:15px 0 5px;font-size:13.8px}
+  p{margin-bottom:8px}
   li{margin-bottom:4px}
-  figure{margin:16px 0}
-  figure img{max-height:112mm;width:auto;max-width:100%;margin:0 auto}
+  figure{margin:13px 0}
+  figure img{max-height:88mm;width:auto;max-width:100%;margin:0 auto}
   figcaption{font-size:11.5px;margin-top:6px}
   table{margin:14px 0;font-size:12.5px}
   th,td{padding:6px 8px}
   .callout{padding:13px 17px;margin:16px 0}
   .note{padding:12px 16px;margin:14px 0}
-  .stats{margin:16px 0;padding:14px 0;gap:18px}
+  .stats{margin:13px 0;padding:11px 0;gap:16px}
   .stat .v{font-size:21px}
   pre{font-size:10.5px;padding:12px 14px;margin:14px 0}
   .diagram{margin:16px 0}
@@ -308,7 +308,7 @@ text inside a listing cannot move a price.</p>
   <tr><td><code>rules</code></td><td>Python</td><td>Connecticut deposit rules and scam patterns, applied to the text</td><td>&mdash;</td></tr>
   <tr><td><code>risk</code></td><td><strong>AGENT</strong></td><td>Explains each finding to a first-time renter. May add observations, may not state law that is not in the rule file</td><td>rule file in prompt</td></tr>
   <tr><td><code>fit</code></td><td>Python</td><td>Scores the listing against this person's budget, arrival month, walk limit and household</td><td>&mdash;</td></tr>
-  <tr><td><code>advice</code></td><td><strong>AGENT</strong></td><td>Writes the verdict and the questions to ask before signing</td><td>all prior output in prompt</td></tr>
+  <tr><td><code>advice</code></td><td><strong>AGENT</strong></td><td>Writes the verdict and the questions to ask before signing</td><td><code>find_comparable_listings</code></td></tr>
 </table>
 
 <h4>Why this model</h4>
@@ -328,6 +328,30 @@ fixed schema, so the worst a perfect injection can do is corrupt field values, w
 the deterministic layer then sanity-checks against public data. This is not a filter
 that can be argued with; it is an absence of capability.</p>
 
+<h4>One agent has a tool, and which one is the argument</h4>
+
+<p>The advisor can call <code>find_comparable_listings</code>, which reads the committed
+snapshot and returns what else that money buys in the same census tract. Intake cannot
+call anything.</p>
+
+<p>That asymmetry is the design, not an inconsistency. By the time the advisor runs, the
+attacker-controlled text is gone: it sees only values the deterministic layer produced.
+Its tool reads committed public data and does nothing else - no writes, no network, no
+reach back into the listing. Handing the same tool to intake would give a hostile
+advertisement something to call, which is exactly the capability the defence is built
+on removing.</p>
+
+<figure>
+  <img src="{{IMG:12-trace-top}}" alt="Per-agent trace in the app">
+  <figcaption><b>What each agent actually did, in the product.</b> Intake reports no
+  tools and seven fields it refused to fill, including a note that the advertisement
+  never says whether $1,400 is the whole apartment or one roommate's share. Risk shows
+  eleven rules checked and its own observations tagged <code>OBSERVED-</code> so a reader
+  can tell a statute from a hunch. The advisor shows the tool it called. The token table
+  underneath is the app's own bill, measured and displayed in the product rather than
+  reconstructed for this report.</figcaption>
+</figure>
+
 <h4>Before any of that: ranking 147 listings for nothing</h4>
 
 <p>Most people do not arrive with one advertisement in hand; they arrive with a
@@ -339,8 +363,9 @@ screen ranks the whole snapshot against those three things &mdash; and does it w
 apartments are worth opening is arithmetic: the census utility measurement for each
 listing's own tract, the twelve-month simulation, the fair-price comparison, and the
 distance from each listing's coordinates to wherever the person typed. Running three
-agents over 147 listings would cost about <strong>$0.28</strong> and several minutes to
-answer a question that takes <strong>19 milliseconds</strong> and nothing. The model is
+agents over 147 listings would cost about <strong>${{RANK_VS_AGENTS_USD}}</strong> and
+several minutes to answer a question that takes <strong>19 milliseconds</strong> and
+nothing. The model is
 spent on the one listing they then choose to open.</p>
 
 <p>The ranking also inherits the rule file's judgement rather than contradicting it.
@@ -349,13 +374,24 @@ that is the same threshold <code>SCAM-PRICE-TOO-GOOD</code> uses, and in this sn
 catches eight listings that are per-room prices quoted as whole-unit rent. They are
 demoted and labelled, not hidden.</p>
 
+<h4>Where the shortlist actually is</h4>
+
+<p>Rent is a geographic question and a ranked list hides that. The shortlist is
+therefore drawn on an OpenStreetMap view of New Haven: numbered pins matching the list,
+a marker on the address the person typed, and a popup on each pin with the real monthly
+cost. Clicking a pin selects that listing, so the list and the map are two views of one
+answer. Destinations resolve through the Census geocoder for street addresses and
+OpenStreetMap for names - neighbourhoods such as East Rock, landmarks such as Yale Bowl,
+a hospital, a supermarket. Neither service needs an API key.</p>
+
 <figure>
-  <img src="{{IMG:03-recommendations-top}}" alt="Ranked recommendations">
-  <figcaption><b>Ranked, with the reasoning shown.</b> Each card gives the real
-  monthly cost next to the advertised one, the twelve-month total, the walk to the
-  address the person actually typed, and how it sits against census rents for its own
-  tract. The ticks and the warnings underneath are the ranking's own reasons &mdash; a
-  score nobody can interrogate is a score nobody should trust.</figcaption>
+  <img src="{{IMG:13-map}}" alt="Ranked listings on a map of New Haven">
+  <figcaption><b>The shortlist, and where it is.</b> Blue pins are within budget and
+  grey ones are not; the black marker is the destination. Each card below gives the real
+  monthly cost next to the advertised one, the walk, and how the price sits against
+  census rents for its own tract, with the ranking's own reasons underneath &mdash; a score
+  nobody can interrogate is a score nobody should trust. Seeing that the cheapest options
+  sit across a motorway from campus is a judgement no table makes for you.</figcaption>
 </figure>
 
 <h4>One real run, start to finish</h4>
@@ -390,15 +426,8 @@ August from abroad.</p>
 </figure>
 
 <figure>
-  <img src="{{IMG:08-usage}}" alt="Token usage table">
-  <figcaption><b>Step 4 &mdash; the app shows its own bill.</b> Measured token counts per
-  agent, priced at the course rate, displayed in the product rather than reconstructed
-  afterwards for this report.</figcaption>
-</figure>
-
-<figure>
   <img src="{{IMG:07-questions}}" alt="Generated viewing questions">
-  <figcaption><b>Step 5 &mdash; what to do next.</b> The output a person who cannot visit
+  <figcaption><b>Step 4 &mdash; what to do next.</b> The output a person who cannot visit
   actually needs: questions tied to this listing's specific unknowns, each with the
   amount of money the answer moves. These are generated from the gaps the parser
   admitted, which is why admitting gaps is treated as a feature.</figcaption>
@@ -443,7 +472,7 @@ single month's rent for one student.</p>
   the fresh rate.</li>
   <li><strong>Keep the model out of the shortlist.</strong> Ranking 147 listings is
   arithmetic, so it runs with no model call at all: <strong>$0 and 19 milliseconds</strong>
-  against roughly <strong>$0.28</strong> and several minutes if the three agents were run
+  against roughly <strong>${{RANK_VS_AGENTS_USD}}</strong> and several minutes if the three agents were run
   over the whole snapshot. Nearly all the browsing in this app is therefore free, and
   the paid work happens once the person has chosen.</li>
   <li><strong>Cap the budget.</strong> Every run carries hard request and token ceilings, so a
@@ -462,10 +491,18 @@ the prompt. I built that version and measured it against the shipped one.</p>
   <tr class="total"><td>Cost per listing</td><td class="num win">${{COST_PER_LISTING}}</td><td class="num lose">${{LEAN_COST}}</td></tr>
 </table>
 
-<p><strong>The lean version sends {{LEAN_PCT_FEWER}}% fewer input tokens and costs
-{{LEAN_PCT_MORE}}% more.</strong> Over half the shipped version's input is cached at a tenth
-of the price, so the apparently wasteful prompt is the cheaper one. Prompt size is
-not the cost; <em>uncached</em> prompt size is the cost.</p>
+<p><strong>The lean version sends {{LEAN_PCT_FEWER}}% fewer input tokens and saves
+nothing</strong> &mdash; ${{LEAN_DELTA_PER_1000}} per thousand listings analysed, in the
+wrong direction. Two thirds of the shipped version's input is served from cache at a
+tenth of the fresh rate, and that discount almost exactly cancels the extra tokens.
+Prompt size is not the cost; <em>uncached</em> prompt size is.</p>
+
+<p>An earlier measurement of this app, before the advisor was given a tool, put the lean
+version 12% <em>more</em> expensive. Adding the tool definition gave the lean
+configuration a stable prefix of its own to cache, which closed most of that gap. The
+honest summary is therefore not "the big prompt is cheaper" but something narrower and
+more durable: <strong>trimming the prompt bought nothing</strong>, and the reason to keep
+or cut it has to be found somewhere other than the bill.</p>
 
 <h4>Did the cheaper configuration perform worse?</h4>
 <p>It performed differently, and in the direction that matters.</p>
@@ -481,12 +518,15 @@ not the cost; <em>uncached</em> prompt size is the cost.</p>
 
 <div class="callout">
   <h4>Reading that last row</h4>
-  <p>Rule-based findings are identical in both configurations, and must be: they come
-  from a rule engine that never sees a prompt. So every difference in the totals is the
-  agent speculating on its own. Taking the rule file away did not help it find more
-  real problems &mdash; it made it invent <strong>{{SPEC_INCREASE}}% more unverified
-  observations</strong>. The cheaper-looking configuration was more expensive <em>and</em>
-  less disciplined.</p>
+  <p>This is where the decision actually gets made. Rule-based findings are identical in
+  both configurations, and must be: they come from a rule engine that never sees a
+  prompt. So every difference in the totals is the agent speculating on its own. Taking
+  the rule file away did not help it find more real problems &mdash; it made it invent
+  <strong>{{SPEC_INCREASE}}% more unverified observations</strong>.</p>
+  <p>So the trim costs the same and produces a less disciplined agent. That is a clear
+  answer, and it is a different answer from the one the first measurement gave. Worth
+  saying plainly: the cost case for the big prompt evaporated once the tool was added,
+  and only the quality case survived.</p>
 </div>
 
 <!-- ============================================ 6. SAFETY -->
@@ -629,9 +669,12 @@ an assumption, not a measurement.</p>
 <h3>What does not work yet</h3>
 
 <ul>
-  <li><strong>One source, one capture.</strong> The snapshot is {{N_LISTINGS}} listings from
-  Yale's marketplace on {{CAPTURE_DATE}}. Landlords who advertise with a sign in the
-  window &mdash; a large part of this market, by Yale's own description &mdash; are invisible to it.</li>
+  <li><strong>One source.</strong> The snapshot is {{N_LISTINGS}} listings from Yale's
+  marketplace. It can now be refreshed on a schedule &mdash; <code>scripts/refresh_listings.py</code>
+  diffs against what is held, records price moves, and marks vanished listings inactive
+  rather than deleting them, so how long a place has sat unrented becomes answerable.
+  But landlords who advertise with a sign in the window &mdash; a large part of this market,
+  by Yale's own description &mdash; remain invisible to it.</li>
   <li><strong>Census medians are a bearing, not a valuation.</strong> ACS covers all rentals in
   a tract, not student housing, and does not adjust for condition, floor or renovation.
   The app says so on screen next to the number.</li>

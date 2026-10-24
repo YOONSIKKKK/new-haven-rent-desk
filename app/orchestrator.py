@@ -98,6 +98,18 @@ def evaluate(
         "Extracted the advertised facts and listed what the ad never says",
     )
     listing: ParsedListing = intake_run.output
+    # What this agent actually produced, kept for the trace view. The whole
+    # point of intake is what it refused to fill in, so that is what we show.
+    intake_run.step.output_preview = {
+        "bedrooms": listing.bedrooms,
+        "asking_rent_usd": listing.asking_rent_usd,
+        "utilities_included": listing.utilities_included,
+        "laundry": listing.laundry,
+        "security_deposit_text": listing.security_deposit_text,
+        "lease_start_month": listing.lease_start_month,
+        "left_unknown": listing.unknown_fields,
+        "parser_notes": listing.parser_notes,
+    }
 
     # ---- deterministic middle
     tract, walk_minutes, how = locate_tract(listing, listing_id)
@@ -141,6 +153,15 @@ def evaluate(
         f"{len(rule_findings.checked_rules)} deterministic checks",
     )
     risk: RiskReport = risk_run.output
+    risk_run.step.output_preview = {
+        "rules_checked": len(rule_findings.checked_rules),
+        "findings_from_rules": sorted(
+            f.rule_id for f in rule_findings.findings
+        ),
+        "observations_added": sorted(
+            f.rule_id for f in risk.findings if f.rule_id.startswith("OBSERVED-")
+        ),
+    }
 
     # Guard: the agent may not quietly drop a deterministic finding.
     given = {f.rule_id for f in rule_findings.findings}
@@ -161,6 +182,15 @@ def evaluate(
         "Wrote the verdict and the questions to ask before signing",
     )
     advice: Advice = advice_run.output
+    advice_run.step.output_preview = {
+        "headline": advice.headline,
+        "biggest_unknown": advice.biggest_unknown,
+        "questions_generated": len(advice.viewing_questions),
+        "questions_with_a_dollar_figure": sum(
+            1 for q in advice.viewing_questions if q.dollar_impact
+        ),
+        "walk_away_conditions": len(advice.walk_away_if),
+    }
 
     steps = [intake_run.step, risk_run.step, advice_run.step]
     total = TokenUsage()

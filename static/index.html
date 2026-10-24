@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>New Haven Rent Desk</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <link rel="stylesheet" href="/styles.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>&#127968;</text></svg>">
 </head>
@@ -32,7 +34,7 @@
     </div>
     <label class="destination-field">Where you need to get to every day
       <input type="text" id="destination" list="destination-list"
-             placeholder="Yale School of Management, or any New Haven address"
+             placeholder="An address, a neighbourhood (East Rock), or a landmark (Yale Bowl)"
              value="Yale School of Management">
       <datalist id="destination-list"></datalist>
     </label>
@@ -68,7 +70,7 @@
   <section class="panel">
     <div class="panel-head">
       <h2>The listing</h2>
-      <p>Ranked against your constraints and your commute, with no model call. Or paste an advertisement of your own.</p>
+      <p>Ranked against your constraints and your commute, with no model call, and plotted on the map. Or paste an advertisement of your own.</p>
     </div>
 
     <div class="tabs" role="tablist">
@@ -86,6 +88,15 @@
         <button class="btn btn-ghost" id="f-apply">Rank them for me</button>
       </div>
       <p class="rank-note" id="rank-note"></p>
+      <div class="map-wrap">
+        <div id="map" aria-label="Map of New Haven with the ranked listings"></div>
+        <div class="map-legend">
+          <span><i class="pin pin-dest"></i>where you are going</span>
+          <span><i class="pin pin-good"></i>within budget</span>
+          <span><i class="pin pin-over"></i>over budget</span>
+          <span class="muted">click a pin to select it</span>
+        </div>
+      </div>
       <div class="rec-list" id="listing-list"><p class="muted">Ranking the snapshot&hellip;</p></div>
     </div>
 
@@ -190,8 +201,9 @@
     </section>
 
     <section class="panel usage">
-      <div class="panel-head"><h2>What this run cost</h2>
-        <p>Measured token counts from this run, priced at the course rate.</p></div>
+      <div class="panel-head"><h2>What each agent did, and what it cost</h2>
+        <p>Measured from this run. Expand an agent to see what it produced.</p></div>
+      <div id="trace"></div>
       <table class="usage-table" id="usage-table"></table>
     </section>
 
@@ -206,6 +218,8 @@
   <span>Not legal advice. Rules summarised from the Connecticut Department of Banking.</span>
 </footer>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="/app.js"></script>
 </body>
 </html>

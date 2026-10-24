@@ -98,8 +98,9 @@ def main() -> None:
         # ---------------------------------------------------- 2. the ranking
         print("waiting for the ranking")
         page.wait_for_selector(".rec-card", timeout=60_000)
-        page.wait_for_timeout(500)
+        page.wait_for_timeout(2500)          # let the map tiles land
         shot(page, ".panel:nth-of-type(2)", "03-recommendations")
+        shot(page, ".map-wrap", "13-map")
 
         # ---------------------------------------------------- 3. a clean run
         print("running a real listing")
@@ -111,7 +112,12 @@ def main() -> None:
             shot(page, ".columns", "05-cost-and-fairprice")
             shot(page, "#risk-panel", "06-risk")
             shot(page, ".questions", "07-questions")
-            shot(page, ".usage", "08-usage")
+            page.evaluate("document.querySelectorAll('.trace-step').forEach(d=>d.open=true)")
+            page.wait_for_timeout(300)
+            shot(page, ".usage", "12-trace")
+            page.evaluate("document.querySelectorAll('.trace-step').forEach((d,i)=>d.open=(i===0))")
+            page.wait_for_timeout(250)
+            shot(page, ".usage-table", "08-usage")
 
         # ---------------------------------------------------- 4. under attack
         print("running the same desk against a hostile listing")

@@ -1,0 +1,17 @@
+{
+  "runs": [
+    {
+      "run_at": "2026-10-24T20:14:35+00:00",
+      "source": "https://offcampushousing.yale.edu/listing",
+      "dry_run": false,
+      "source_count": 152,
+      "held_before": 152,
+      "added": 0,
+      "price_changed": 0,
+      "gone": 0,
+      "unchanged": 152,
+      "active_after": 152,
+      "total_tracked": 152
+    }
+  ]
+}

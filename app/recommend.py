@@ -18,10 +18,12 @@ from __future__ import annotations
 import json
 import math
 import re
+import time
+from datetime import date
 from functools import lru_cache
 from urllib.error import URLError
 from urllib.parse import urlencode
-from urllib.request import urlopen
+from urllib.request import Request, urlopen
 
 from . import data_store as store
 from . import tools
@@ -35,6 +37,14 @@ from .models import (
 )
 
 GEOCODER = "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress"
+NOMINATIM = "https://nominatim.openstreetmap.org/search"
+NOMINATIM_USER_AGENT = (
+    "NewHavenRentDesk/1.0 (MGT 409 student project; "
+    "https://github.com/YOONSIKKKK/new-haven-rent-desk)"
+)
+# OpenStreetMap's public geocoder asks for at most one request a second.
+NOMINATIM_MIN_INTERVAL = 1.1
+_last_nominatim_call = 0.0
 
 # New Haven is flat and walkable; these are ordinary urban speeds, and the UI
 # labels the result as an estimate from a straight line, not a routed walk.
@@ -69,16 +79,103 @@ def _normalise(text: str) -> str:
     return re.sub(r"[^a-z0-9 ]", " ", (text or "").lower()).strip()
 
 
+def _geocode_census(query: str) -> tuple[float, float, str] | None:
+    """U.S. Census geocoder: authoritative for street addresses, blind to names.
+
+    It will not find "East Rock", "Yale Bowl" or a supermarket - it matches
+    numbered street addresses only. That is why it is not used alone.
+    """
+    params = urlencode({
+        "address": query, "benchmark": "Public_AR_Current", "format": "json",
+    })
+    try:
+        with urlopen(f"{GEOCODER}?{params}", timeout=20) as response:
+            data = json.loads(response.read().decode("utf-8"))
+    except (URLError, json.JSONDecodeError, TimeoutError, OSError):
+        return None
+    matches = data.get("result", {}).get("addressMatches") or []
+    if not matches:
+        return None
+    coords = matches[0]["coordinates"]
+    return coords["y"], coords["x"], matches[0]["matchedAddress"]
+
+
+def _geocode_nominatim(query: str) -> tuple[float, float, str] | None:
+    """OpenStreetMap: finds neighbourhoods, parks, campuses, shops, hospitals.
+
+    Needs no API key, which keeps the app's requirement at PORTKEY_API_KEY only.
+    Results are biased to the New Haven area with a viewbox, and calls are
+    rate-limited to respect the public service's usage policy.
+    """
+    global _last_nominatim_call
+    wait = NOMINATIM_MIN_INTERVAL - (time.monotonic() - _last_nominatim_call)
+    if wait > 0:
+        time.sleep(wait)
+
+    params = urlencode({
+        "q": query,
+        "format": "json",
+        "limit": 1,
+        "countrycodes": "us",
+        # Rough box around greater New Haven, so "Union Station" and
+        # "Stop & Shop" resolve here rather than in another state.
+        "viewbox": "-73.05,41.38,-72.80,41.22",
+        "bounded": 0,
+    })
+    request = Request(
+        f"{NOMINATIM}?{params}",
+        headers={"User-Agent": NOMINATIM_USER_AGENT, "Accept-Language": "en"},
+    )
+    try:
+        with urlopen(request, timeout=20) as response:
+            data = json.loads(response.read().decode("utf-8"))
+    except (URLError, json.JSONDecodeError, TimeoutError, OSError):
+        return None
+    finally:
+        _last_nominatim_call = time.monotonic()
+
+    if not data:
+        return None
+    hit = data[0]
+    return float(hit["lat"]), float(hit["lon"]), hit.get("display_name", query)
+
+
+@lru_cache(maxsize=256)
+def _lookup(query: str) -> tuple[float, float, str, str] | None:
+    """Resolve one query to (lat, lng, matched, how). Cached per process.
+
+    Order matters. A query that starts with a house number is a street address,
+    and the Census geocoder is the better authority for those. Anything else is
+    a name - a neighbourhood, a building, a shop - and only OpenStreetMap will
+    find it. Each falls back to the other, so a query that looks like one and is
+    really the other still resolves.
+    """
+    looks_like_address = bool(re.match(r"^\s*\d", query))
+    # Nudge bare names into the right city without overriding a stated one.
+    enriched = query if re.search(r"\b(ct|connecticut|new haven)\b", query, re.I) \
+        else f"{query}, New Haven, CT"
+
+    attempts = (
+        [("address", _geocode_census, query), ("place", _geocode_nominatim, enriched)]
+        if looks_like_address else
+        [("place", _geocode_nominatim, enriched), ("address", _geocode_census, query)]
+    )
+    for how, fn, q in attempts:
+        hit = fn(q)
+        if hit:
+            return hit[0], hit[1], hit[2], how
+    return None
+
+
 def resolve_destination(text: str) -> tuple[Destination | None, str | None]:
     """Turn whatever the user typed into coordinates.
 
-    Quick picks first, because they are free and cover most people. Then the
-    Census geocoder, which needs no API key - important, because the app is
-    only allowed to require PORTKEY_API_KEY.
+    Quick picks first, because they are free and instant. Then a street address
+    or a place name, in whichever order the query suggests.
     """
     query = (text or "").strip()
     if not query:
-        return None, "Enter the address you need to get to every day."
+        return None, "Enter the address or place you need to get to every day."
 
     target = _normalise(query)
     for place in quick_picks():
@@ -90,29 +187,18 @@ def resolve_destination(text: str) -> tuple[Destination | None, str | None]:
                 resolved_by="quick_pick", matched_address=place.get("matched_address"),
             ), None
 
-    params = urlencode({
-        "address": query, "benchmark": "Public_AR_Current", "format": "json",
-    })
-    try:
-        with urlopen(f"{GEOCODER}?{params}", timeout=20) as response:
-            data = json.loads(response.read().decode("utf-8"))
-    except (URLError, json.JSONDecodeError, TimeoutError, OSError):
+    found = _lookup(query)
+    if found is None:
         return None, (
-            "Could not reach the address lookup service. Pick one of the suggested "
-            "destinations instead - those work without a network call."
+            f'Nothing matched "{query}". Try a street address with its number, a '
+            "neighbourhood such as East Rock or Westville, or a landmark such as "
+            "Yale Bowl. If you are offline, the suggested destinations still work."
         )
 
-    matches = data.get("result", {}).get("addressMatches") or []
-    if not matches:
-        return None, (
-            f'No address matched "{query}". Try including the street number and '
-            '"New Haven, CT".'
-        )
-
-    coords = matches[0]["coordinates"]
+    lat, lng, matched, how = found
     return Destination(
-        label=query, address=query, lat=coords["y"], lng=coords["x"],
-        resolved_by="geocoder", matched_address=matches[0]["matchedAddress"],
+        label=query, address=query, lat=lat, lng=lng,
+        resolved_by=how, matched_address=matched,
     ), None
 
 
@@ -179,6 +265,16 @@ def listing_to_parsed(row: dict) -> ParsedListing:
         security_deposit_text=deposit,
         unknown_fields=unknown,
     )
+
+
+def _days_since(iso_date: str | None) -> int | None:
+    """How long a listing has been advertised, from the refresh history."""
+    if not iso_date:
+        return None
+    try:
+        return max(0, (date.today() - date.fromisoformat(iso_date)).days)
+    except ValueError:
+        return None
 
 
 def _commute_minutes(km: float, kmh: float) -> int:
@@ -398,6 +494,11 @@ def recommend(
             first_year_total_usd=cost.first_year_total_usd,
             fair_price_delta_pct=fair.delta_pct,
             fair_price_verdict=fair.verdict,
+            lat=row.get("lat"),
+            lng=row.get("lng"),
+            rent_change_usd=row.get("rent_change_usd"),
+            first_seen=row.get("first_seen"),
+            days_advertised=_days_since(row.get("first_seen")),
             distance_km=km,
             walk_minutes=walk,
             bike_minutes=bike,

@@ -395,6 +395,49 @@ def _quote(text: str, pattern: str, window: int = 70) -> str:
 # --------------------------------------------------------------------------
 # Listing search over the committed snapshot
 # --------------------------------------------------------------------------
+def find_comparable_listings(
+    bedrooms: int, census_tract: str | None = None, limit: int = 4
+) -> list[dict]:
+    """Find comparable New Haven listings to put one apartment's price in context.
+
+    Prefers listings in the same census tract; falls back to the whole snapshot
+    when the tract has too few. Returns the advertised rent, what the tenant
+    would actually pay once utilities are counted, and the walk to campus.
+
+    Args:
+        bedrooms: Bedroom count to match. Studios are 0.
+        census_tract: Six-digit tract code to prefer, if known.
+        limit: How many comparables to return, at most 8.
+    """
+    limit = max(1, min(limit, 8))
+    rows = [
+        r for r in store.listings()
+        if r.get("status", "active") == "active"
+        and r.get("rent_min")
+        and (r.get("bed_min") == bedrooms or r.get("bed_max") == bedrooms)
+    ]
+    same_tract = [r for r in rows if census_tract and r.get("census_tract") == census_tract]
+    pool = same_tract if len(same_tract) >= 2 else rows
+    pool = sorted(pool, key=lambda r: r["rent_min"])[:limit]
+
+    out = []
+    for r in pool:
+        utilities, _, _ = estimate_tenant_utilities(
+            r.get("utilities_included") or [], r.get("census_tract")
+        )
+        out.append({
+            "address": r.get("address"),
+            "bedrooms": r.get("bed_min"),
+            "advertised_rent_usd": r["rent_min"],
+            "tenant_utilities_usd": round(utilities, 2),
+            "real_monthly_usd": round(r["rent_min"] + utilities, 2),
+            "utilities_included": r.get("utilities_included") or [],
+            "walk_minutes_to_campus": r.get("walk_minutes_to_campus"),
+            "same_tract": bool(census_tract and r.get("census_tract") == census_tract),
+        })
+    return out
+
+
 def search_listings(
     max_rent: int | None = None,
     min_bedrooms: int | None = None,

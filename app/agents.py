@@ -154,6 +154,13 @@ Write:
    is useful. Give dollar_impact when the material supports a figure.
 5. walk_away_if - concrete conditions that should end the conversation.
 
+You have one tool, find_comparable_listings. Call it once when a price judgement
+would be sharper with context - when the listing is above or below its local
+baseline, or when the person is close to their budget ceiling. Use what it
+returns to say what else that money buys nearby, naming a comparable and its
+real monthly cost. Do not call it more than once, and do not use it to invent a
+figure for THIS listing; its numbers describe other apartments.
+
 Be direct. This person is tired, is doing this in a second language, and is
 about to commit a year of money.
 """
@@ -195,7 +202,7 @@ def risk_agent() -> Agent[None, RiskReport]:
 
 
 def advisor_agent() -> Agent[None, Advice]:
-    return Agent(
+    agent = Agent(
         build_model(),
         output_type=Advice,
         instructions=_instructions(
@@ -205,6 +212,13 @@ def advisor_agent() -> Agent[None, Advice]:
         model_settings=_settings("advisor"),
         name="advisor",
     )
+    # The one agent that gets a tool, and the contrast is the point. By the time
+    # the advisor runs, the untrusted text is long gone: it sees only values the
+    # deterministic layer produced. A tool here can read committed public data
+    # and nothing else - no writes, no network, no reach into the listing text.
+    # Giving the same tool to intake would hand an attacker something to call.
+    agent.tool_plain(tools.find_comparable_listings)
+    return agent
 
 
 # --------------------------------------------------------------------------
@@ -252,10 +266,25 @@ class Run:
     step: AgentStep
 
 
+def _tools_called(result) -> list[str]:
+    """Names of tools the model actually called during this run."""
+    names: list[str] = []
+    try:
+        for message in result.all_messages():
+            for part in getattr(message, "parts", []):
+                name = getattr(part, "tool_name", None)
+                if name and name != "final_result" and name not in names:
+                    names.append(name)
+    except Exception:
+        pass
+    return names
+
+
 def run_agent(agent: Agent, prompt: str | list, label: str, summary: str) -> Run:
     started = time.perf_counter()
     result = agent.run_sync(prompt, usage_limits=RUN_LIMITS)
     elapsed = round(time.perf_counter() - started, 2)
+    called = _tools_called(result)
     return Run(
         output=result.output,
         step=AgentStep(
@@ -263,6 +292,9 @@ def run_agent(agent: Agent, prompt: str | list, label: str, summary: str) -> Run
             summary=summary,
             usage=price_usage(result.usage),
             seconds=elapsed,
+            tools_available=[t.name for t in getattr(agent, "_function_toolset", None).tools.values()]
+                if getattr(agent, "_function_toolset", None) else [],
+            tools_called=called,
         ),
     )
 

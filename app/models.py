@@ -195,7 +195,10 @@ class Destination(BaseModel):
     address: str | None = None
     lat: float
     lng: float
-    resolved_by: Literal["quick_pick", "geocoder", "fallback"] = "geocoder"
+    resolved_by: Literal["quick_pick", "address", "place"] = "address"
+    """quick_pick: matched a pre-geocoded destination, no network call.
+    address: resolved as a street address by the U.S. Census geocoder.
+    place: resolved as a name - neighbourhood, campus, park, shop - by OpenStreetMap."""
     matched_address: str | None = None
 
 
@@ -213,9 +216,19 @@ class Recommendation(BaseModel):
     fair_price_delta_pct: float | None = None
     fair_price_verdict: Verdict = "unknown"
 
+    lat: float | None = None
+    lng: float | None = None
     distance_km: float | None = None
     walk_minutes: int | None = None
     bike_minutes: int | None = None
+
+    rent_change_usd: int | None = Field(
+        None, description="Price move since a previous refresh, if one was recorded"
+    )
+    first_seen: str | None = None
+    days_advertised: int | None = Field(
+        None, description="How long it has been on the market, which no listing site shows"
+    )
 
     score: int = Field(ge=0, le=100)
     within_budget: bool = False
@@ -253,6 +266,14 @@ class AgentStep(BaseModel):
     summary: str
     usage: TokenUsage
     seconds: float
+    tools_available: list[str] = Field(
+        default_factory=list,
+        description="Tools this agent could call. Empty for intake, deliberately.",
+    )
+    tools_called: list[str] = Field(default_factory=list)
+    output_preview: dict | None = Field(
+        None, description="What this agent actually produced, for the trace view"
+    )
 
 
 class Evaluation(BaseModel):

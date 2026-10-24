@@ -173,14 +173,15 @@ pre.term .dim{color:var(--muted)}
   <h2 style="font-size:1.1em">147 listings ranked for <span style="color:var(--blue)">$0</span></h2>
   <div class="cols">
     <div style="flex:1.45">
-      <img class="shot shot-wide" src="{{IMG:03-recommendations-top}}" alt="Ranked recommendations">
+      <img class="shot shot-wide" src="{{IMG:13-map}}" alt="Ranked listings on a map of New Haven">
     </div>
     <div>
       <p style="font-size:.72em;line-height:1.5">Budget, household, and the address you
-      actually have to reach each morning. Ranked by <strong>twelve-month cost</strong>,
-      not advertised rent.</p>
+      actually have to reach each morning &mdash; a street address, a neighbourhood, or a
+      landmark. Ranked by <strong>twelve-month cost</strong>, not advertised rent, and
+      drawn on the map so you can see where the money goes.</p>
       <div class="callout"><strong>Zero model calls.</strong> Which places are worth
-      opening is arithmetic &mdash; 19&nbsp;ms and nothing, against ~$0.28 and minutes
+      opening is arithmetic &mdash; 19&nbsp;ms and nothing, against ~${{RANK_VS_AGENTS_USD}} and minutes
       to run the agents over all of them.<br><br>The model is spent on the one you open.</div>
     </div>
   </div>
@@ -218,8 +219,9 @@ pre.term .dim{color:var(--muted)}
     </div>
     <div>
       <div class="callout">Cutting the prompt by <strong>{{LEAN_PCT_FEWER}}%</strong>
-      made it <strong>{{LEAN_PCT_MORE}}% more expensive</strong> &mdash; and the agent
-      invented <strong>{{SPEC_INCREASE}}% more</strong> unverified findings.
+      <strong>saved nothing</strong> &mdash; two thirds of the input is cached at a tenth
+      of the price &mdash; and the agent invented <strong>{{SPEC_INCREASE}}% more</strong>
+      unverified findings.
       <br><br>Prompt size is not the cost. <em>Uncached</em> prompt size is.</div>
     </div>
   </div>
