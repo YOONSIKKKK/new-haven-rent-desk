@@ -1,0 +1,71 @@
+{
+  "note": "Every number the recommendation ranking uses. Edit this file and reload the app - no code change, no restart of anything but the server. Scores start at base_score and move from there; the final value is clamped to 0-100. Raise a number to make that factor matter more.",
+  "last_reviewed": "2026-10-24",
+
+  "base_score": 60,
+  "_base_score": "Where every listing starts before anything is known about it.",
+
+  "budget": {
+    "_what": "Scored against the REAL monthly cost, not the advertised rent. This is the heaviest factor on purpose: being over budget is the one thing that rules a place out.",
+    "under_budget_base": 10,
+    "_under_budget_base": "Credit for simply fitting the budget at all.",
+    "under_budget_per_budget_fraction": 60,
+    "_under_budget_per_budget_fraction": "Extra credit scaled by how much headroom there is, as a fraction of the budget. Headroom of 20% of budget adds 0.20 x 60 = 12.",
+    "under_budget_max": 24,
+    "over_budget_per_budget_fraction": 110,
+    "_over_budget_per_budget_fraction": "Penalty scaled by how far over, as a fraction of budget. 10% over costs 0.10 x 110 = 11.",
+    "over_budget_max_penalty": 45
+  },
+
+  "value_vs_baseline": {
+    "_what": "How the listing's gross rent compares with U.S. Census rents for its own census tract and bedroom count.",
+    "implausible_below_pct": -35,
+    "_implausible_below_pct": "Below this, a listing is treated as suspect rather than cheap. Same threshold as SCAM-PRICE-TOO-GOOD in ct_rental_rules.json; in this snapshot it catches eight per-room prices quoted as whole-unit rent. Keep the two files in step if you change it.",
+    "implausible_penalty": 10,
+    "good_deal_at_or_below_pct": -10,
+    "good_deal_bonus": 12,
+    "expensive_at_or_above_pct": 20,
+    "expensive_penalty": 12,
+    "slightly_expensive_at_or_above_pct": 10,
+    "slightly_expensive_penalty": 5
+  },
+
+  "commute": {
+    "_what": "Walking minutes to the address the person typed, from a straight-line distance with a detour allowance.",
+    "within_limit_base": 4,
+    "within_limit_per_minute_spare": 0.8,
+    "_within_limit_per_minute_spare": "Credit per minute under the stated limit. A 20 min limit met in 12 min adds 4 + 8 x 0.8 = 10.4.",
+    "within_limit_max": 12,
+    "over_limit_per_minute": 1.2,
+    "over_limit_max_penalty": 22,
+    "long_walk_warning_minutes": 25,
+    "_long_walk_warning_minutes": "Above this, with no car, adds a warning but no score change."
+  },
+
+  "requirements": {
+    "_what": "Things the person explicitly asked for.",
+    "too_few_bedrooms_penalty": 20,
+    "spare_bedrooms_warn_at": 2,
+    "_spare_bedrooms_warn_at": "Bedrooms beyond household size before warning that the price may be per room. No score change - spare rooms are neither a benefit nor a fault.",
+    "in_unit_laundry_bonus": 8,
+    "on_site_laundry_penalty": 6,
+    "laundry_unknown_penalty": 8,
+    "_laundry_unknown_penalty": "Deliberately harsher than on-site: not knowing is worse than knowing something mediocre.",
+    "furnished_bonus": 8,
+    "not_furnished_penalty": 12
+  },
+
+  "calendar_gap": {
+    "_what": "Months of rent paid before the person arrives, from the June-lease / August-arrival mismatch.",
+    "penalty_per_month": 6,
+    "max_penalty": 14
+  },
+
+  "completeness": {
+    "_what": "How much the advertisement actually states. A ranking built on guesses should rank below one built on facts.",
+    "many_unknowns_at": 7,
+    "many_unknowns_penalty": 6,
+    "few_unknowns_at": 3,
+    "few_unknowns_bonus": 4
+  }
+}

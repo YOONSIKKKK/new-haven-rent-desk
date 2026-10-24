@@ -132,6 +132,7 @@ gives the same numbers twice, and why hostile text in a listing cannot move a pr
 | `data/rent_baseline.json` | U.S. Census ACS 2023, 133 tracts: median gross rent, contract rent, rent by bedroom count |
 | `data/ct_rental_rules.json` | The Connecticut rules the app is permitted to assert, with sources |
 | `data/destinations.json` | Pre-geocoded commute destinations, so the common choices need no network call |
+| `data/ranking_weights.json` | Every number the recommendation ranking uses, so it can be retuned without touching code |
 | `data/cost_assumptions.json` | Measured figures and assumptions, kept separate and labelled as such |
 
 All four are committed. The app never calls the network except to reach the model.
@@ -225,6 +226,34 @@ run the app:
 
 Both HTML files embed their images as base64 and open by double-clicking.
 `slides.html` loads reveal.js from a CDN: arrow keys to move, **F** for full screen.
+
+### Retuning the ranking
+
+Every number the ranking uses lives in `data/ranking_weights.json`, annotated with
+what it does. Edit it, restart the server, and the order changes - no code edit.
+Raise a number to make that factor matter more.
+
+Scores start at `base_score` (60), move by the rules below, and are clamped to
+0-100. The ranking also emits the reason for every adjustment it makes, so a
+retune is visible on the cards rather than hidden in the order.
+
+| Factor | Weight as shipped |
+|---|---|
+| Under budget | +10, plus 60 x (headroom / budget), capped at +24 |
+| Over budget | -110 x (overage / budget), capped at -45 |
+| 10%+ below local baseline | +12 |
+| More than 35% below baseline | **-10 and a warning**, not a bonus |
+| 10-20% above baseline | -5 · 20%+ above | -12 |
+| Within your walk limit | +4, plus 0.8 per spare minute, capped at +12 |
+| Past your walk limit | -1.2 per minute over, capped at -22 |
+| Too few bedrooms | -20 |
+| In-unit laundry, if asked for | +8 · on-site -6 · unstated -8 |
+| Furnished, if asked for | +8 · not stated -12 |
+| Lease-calendar gap months | -6 each, capped at -14 |
+| 7+ facts unstated | -6 · 3 or fewer | +4 |
+
+The -35% rule is shared with `SCAM-PRICE-TOO-GOOD` in `ct_rental_rules.json`. If you
+change one, change both.
 
 ---
 

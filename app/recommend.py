@@ -46,6 +46,18 @@ DETOUR_FACTOR = 1.25
 
 
 @lru_cache(maxsize=1)
+def weights() -> dict:
+    """Ranking weights, kept as data so they can be retuned without code edits."""
+    path = DATA_DIR / "ranking_weights.json"
+    if not path.is_file():
+        raise FileNotFoundError(
+            f"Missing {path}. It holds every number the ranking uses and is "
+            "committed on purpose."
+        )
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+@lru_cache(maxsize=1)
 def quick_picks() -> list[dict]:
     path = DATA_DIR / "destinations.json"
     if not path.is_file():
@@ -182,122 +194,145 @@ def score_listing(
 ) -> tuple[int, list[str], list[str]]:
     """Rank on what the person said matters, and say why out loud.
 
-    Returns (score, reasons it ranked well, warnings). A reason the user cannot
-    read is a ranking they cannot trust, so every adjustment produces text.
+    Every number used here lives in data/ranking_weights.json, so the ranking can
+    be retuned without touching code. Returns (score, reasons it ranked well,
+    warnings). A reason the user cannot read is a ranking they cannot trust, so
+    every adjustment produces text.
     """
-    score = 60.0
+    w = weights()
+    score = float(w["base_score"])
     reasons: list[str] = []
     warnings: list[str] = []
 
     # --- budget, against the real monthly cost rather than the advertised rent
+    b = w["budget"]
     if profile.monthly_budget_usd and cost.monthly_total_usd:
         budget = profile.monthly_budget_usd
         over = cost.monthly_total_usd - budget
         if over <= 0:
             headroom = -over
-            score += min(24, 10 + headroom / budget * 60)
+            score += min(
+                b["under_budget_max"],
+                b["under_budget_base"]
+                + headroom / budget * b["under_budget_per_budget_fraction"],
+            )
             reasons.append(
                 f"${cost.monthly_total_usd:,.0f}/mo all in, ${headroom:,.0f} under your budget"
             )
         else:
-            score -= min(45, over / budget * 110)
+            score -= min(
+                b["over_budget_max_penalty"],
+                over / budget * b["over_budget_per_budget_fraction"],
+            )
             warnings.append(
                 f"${over:,.0f}/mo over budget once utilities and the rest are counted "
                 f"(advertised rent alone is ${cost.monthly_rent_usd:,.0f})"
             )
 
     # --- value for money against the census baseline for that tract
+    v = w["value_vs_baseline"]
     if fair.delta_pct is not None:
         # The rule file's own judgement, applied here rather than only after the
         # fact: a listing far under the local baseline is more often a bad
         # record or a bad actor than a bargain, and a ranking that rewards it
-        # puts exactly the wrong thing on top. Same -35% threshold as
-        # SCAM-PRICE-TOO-GOOD in data/ct_rental_rules.json.
-        if fair.delta_pct < -35:
-            score -= 10
+        # puts exactly the wrong thing on top. The threshold is shared with
+        # SCAM-PRICE-TOO-GOOD in data/ct_rental_rules.json; keep them in step.
+        if fair.delta_pct < v["implausible_below_pct"]:
+            score -= v["implausible_penalty"]
             warnings.append(
                 f"{abs(fair.delta_pct):.0f}% below the local baseline - too far below to "
                 "take at face value. Often a per-room price quoted as whole-unit rent, "
                 "a stale record, or a listing that is not what it claims"
             )
-        elif fair.delta_pct <= -10:
-            score += 12
+        elif fair.delta_pct <= v["good_deal_at_or_below_pct"]:
+            score += v["good_deal_bonus"]
             reasons.append(f"{abs(fair.delta_pct):.0f}% below the local baseline for this tract")
-        elif fair.delta_pct >= 20:
-            score -= 12
+        elif fair.delta_pct >= v["expensive_at_or_above_pct"]:
+            score -= v["expensive_penalty"]
             warnings.append(f"{fair.delta_pct:.0f}% above the local baseline for this tract")
-        elif fair.delta_pct >= 10:
-            score -= 5
+        elif fair.delta_pct >= v["slightly_expensive_at_or_above_pct"]:
+            score -= v["slightly_expensive_penalty"]
             warnings.append(f"{fair.delta_pct:.0f}% above the local baseline")
         else:
             reasons.append("priced about level with the neighbourhood")
 
     # --- the commute they actually have
+    c = w["commute"]
     if walk_minutes is not None:
         limit = profile.max_walk_minutes
         if limit and walk_minutes <= limit:
-            score += min(12, (limit - walk_minutes) * 0.8 + 4)
+            score += min(
+                c["within_limit_max"],
+                (limit - walk_minutes) * c["within_limit_per_minute_spare"]
+                + c["within_limit_base"],
+            )
             reasons.append(f"about {walk_minutes} min on foot to your destination")
         elif limit:
-            score -= min(22, (walk_minutes - limit) * 1.2)
+            score -= min(
+                c["over_limit_max_penalty"],
+                (walk_minutes - limit) * c["over_limit_per_minute"],
+            )
             warnings.append(
                 f"about {walk_minutes} min on foot, past the {limit} min you set"
             )
         else:
             reasons.append(f"about {walk_minutes} min on foot to your destination")
-        if walk_minutes > 25 and not profile.has_car:
+        if walk_minutes > c["long_walk_warning_minutes"] and not profile.has_car:
             warnings.append("a long walk in a New Haven winter, and you said no car")
 
     # --- hard requirements
+    r = w["requirements"]
     if listing.bedrooms is not None and profile.household_size:
         if listing.bedrooms >= profile.household_size:
             # Spare bedrooms are not a benefit you were looking for; they are
             # rent you pay for rooms you do not use. Neither reward nor punish.
-            if listing.bedrooms >= profile.household_size + 2:
+            if listing.bedrooms >= profile.household_size + r["spare_bedrooms_warn_at"]:
                 warnings.append(
                     f"{listing.bedrooms} bedrooms for {profile.household_size} - "
                     "usually a shared house, so the price may be per room"
                 )
         else:
-            score -= 20
+            score -= r["too_few_bedrooms_penalty"]
             warnings.append(
                 f"{listing.bedrooms} bedroom(s) for {profile.household_size} people"
             )
 
     if profile.needs_in_unit_laundry:
         if listing.laundry == "in_unit":
-            score += 8
+            score += r["in_unit_laundry_bonus"]
             reasons.append("in-unit laundry")
         elif listing.laundry == "on_site":
-            score -= 6
+            score -= r["on_site_laundry_penalty"]
             warnings.append("laundry is on-site, not in the unit")
         else:
-            score -= 8
+            score -= r["laundry_unknown_penalty"]
             warnings.append("the listing never says where the laundry is")
 
     if profile.needs_furnished:
         if listing.furnished:
-            score += 8
+            score += r["furnished_bonus"]
             reasons.append("furnished")
         else:
-            score -= 12
+            score -= r["not_furnished_penalty"]
             warnings.append("not stated as furnished")
 
     # --- the calendar trap
+    g = w["calendar_gap"]
     if cost.gap_months:
-        score -= min(14, cost.gap_months * 6)
+        score -= min(g["max_penalty"], cost.gap_months * g["penalty_per_month"])
         warnings.append(
             f"standard June lease means about {cost.gap_months} month(s) of rent "
             f"before you arrive"
         )
 
     # --- how much of this is actually known
+    k = w["completeness"]
     unknowns = len(listing.unknown_fields)
-    if unknowns >= 7:
-        score -= 6
+    if unknowns >= k["many_unknowns_at"]:
+        score -= k["many_unknowns_penalty"]
         warnings.append(f"the advertisement leaves {unknowns} facts unstated")
-    elif unknowns <= 3:
-        score += 4
+    elif unknowns <= k["few_unknowns_at"]:
+        score += k["few_unknowns_bonus"]
         reasons.append("unusually complete advertisement")
 
     return int(max(0, min(100, round(score)))), reasons, warnings
