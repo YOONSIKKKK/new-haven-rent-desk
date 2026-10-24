@@ -15,6 +15,7 @@ let imageDataUrl = null;
 let map = null;
 let markerLayer = null;
 const markers = new Map();   // listing id -> leaflet marker
+let lastBounds = [];
 
 function ensureMap() {
   if (map) return map;
@@ -80,8 +81,23 @@ function drawMap(result) {
     bounds.push([x.lat, x.lng]);
   });
 
+  lastBounds = bounds;
   if (bounds.length) map.fitBounds(bounds, { padding: [34, 34], maxZoom: 15 });
   setTimeout(() => map.invalidateSize(), 60);
+}
+
+function toggleMapFullscreen(force) {
+  const wrap = $("map-wrap");
+  const on = force !== undefined ? force : !wrap.classList.contains("fullscreen");
+  wrap.classList.toggle("fullscreen", on);
+  document.body.classList.toggle("map-open", on);
+  // Leaflet sizes its canvas once; it has to be told the box changed.
+  setTimeout(() => {
+    if (map) {
+      map.invalidateSize();
+      if (lastBounds.length) map.fitBounds(lastBounds, { padding: [48, 48], maxZoom: 16 });
+    }
+  }, 220);
 }
 
 function selectListing(id) {
@@ -488,6 +504,13 @@ function render(d) {
   $("results").hidden = false;
   $("verdict-panel").scrollIntoView({ behavior: "smooth", block: "start" });
 }
+
+$("map-expand").addEventListener("click", () => toggleMapFullscreen());
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && $("map-wrap").classList.contains("fullscreen")) {
+    toggleMapFullscreen(false);
+  }
+});
 
 loadStatus();
 loadDestinations().then(rankListings);

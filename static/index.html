@@ -88,7 +88,12 @@
         <button class="btn btn-ghost" id="f-apply">Rank them for me</button>
       </div>
       <p class="rank-note" id="rank-note"></p>
-      <div class="map-wrap">
+      <div class="map-wrap" id="map-wrap">
+        <button type="button" class="map-expand" id="map-expand"
+                aria-label="Expand the map to full screen">
+          <span class="map-expand-in">Full screen</span>
+          <span class="map-expand-out">Close</span>
+        </button>
         <div id="map" aria-label="Map of New Haven with the ranked listings"></div>
         <div class="map-legend">
           <span><i class="pin pin-dest"></i>where you are going</span>

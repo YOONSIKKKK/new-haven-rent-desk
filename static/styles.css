@@ -362,11 +362,35 @@ footer{
 .spinner-dark{border-color:var(--g300);border-top-color:var(--blue)}
 
 /* ---------------------------------------------------------- map */
-.map-wrap{margin-bottom:16px}
+.map-wrap{margin-bottom:18px;position:relative}
 #map{
-  height:400px;border-radius:var(--r-lg);background:var(--g100);
+  height:560px;border-radius:var(--r-lg);background:var(--g100);
   box-shadow:inset 0 0 0 1px var(--g200);z-index:1;
 }
+@media(max-width:900px){#map{height:420px}}
+
+/* Full screen. A CSS overlay rather than the Fullscreen API: it needs no
+   permission, it keeps the app's own chrome, and Escape closes it. */
+.map-wrap.fullscreen{
+  position:fixed;inset:0;z-index:200;margin:0;padding:16px;
+  background:#fff;display:flex;flex-direction:column;
+}
+.map-wrap.fullscreen #map{flex:1;height:auto;border-radius:var(--r)}
+.map-wrap.fullscreen .map-legend{margin-top:13px}
+body.map-open{overflow:hidden}
+
+.map-expand{
+  position:absolute;top:12px;right:12px;z-index:5;
+  padding:9px 15px;border:0;border-radius:10px;cursor:pointer;
+  background:rgba(255,255,255,.95);backdrop-filter:blur(6px);
+  color:var(--g800);font:inherit;font-size:13px;font-weight:700;letter-spacing:-.015em;
+  box-shadow:0 2px 8px rgba(25,31,40,.18);transition:background .15s,color .15s;
+}
+.map-expand:hover{background:#fff;color:var(--blue)}
+.map-wrap.fullscreen .map-expand{top:28px;right:28px}
+.map-expand-out{display:none}
+.map-wrap.fullscreen .map-expand-in{display:none}
+.map-wrap.fullscreen .map-expand-out{display:inline}
 .leaflet-container{font:inherit;border-radius:var(--r-lg)}
 .map-legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:11px;font-size:12.5px;color:var(--g600);font-weight:500}
 .map-legend span{display:flex;align-items:center;gap:7px}

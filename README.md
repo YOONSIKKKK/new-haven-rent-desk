@@ -94,7 +94,8 @@ Then give it a listing, three ways:
 - **Recommended for you** — all snapshot listings ranked against your budget,
   household and that commute, ordered by what twelve months actually costs rather
   than by advertised rent, and plotted on a map of New Haven. Numbered pins match the
-  list; click a pin or a card to select it. **No model call**: ranking is arithmetic,
+  list; click a pin or a card to select it, and **Full screen** on the map opens it
+  edge to edge (Escape closes it). **No model call**: ranking is arithmetic,
   so it is free and takes about 19 ms. Click one to spend the model on it.
 - **Paste an advertisement** — any listing text, however messy.
 - **Upload a screenshot** — a photo of a listing from a group chat works;
