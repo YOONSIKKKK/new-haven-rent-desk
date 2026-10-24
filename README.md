@@ -220,6 +220,34 @@ Both HTML files embed their images as base64 and open by double-clicking.
 
 ---
 
+## User study
+
+The app's twelve-month figure is only worth what it predicts. `research/` holds the
+protocol for measuring that against what students actually paid:
+
+| File | What it is |
+|---|---|
+| `research/interview_protocol.md` | 15-minute protocol. Part A is closed-book on purpose - showing the app first anchors every answer after it |
+| `research/demo_script.md` | What to click and what to say, five minutes |
+| `research/attack_listing.txt` | The hostile listing used in the optional last minute of the demo |
+| `research/sessions/_template.json` | One file per participant, filled in during the session |
+
+```bash
+.venv/Scripts/python.exe scripts/build_user_study.py
+```
+
+Summarises the sessions into `output/user_study.json` and prints the comparison
+table. Two guards are built in, both because this repository is public and because
+a small sample is easy to over-read:
+
+- **Anonymity check.** Any name, email, address or landlord field, or a quote
+  without recorded consent, fails the build before anything can be committed.
+- **No averaging a tiny sample.** Below three sessions it prints the individual
+  figures and refuses to report a median, because a mean of two people looks like
+  evidence and is not.
+
+---
+
 ## Layout
 
 ```
@@ -236,7 +264,8 @@ app/
   main.py                  FastAPI endpoints
 static/                    index.html, styles.css, app.js — no build step
 data/                      listings, census baseline, rules, assumptions
-scripts/                   build-time data capture and the two test harnesses
+scripts/                   build-time data capture, test harnesses, deliverable builders
+research/                  user-study protocol, demo script, session records
 output/
   safety_test.json         red-team results
   cost_test.json           cost and quality, both configurations

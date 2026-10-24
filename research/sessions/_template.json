@@ -1,0 +1,83 @@
+{
+  "_instructions": "Copy to P1.json, P2.json ... and fill in during the session. Files beginning with _ are ignored by the summariser. NO names, NO street addresses, NO landlord names, NO contact details - this repository is public. Leave a field null rather than guessing; null is handled, a made-up number is not.",
+
+  "participant": "P1",
+  "date": "2026-10-__",
+  "group": "international",
+  "_group_options": "international | domestic-out-of-state | other",
+  "arrived": "2026-08",
+  "neighbourhood": "East Rock",
+  "viewed_in_person_before_signing": false,
+
+  "search": {
+    "hours_spent": null,
+    "_hours_spent": "A3. Total hours across the whole search.",
+    "places_seriously_considered": null,
+    "sources_used": [],
+    "_sources_used": "A2. e.g. [\"yale off-campus site\", \"facebook group\", \"friend already here\"]",
+    "hardest_part": null,
+    "_hardest_part": "A11. Their words, short."
+  },
+
+  "what_they_signed": {
+    "monthly_rent_usd": null,
+    "bedrooms": null,
+    "lease_start_month": null,
+    "lease_length_months": null,
+    "deposit_months": null,
+    "broker_or_application_fee_usd": null,
+    "utilities_included": [],
+    "_utilities_included": "A6. Their words, e.g. [\"heat\", \"hot water\"]"
+  },
+
+  "surprises": {
+    "costs_discovered_after_moving_in": [],
+    "_costs_discovered_after_moving_in": "A7. THE KEY LIST. One object per cost: {\"label\": \"heating\", \"monthly_usd\": 180, \"note\": \"January was far worse\"}",
+    "gap_months_paid": null,
+    "_gap_months_paid": "A8. Months of rent paid before actually arriving.",
+    "could_sublet_gap": null,
+    "would_choose_differently": null,
+    "_would_choose_differently": "A10. true / false / null, plus why in the note below.",
+    "would_choose_differently_why": null
+  },
+
+  "their_actual_first_year": {
+    "total_usd": null,
+    "_total_usd": "A9. Their own total for twelve months, everything in.",
+    "confidence": null,
+    "_confidence": "their words: \"pretty sure\" / \"rough guess\" / \"I checked my bank\"",
+    "basis": null,
+    "_basis": "recalled | partly checked | checked against records"
+  },
+
+  "app_said": {
+    "listing_used": "their own ad",
+    "_listing_used": "their own ad | their screenshot | closest match from snapshot",
+    "monthly_total_usd": null,
+    "first_year_total_usd": null,
+    "upfront_cash_usd": null,
+    "fair_price_delta_pct": null,
+    "fit_score": null,
+    "gap_months": null,
+    "risk_findings": [],
+    "corrections": [],
+    "_corrections": "Demo step 4. Lines the participant said were wrong: [{\"line\": \"laundry\", \"app_said_usd\": 35, \"they_say_usd\": 0, \"why\": \"in-unit, ad didn't say\"}]"
+  },
+
+  "reaction": {
+    "learned_something_new": null,
+    "_learned_something_new": "C1. true / false / null",
+    "what_was_new": null,
+    "would_have_used_before_signing": null,
+    "would_have_trusted_the_number": null,
+    "would_recommend_to_incoming_student": null,
+    "whats_missing": null,
+    "_whats_missing": "C5. Their words.",
+    "consented_to_anonymous_quote": false,
+    "quote": null,
+    "_quote": "Only if consented_to_anonymous_quote is true. Must be something they would be comfortable seeing in public."
+  },
+
+  "researcher_note": null,
+  "_researcher_note": "One sentence: what surprised YOU in this session."
+}
