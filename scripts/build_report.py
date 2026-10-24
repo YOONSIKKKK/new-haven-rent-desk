@@ -21,6 +21,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from app import config  # noqa: E402
+import build_user_study  # noqa: E402
 
 TEMPLATE = ROOT / "scripts" / "report_template.html"
 SHOTS = ROOT / "output" / "screenshots"
@@ -41,6 +42,158 @@ def embed(name: str) -> str:
         sys.exit(f"Missing screenshot {path}. Run scripts/make_screenshots.py first.")
     mime = mimetypes.guess_type(path.name)[0] or "image/png"
     return f"data:{mime};base64,{base64.b64encode(path.read_bytes()).decode()}"
+
+
+def esc(text) -> str:
+    return (str(text).replace("&", "&amp;").replace("<", "&lt;")
+            .replace(">", "&gt;").replace('"', "&quot;"))
+
+
+def _money(v) -> str:
+    return f"${v:,.0f}" if isinstance(v, (int, float)) else "&mdash;"
+
+
+def _pct(v) -> str:
+    return f"{v:+.1f}%" if isinstance(v, (int, float)) else "&mdash;"
+
+
+def user_study_block(study: dict | None) -> str:
+    """The Impact section's evidence block.
+
+    With no sessions it says so plainly; the honest admission is better than a
+    silently empty section. Once sessions exist it becomes the measurement, and
+    below three participants it deliberately refuses to average them.
+    """
+    if study is None:
+        return """<div class="callout">
+  <h4>What is missing from this section, honestly</h4>
+  <p>A real user has not yet tried it end to end. The strongest evidence available for
+  this app is a comparison of its twelve-month prediction against what an incoming
+  student actually paid over their first year, and that test is the immediate next
+  step rather than a completed one. Everything above is either measured from public
+  data or explicitly labelled as a projection.</p>
+</div>"""
+
+    s, rows = study["summary"], study["participants"]
+    n = s["sessions"]
+    errors = s["prediction_error_pct"]["values"]
+
+    body = "".join(
+        f"<tr><td>{esc(r['participant'])}</td>"
+        f"<td class='num'>{r['hours_spent'] if r['hours_spent'] is not None else '&mdash;'}</td>"
+        f"<td class='num'>{_money(r['surprise_monthly_usd'])}</td>"
+        f"<td class='num'>{_money(r['actual_first_year_usd'])}</td>"
+        f"<td class='num'>{_money(r['predicted_first_year_usd'])}</td>"
+        f"<td class='num'>{_pct(r['prediction_error_pct'])}</td></tr>"
+        for r in rows
+    )
+
+    if not errors:
+        verdict = ("<p>No participant yet has both a recalled first-year total and a "
+                   "prediction to compare it against, so the error column is empty. "
+                   "That comparison is the point of the study and it is not done.</p>")
+    elif len(errors) < 3:
+        verdict = (f"<p>Prediction error on the {len(errors)} comparable case"
+                   f"{'s' if len(errors) != 1 else ''}: "
+                   f"<strong>{', '.join(f'{e:+.1f}%' for e in errors)}</strong>. "
+                   "Too few to average, so they are listed individually rather than "
+                   "summarised into a figure that would look more solid than it is.</p>")
+    else:
+        verdict = (f"<p>Median prediction error across {len(errors)} participants: "
+                   f"<strong>{s['prediction_error_pct']['median']:+.1f}%</strong>, "
+                   f"worst case {s['prediction_error_pct']['worst_absolute']:.1f}%.</p>")
+
+    quotes = "".join(
+        f'<p style="padding-left:18px;border-left:3px solid var(--line);font-style:italic">'
+        f'&ldquo;{esc(q)}&rdquo;</p>' for q in s["quotes"]
+    )
+
+    counts = (
+        f"<p>Of {n} participant{'s' if n != 1 else ''}, "
+        f"<strong>{s['learned_something_new']}</strong> said the desk showed them "
+        f"something they did not know at the time, "
+        f"<strong>{s['would_have_used_before_signing']}</strong> said they would have "
+        f"used it before signing, and "
+        f"<strong>{s['would_recommend']}</strong> would send it to someone arriving "
+        f"next year.</p>"
+    )
+
+    caveat = (
+        "<div class=\"callout\"><h4>How much weight this carries</h4>"
+        f"<p>{n} participant{'s' if n != 1 else ''} is an illustration, not a study. "
+        "The figures are recalled months after the fact rather than read off bank "
+        "statements, and people who agree to be interviewed about their housing search "
+        "are likely the ones who found it hardest. The individual numbers are shown "
+        "above for that reason.</p></div>"
+    )
+
+    return f"""<h4>What real users found</h4>
+<p>{n} student{'s' if n != 1 else ''} who moved to New Haven for the 2026&ndash;27 year
+sat through the protocol in <code>research/interview_protocol.md</code>: their own
+search first, closed-book, then their own listing run through the desk.</p>
+<table>
+  <tr><th>Participant</th><th class="num">Hours searching</th>
+      <th class="num">Discovered after moving in</th>
+      <th class="num">Their first year</th><th class="num">Predicted</th>
+      <th class="num">Error</th></tr>
+  {body}
+</table>
+{verdict}
+{counts}
+{quotes}
+{caveat}"""
+
+
+def user_study_measured(study: dict | None) -> str:
+    """Extra bullets for the Measured list, only once they are measured."""
+    if study is None:
+        return ""
+    s = study["summary"]
+    out = []
+    surprise = s["monthly_cost_discovered_after_moving_in"]["median"]
+    if surprise:
+        out.append(
+            f"<li><strong>Costs discovered only after moving in: ${surprise:,.0f} a month</strong> "
+            f"(median across {s['sessions']} participant"
+            f"{'s' if s['sessions'] != 1 else ''}), none of it in the advertisement.</li>"
+        )
+    hours = s["hours_spent_searching"]["median"]
+    if hours:
+        out.append(
+            f"<li><strong>{hours:,.0f} hours</strong> spent searching, median across "
+            f"participants.</li>"
+        )
+    errors = s["prediction_error_pct"]["values"]
+    if len(errors) >= 3:
+        out.append(
+            f"<li><strong>Prediction error {s['prediction_error_pct']['median']:+.1f}% "
+            f"(median)</strong> against what participants actually paid.</li>"
+        )
+    return "".join(out)
+
+
+def user_study_slide(study: dict | None) -> str:
+    """Slide 9's right-hand block."""
+    if study is None:
+        return ('<div class="callout">No real user has run it end to end yet. '
+                'The test that would settle it &mdash; prediction against what students '
+                'actually paid &mdash; is the next step, not a finished one.</div>')
+    s = study["summary"]
+    errors = s["prediction_error_pct"]["values"]
+    if len(errors) >= 3:
+        headline = (f"Median prediction error <strong>"
+                    f"{s['prediction_error_pct']['median']:+.1f}%</strong> against what "
+                    f"{len(errors)} students actually paid.")
+    elif errors:
+        headline = ("Prediction error on the comparable cases: <strong>"
+                    + ", ".join(f"{e:+.1f}%" for e in errors)
+                    + "</strong>. Too few to average.")
+    else:
+        headline = "No comparable first-year total captured yet."
+    return (f'<div class="callout">{headline}<br><br>'
+            f'{s["would_have_used_before_signing"]} of {s["sessions"]} said they would '
+            f'have used it before signing. A handful of people is an illustration, '
+            f'not a study.</div>')
 
 
 def diagram() -> str:
@@ -229,6 +382,22 @@ def collect_values() -> dict:
 
         "DIAGRAM": diagram(),
     }
+
+    # The study is read straight from research/sessions/, never from a stale
+    # cache, so the report cannot quote a result the session files have moved on
+    # from. An anonymity failure stops the build rather than publishing a name.
+    try:
+        study = build_user_study.summarise()
+    except build_user_study.AnonymityError as exc:
+        sys.exit(
+            "Refusing to build: the user-study sessions contain something "
+            f"identifying, and this report is published.\n{exc}"
+        )
+    values["USER_STUDY_BLOCK"] = user_study_block(study)
+    values["USER_STUDY_MEASURED"] = user_study_measured(study)
+    values["USER_STUDY_SLIDE"] = user_study_slide(study)
+    values["_study_sessions"] = str(study["summary"]["sessions"]) if study else "0"
+
     return values
 
 

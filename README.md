@@ -237,7 +237,10 @@ protocol for measuring that against what students actually paid:
 ```
 
 Summarises the sessions into `output/user_study.json` and prints the comparison
-table. Two guards are built in, both because this repository is public and because
+table. `build_report.py` and `build_slides.py` read the same function directly, so
+**the Impact section rewrites itself the moment session files exist** - no session
+files and it prints the honest admission that nobody has tried it yet; add them and
+it becomes a results table, the measured bullets, and any consented quote. Two guards are built in, both because this repository is public and because
 a small sample is easy to over-read:
 
 - **Anonymity check.** Any name, email, address or landlord field, or a quote

@@ -67,25 +67,23 @@ def num(node, *path):
     return node if isinstance(node, (int, float)) else None
 
 
-def main() -> None:
-    sessions = load_sessions()
+class AnonymityError(Exception):
+    """Raised instead of printing, so build_report.py fails loudly too."""
 
+
+def summarise() -> dict | None:
+    """Summarise every session on disk, or None when the study has not started.
+
+    build_report.py calls this directly, so the report can never quote a study
+    result that is staler than the session files.
+    """
+    sessions = load_sessions()
     if not sessions:
-        print("No sessions yet.")
-        print()
-        print("  1. cp research/sessions/_template.json research/sessions/P1.json")
-        print("  2. Run the interview: research/interview_protocol.md")
-        print("  3. Re-run this script")
-        OUT.parent.mkdir(parents=True, exist_ok=True)
-        OUT.write_text(json.dumps({"sessions": 0, "status": "not started"}, indent=2), encoding="utf-8")
-        return
+        return None
 
     problems = check_anonymity(sessions)
     if problems:
-        print("ANONYMITY CHECK FAILED - fix before committing:")
-        for p in problems:
-            print("  -", p)
-        sys.exit(1)
+        raise AnonymityError("\n".join(problems))
 
     rows = []
     for s in sessions:
@@ -147,8 +145,32 @@ def main() -> None:
         "quotes": [r["quote"] for r in rows if r["quote"]],
     }
 
+    return {"summary": summary, "participants": rows}
+
+
+def main() -> None:
+    try:
+        study = summarise()
+    except AnonymityError as exc:
+        print("ANONYMITY CHECK FAILED - fix before committing:")
+        for line in str(exc).splitlines():
+            print("  -", line)
+        sys.exit(1)
+
     OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(json.dumps({"summary": summary, "participants": rows}, indent=2), encoding="utf-8")
+
+    if study is None:
+        print("No sessions yet.")
+        print()
+        print("  1. cp research/sessions/_template.json research/sessions/P1.json")
+        print("  2. Run the interview: research/interview_protocol.md")
+        print("  3. Re-run this script")
+        OUT.write_text(json.dumps({"sessions": 0, "status": "not started"}, indent=2), encoding="utf-8")
+        return
+
+    summary, rows = study["summary"], study["participants"]
+    errors = summary["prediction_error_pct"]["values"]
+    OUT.write_text(json.dumps(study, indent=2), encoding="utf-8")
 
     print(f"{len(rows)} session(s)\n")
     head = f"{'id':<5}{'hrs':>5}{'surprise/mo':>13}{'actual yr':>12}{'predicted':>11}{'error':>9}"
