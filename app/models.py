@@ -186,6 +186,57 @@ class Advice(BaseModel):
 
 
 # --------------------------------------------------------------------------
+# 7. Ranking the whole snapshot against one person's constraints
+# --------------------------------------------------------------------------
+class Destination(BaseModel):
+    """Where the person actually has to get to every day."""
+
+    label: str
+    address: str | None = None
+    lat: float
+    lng: float
+    resolved_by: Literal["quick_pick", "geocoder", "fallback"] = "geocoder"
+    matched_address: str | None = None
+
+
+class Recommendation(BaseModel):
+    listing_id: int
+    address: str
+    bedrooms_min: int | None = None
+    bedrooms_max: int | None = None
+
+    advertised_rent_usd: int | None = None
+    utilities_tenant_pays_usd: float | None = None
+    real_monthly_usd: float | None = None
+    first_year_total_usd: float | None = None
+
+    fair_price_delta_pct: float | None = None
+    fair_price_verdict: Verdict = "unknown"
+
+    distance_km: float | None = None
+    walk_minutes: int | None = None
+    bike_minutes: int | None = None
+
+    score: int = Field(ge=0, le=100)
+    within_budget: bool = False
+    reasons: list[str] = Field(default_factory=list)
+    warnings: list[str] = Field(default_factory=list)
+    unknown_count: int = 0
+
+
+class RecommendationResult(BaseModel):
+    destination: Destination | None = None
+    destination_error: str | None = None
+    considered: int = 0
+    returned: int = 0
+    recommendations: list[Recommendation] = Field(default_factory=list)
+    method_note: str
+    model_calls: int = Field(
+        0, description="Always zero. Ranking is arithmetic, not inference."
+    )
+
+
+# --------------------------------------------------------------------------
 # Envelope returned to the browser
 # --------------------------------------------------------------------------
 class TokenUsage(BaseModel):

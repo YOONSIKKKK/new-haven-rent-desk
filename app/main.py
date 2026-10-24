@@ -15,9 +15,10 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from . import data_store as store
+from . import recommend as rec
 from . import tools
 from .config import MAX_AD_TEXT_CHARS, ROOT, key_status
-from .models import Evaluation, RenterProfile
+from .models import Evaluation, RecommendationResult, RenterProfile
 from .orchestrator import evaluate
 
 STATIC_DIR = ROOT / "static"
@@ -73,6 +74,38 @@ def listings(
         ),
     } for r in rows]
     return {"count": len(slim), "listings": slim}
+
+
+class RecommendRequest(BaseModel):
+    destination: str = Field("", max_length=300)
+    profile: RenterProfile = Field(default_factory=RenterProfile)
+    max_rent: int | None = None
+    min_bedrooms: int | None = None
+    limit: int = 12
+
+
+@app.get("/api/destinations")
+def destinations() -> dict:
+    """Quick picks for the destination box; these need no network call."""
+    return {"destinations": [
+        {"label": d["label"], "address": d["address"]} for d in rec.quick_picks()
+    ]}
+
+
+@app.post("/api/recommend", response_model=RecommendationResult)
+def recommend(req: RecommendRequest) -> RecommendationResult:
+    """Rank the whole snapshot against one person's constraints.
+
+    No model call, by design: see the note in app/recommend.py. The expensive
+    analysis is spent on the listing the person then chooses to open.
+    """
+    return rec.recommend(
+        profile=req.profile,
+        destination_text=req.destination,
+        limit=max(1, min(req.limit, 50)),
+        max_rent=req.max_rent,
+        min_bedrooms=req.min_bedrooms,
+    )
 
 
 @app.get("/api/listings/{listing_id}")

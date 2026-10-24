@@ -84,10 +84,14 @@ key was found before you try anything.
 Fill in **About you** — budget, when you actually arrive, whether you have a car.
 Every figure is scored against those, not against an average renter.
 
+Say **where you need to get to every day** — a quick pick, or any New Haven address.
+
 Then give it a listing, three ways:
 
-- **Browse the snapshot** — 152 real New Haven listings captured from Yale's
-  off-campus housing marketplace. Click one.
+- **Recommended for you** — all 152 snapshot listings ranked against your budget,
+  household and that commute, ordered by what twelve months actually costs rather
+  than by advertised rent. **No model call**: ranking is arithmetic, so it is free and
+  takes about 19 ms. Click one to spend the model on it.
 - **Paste an advertisement** — any listing text, however messy.
 - **Upload a screenshot** — a photo of a listing from a group chat works;
   `gpt-6-luna` reads the image.
@@ -97,6 +101,9 @@ Then give it a listing, three ways:
 ## What it does, in order
 
 ```
+budget + household + the address you must reach
+    └─ rank              score all 147 priced listings           deterministic, 0 model calls
+
 listing text (untrusted)
     │
     ├─ screen            strip hidden/invisible text, detect injection      deterministic
@@ -124,6 +131,7 @@ gives the same numbers twice, and why hostile text in a listing cannot move a pr
 | `data/listings.json` | 152 New Haven listings, Yale off-campus marketplace, captured 2026-10-24 |
 | `data/rent_baseline.json` | U.S. Census ACS 2023, 133 tracts: median gross rent, contract rent, rent by bedroom count |
 | `data/ct_rental_rules.json` | The Connecticut rules the app is permitted to assert, with sources |
+| `data/destinations.json` | Pre-geocoded commute destinations, so the common choices need no network call |
 | `data/cost_assumptions.json` | Measured figures and assumptions, kept separate and labelled as such |
 
 All four are committed. The app never calls the network except to reach the model.
@@ -260,6 +268,7 @@ app/
   models.py                every structured output; unknown stays unknown
   data_store.py            loads the committed datasets
   tools.py                 ALL the arithmetic: utilities, cost, fair price, rules
+  recommend.py             ranks the whole snapshot against one person; no model call
   safety.py                sanitising, injection detection, untrusted-text fencing
   prompts.py               cached reference blocks, built from the data files
   agents.py                the three agents and the deterministic fit scorer

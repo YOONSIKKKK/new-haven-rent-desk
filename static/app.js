@@ -60,50 +60,101 @@ document.querySelectorAll(".tab").forEach((tab) => {
   });
 });
 
-/* ------------------------------------------------------------ listings */
-async function loadListings() {
-  const params = new URLSearchParams();
-  if ($("f-rent").value) params.set("max_rent", $("f-rent").value);
-  if ($("f-beds").value) params.set("min_bedrooms", $("f-beds").value);
-  if ($("f-walk").value) params.set("max_walk_minutes", $("f-walk").value);
-  params.set("limit", "60");
-
-  const box = $("listing-list");
-  box.innerHTML = `<p class="muted">Loading listings&hellip;</p>`;
+/* ------------------------------------------------------------ destinations */
+async function loadDestinations() {
   try {
-    const d = await (await fetch("/api/listings?" + params)).json();
-    if (!d.listings.length) {
+    const d = await (await fetch("/api/destinations")).json();
+    $("destination-list").innerHTML = d.destinations
+      .map((x) => `<option value="${esc(x.label)}">${esc(x.address)}</option>`).join("");
+  } catch (e) { /* the box still accepts a typed address */ }
+}
+
+/* ------------------------------------------------------------ ranking */
+async function rankListings() {
+  const box = $("listing-list");
+  const note = $("rank-note");
+  box.innerHTML = `<p class="muted"><span class="spinner spinner-dark"></span>Ranking the snapshot&hellip;</p>`;
+  note.textContent = "";
+
+  const body = {
+    destination: $("destination").value.trim(),
+    profile: readProfile(),
+    limit: 12,
+  };
+  if ($("f-rent").value) body.max_rent = Number($("f-rent").value);
+  if ($("f-beds").value) body.min_bedrooms = Number($("f-beds").value);
+
+  try {
+    const r = await fetch("/api/recommend", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.detail || `Request failed (${r.status})`);
+
+    if (d.destination_error) {
+      box.innerHTML = `<p class="muted">${esc(d.destination_error)}</p>`;
+      return;
+    }
+    if (!d.recommendations.length) {
       box.innerHTML = `<p class="muted">Nothing in the snapshot matches those filters.</p>`;
       return;
     }
-    box.innerHTML = d.listings.map((l) => {
-      const rent = l.rent_min
-        ? money(l.rent_min) + (l.rent_max && l.rent_max !== l.rent_min ? "&ndash;" + money(l.rent_max) : "")
-        : "price not listed";
-      const beds = l.bed_min === l.bed_max
-        ? `${l.bed_min ?? "?"} bed` : `${l.bed_min ?? "?"}&ndash;${l.bed_max ?? "?"} bed`;
-      const utils = l.utilities_included.length
-        ? `${l.utilities_included.length} utilities listed` : `no utilities listed`;
-      return `<button class="listing-card" data-id="${l.id}">
-        <div class="addr">${esc(l.address)}</div>
-        <div class="meta">
-          <span class="rent">${rent}</span><span>${beds}</span>
-          <span>${l.walk_minutes_to_campus ?? "?"} min walk</span><span>${utils}</span>
-        </div></button>`;
+
+    const dest = d.destination;
+    note.innerHTML =
+      `Ranked <strong>${d.considered}</strong> listings against your constraints and ` +
+      `<strong>${esc(dest.label)}</strong>` +
+      (dest.resolved_by === "geocoder" && dest.matched_address
+        ? ` <span class="muted">(matched ${esc(dest.matched_address)})</span>` : "") +
+      ` &mdash; <strong>${d.model_calls} model calls</strong>, so this is free and instant. ` +
+      `Open one to run the full analysis.`;
+
+    box.innerHTML = d.recommendations.map((x, i) => {
+      const over = x.real_monthly_usd - x.advertised_rent_usd;
+      const beds = x.bedrooms_min === x.bedrooms_max
+        ? `${x.bedrooms_min ?? "?"} bed`
+        : `${x.bedrooms_min ?? "?"}&ndash;${x.bedrooms_max ?? "?"} bed`;
+      return `<button class="rec-card${x.within_budget ? "" : " over"}" data-id="${x.listing_id}">
+        <div class="rec-top">
+          <span class="rec-rank">${i + 1}</span>
+          <span class="rec-addr">${esc(x.address)}</span>
+          <span class="rec-score" title="fit score">${x.score}</span>
+        </div>
+        <div class="rec-figures">
+          <div><span class="k">Real monthly</span><span class="v">${money(x.real_monthly_usd)}</span>
+            <span class="s">ad ${money(x.advertised_rent_usd)}${over > 0 ? ` &middot; +${money(over)} hidden` : ""}</span></div>
+          <div><span class="k">First year</span><span class="v">${money(x.first_year_total_usd)}</span>
+            <span class="s">${beds}</span></div>
+          <div><span class="k">To your destination</span><span class="v">${x.walk_minutes ?? "?"} min</span>
+            <span class="s">walk &middot; ${x.bike_minutes ?? "?"} min bike</span></div>
+          <div><span class="k">Vs neighbourhood</span><span class="v ${x.fair_price_delta_pct > 0 ? "up" : "down"}">${
+            x.fair_price_delta_pct === null ? "&mdash;"
+            : (x.fair_price_delta_pct > 0 ? "+" : "") + x.fair_price_delta_pct + "%"}</span>
+            <span class="s">census tract</span></div>
+        </div>
+        ${x.reasons.length ? `<ul class="rec-why">${x.reasons.map((s) =>
+          `<li class="good">${esc(s)}</li>`).join("")}</ul>` : ""}
+        ${x.warnings.length ? `<ul class="rec-why">${x.warnings.map((s) =>
+          `<li class="bad">${esc(s)}</li>`).join("")}</ul>` : ""}
+      </button>`;
     }).join("");
 
-    box.querySelectorAll(".listing-card").forEach((card) => {
+    box.querySelectorAll(".rec-card").forEach((card) => {
       card.addEventListener("click", () => {
-        box.querySelectorAll(".listing-card").forEach((c) => c.classList.remove("selected"));
+        box.querySelectorAll(".rec-card").forEach((c) => c.classList.remove("selected"));
         card.classList.add("selected");
         selectedListingId = Number(card.dataset.id);
+        $("run").scrollIntoView({ behavior: "smooth", block: "center" });
       });
     });
   } catch (e) {
-    box.innerHTML = `<p class="muted">Could not load listings: ${esc(e.message)}</p>`;
+    box.innerHTML = `<p class="muted">Could not rank listings: ${esc(e.message)}</p>`;
   }
 }
-$("f-apply").addEventListener("click", loadListings);
+$("f-apply").addEventListener("click", rankListings);
+$("destination").addEventListener("change", rankListings);
 
 /* ------------------------------------------------------------ image */
 $("ad-image").addEventListener("change", (e) => {
@@ -124,6 +175,7 @@ function readProfile() {
     arrival_month: $("arrival").value,
     household_size: Number($("household").value) || 1,
     max_walk_minutes: Number($("walk").value) || null,
+    destination: $("destination").value.trim() || "Yale campus",
     is_international: $("intl").checked,
     has_car: $("car").checked,
     needs_in_unit_laundry: $("laundry").checked,
@@ -323,4 +375,4 @@ function render(d) {
 }
 
 loadStatus();
-loadListings();
+loadDestinations().then(rankListings);

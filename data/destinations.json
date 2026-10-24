@@ -1,0 +1,48 @@
+{
+  "source": "U.S. Census Bureau Geocoder (no API key required)",
+  "note": "Quick-pick destinations, pre-resolved so the common choices need no network call and the feature degrades gracefully when the geocoder is unreachable. Any other address is geocoded at request time.",
+  "destinations": [
+    {
+      "label": "Yale School of Management",
+      "address": "165 Whitney Ave, New Haven, CT 06511",
+      "lat": 41.317277281077,
+      "lng": -72.919920295018,
+      "matched_address": "165 WHITNEY AVE, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Yale central campus (Prospect St)",
+      "address": "1 Prospect St, New Haven, CT 06511",
+      "lat": 41.311736063043,
+      "lng": -72.925484338616,
+      "matched_address": "1 PROSPECT ST, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Yale School of Medicine",
+      "address": "333 Cedar St, New Haven, CT 06510",
+      "lat": 41.302176805209,
+      "lng": -72.933599082443,
+      "matched_address": "333 CEDAR ST, NEW HAVEN, CT, 06510"
+    },
+    {
+      "label": "Yale Science Hill",
+      "address": "344 Winchester Ave, New Haven, CT 06511",
+      "lat": 41.324476368513,
+      "lng": -72.928176723945,
+      "matched_address": "344 WINCHESTER AVE, NEW HAVEN, CT, 06511"
+    },
+    {
+      "label": "Downtown / Chapel St",
+      "address": "900 Chapel St, New Haven, CT 06510",
+      "lat": 41.306091314726,
+      "lng": -72.926026827451,
+      "matched_address": "900 CHAPEL ST, NEW HAVEN, CT, 06510"
+    },
+    {
+      "label": "Union Station",
+      "address": "50 Union Ave, New Haven, CT 06519",
+      "lat": 41.297003555612,
+      "lng": -72.927556175812,
+      "matched_address": "50 UNION AVE, NEW HAVEN, CT, 06519"
+    }
+  ]
+}

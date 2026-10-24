@@ -95,11 +95,16 @@ def main() -> None:
         shot(page, "body", "01-home")
         shot(page, "#profile-panel", "02-profile")
 
-        # ---------------------------------------------------- 2. a clean run
+        # ---------------------------------------------------- 2. the ranking
+        print("waiting for the ranking")
+        page.wait_for_selector(".rec-card", timeout=60_000)
+        page.wait_for_timeout(500)
+        shot(page, ".panel:nth-of-type(2)", "03-recommendations")
+
+        # ---------------------------------------------------- 3. a clean run
         print("running a real listing")
-        page.locator(".listing-card").first.click()
-        page.wait_for_timeout(200)
-        shot(page, ".panel:nth-of-type(2)", "03-listing-picker")
+        page.locator(".rec-card").first.click()
+        page.wait_for_timeout(300)
         page.locator("#run").click()
         if wait_for_results(page):
             shot(page, "#verdict-panel", "04-verdict")
@@ -108,7 +113,7 @@ def main() -> None:
             shot(page, ".questions", "07-questions")
             shot(page, ".usage", "08-usage")
 
-        # ---------------------------------------------------- 3. under attack
+        # ---------------------------------------------------- 4. under attack
         print("running the same desk against a hostile listing")
         page.evaluate("window.scrollTo(0,0)")
         page.locator('.tab[data-tab="paste"]').click()

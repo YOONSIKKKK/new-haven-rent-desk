@@ -275,6 +275,9 @@ gap this app is built in.</p>
   <li><strong>Built for someone who cannot visit.</strong> The output ends in a list of
   questions specific to <em>this</em> listing's unknowns, written to be handed to whoever
   is doing the video walkthrough.</li>
+  <li><strong>Ranked by total cost, not by advertised rent.</strong> The shortlist is
+  ordered by what twelve months actually costs and how far it is from the address the
+  person has to reach, not by the number in the headline.</li>
   <li><strong>Honest blanks.</strong> A field the advertisement does not state is reported as
   unknown. In this sample the parser admits <strong>{{MEAN_UNKNOWN}} unknown fields per
   listing</strong> rather than filling them with plausible guesses.</li>
@@ -295,6 +298,7 @@ text inside a listing cannot move a price.</p>
 
 <table>
   <tr><th>Stage</th><th>Who</th><th>What it does</th><th>Tools</th></tr>
+  <tr><td><code>rank</code></td><td>Python</td><td>Scores all 147 priced listings against budget, household, commute and the census baseline; no model call</td><td>&mdash;</td></tr>
   <tr><td><code>screen</code></td><td>Python</td><td>Strips invisible characters and CSS-hidden text, detects injection phrasings, caps length</td><td>&mdash;</td></tr>
   <tr><td><code>intake</code></td><td><strong>AGENT</strong></td><td>Advertisement &rarr; <code>ParsedListing</code>. Records only what the ad states; names every field it could not fill</td><td><strong>none</strong></td></tr>
   <tr><td><code>locate</code></td><td>Python</td><td>Matches the listing to a census tract offline, by id or normalised address</td><td>&mdash;</td></tr>
@@ -323,6 +327,36 @@ constructed <strong>with no tools at all</strong>. It cannot call anything. Its 
 fixed schema, so the worst a perfect injection can do is corrupt field values, which
 the deterministic layer then sanity-checks against public data. This is not a filter
 that can be argued with; it is an absence of capability.</p>
+
+<h4>Before any of that: ranking 147 listings for nothing</h4>
+
+<p>Most people do not arrive with one advertisement in hand; they arrive with a
+budget, a household, and a building they have to reach every morning. So the first
+screen ranks the whole snapshot against those three things &mdash; and does it with
+<strong>zero model calls</strong>.</p>
+
+<p>That is not a saving trick, it is the same principle as the rest of the app. Which
+apartments are worth opening is arithmetic: the census utility measurement for each
+listing's own tract, the twelve-month simulation, the fair-price comparison, and the
+distance from each listing's coordinates to wherever the person typed. Running three
+agents over 147 listings would cost about <strong>$0.28</strong> and several minutes to
+answer a question that takes <strong>19 milliseconds</strong> and nothing. The model is
+spent on the one listing they then choose to open.</p>
+
+<p>The ranking also inherits the rule file's judgement rather than contradicting it.
+A listing more than 35% under its local baseline is not promoted as a bargain &mdash;
+that is the same threshold <code>SCAM-PRICE-TOO-GOOD</code> uses, and in this snapshot it
+catches eight listings that are per-room prices quoted as whole-unit rent. They are
+demoted and labelled, not hidden.</p>
+
+<figure>
+  <img src="{{IMG:03-recommendations-top}}" alt="Ranked recommendations">
+  <figcaption><b>Ranked, with the reasoning shown.</b> Each card gives the real
+  monthly cost next to the advertised one, the twelve-month total, the walk to the
+  address the person actually typed, and how it sits against census rents for its own
+  tract. The ticks and the warnings underneath are the ranking's own reasons &mdash; a
+  score nobody can interrogate is a score nobody should trust.</figcaption>
+</figure>
 
 <h4>One real run, start to finish</h4>
 <p>What follows is an actual run against 17 Broadway, a two-bedroom in the snapshot
@@ -407,6 +441,11 @@ single month's rent for one student.</p>
   baseline &mdash; that are byte-identical on every run, so the provider can cache them.
   <strong>{{CACHE_RATE}}% of all input tokens are now served from cache</strong> at a tenth of
   the fresh rate.</li>
+  <li><strong>Keep the model out of the shortlist.</strong> Ranking 147 listings is
+  arithmetic, so it runs with no model call at all: <strong>$0 and 19 milliseconds</strong>
+  against roughly <strong>$0.28</strong> and several minutes if the three agents were run
+  over the whole snapshot. Nearly all the browsing in this app is therefore free, and
+  the paid work happens once the person has chosen.</li>
   <li><strong>Cap the budget.</strong> Every run carries hard request and token ceilings, so a
   loop or a hostile input cannot run up a bill.</li>
 </ol>

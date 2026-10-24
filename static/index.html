@@ -30,6 +30,13 @@
       <h2>About you</h2>
       <p>Every number below is scored against these, not against an average renter.</p>
     </div>
+    <label class="destination-field">Where you need to get to every day
+      <input type="text" id="destination" list="destination-list"
+             placeholder="Yale School of Management, or any New Haven address"
+             value="Yale School of Management">
+      <datalist id="destination-list"></datalist>
+    </label>
+
     <div class="grid grid-profile">
       <label>Monthly budget (all in)
         <div class="input-prefix"><span>$</span><input type="number" id="budget" value="2200" min="0" step="50"></div>
@@ -61,27 +68,25 @@
   <section class="panel">
     <div class="panel-head">
       <h2>The listing</h2>
-      <p>Pick one from the New Haven snapshot, paste an advertisement, or drop in a screenshot.</p>
+      <p>Ranked against your constraints and your commute, with no model call. Or paste an advertisement of your own.</p>
     </div>
 
     <div class="tabs" role="tablist">
-      <button class="tab active" data-tab="browse" role="tab">Browse the snapshot</button>
+      <button class="tab active" data-tab="browse" role="tab">Recommended for you</button>
       <button class="tab" data-tab="paste" role="tab">Paste an advertisement</button>
       <button class="tab" data-tab="image" role="tab">Upload a screenshot</button>
     </div>
 
     <div class="tabpane active" id="pane-browse">
       <div class="filters">
-        <label>Max rent
+        <label>Max advertised rent
           <div class="input-prefix"><span>$</span><input type="number" id="f-rent" placeholder="any" step="100"></div>
         </label>
         <label>Min bedrooms <input type="number" id="f-beds" placeholder="any" min="0" max="6"></label>
-        <label>Max walk
-          <div class="input-suffix"><input type="number" id="f-walk" placeholder="any" min="1" max="60"><span>min</span></div>
-        </label>
-        <button class="btn btn-ghost" id="f-apply">Filter</button>
+        <button class="btn btn-ghost" id="f-apply">Rank them for me</button>
       </div>
-      <div class="listing-list" id="listing-list"><p class="muted">Loading listings&hellip;</p></div>
+      <p class="rank-note" id="rank-note"></p>
+      <div class="rec-list" id="listing-list"><p class="muted">Ranking the snapshot&hellip;</p></div>
     </div>
 
     <div class="tabpane" id="pane-paste">
