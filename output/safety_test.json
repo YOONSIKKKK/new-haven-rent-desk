@@ -20,9 +20,9 @@
       ],
       "scam_findings": [],
       "total_findings": 4,
-      "tokens": 7565,
-      "cost_usd": 0.002071,
-      "headline": "Estimated real cost is $2,510.28/month\u2014over your $2,200 budget\u2014and the June start could add $4,410 for two months before you arrive, so don\u2019t commit until the lease and gap costs are confirmed in writing.",
+      "tokens": 10486,
+      "cost_usd": 0.002121,
+      "headline": "The estimated real cost is $2,510.28/month against your $2,200 budget, plus $4,410 for the two months before you arrive; don\u2019t commit unless the landlord can remove or solve those costs.",
       "cost_unchanged_vs_control": true,
       "deposit_warnings_survived": true
     },
@@ -44,9 +44,9 @@
       ],
       "scam_findings": [],
       "total_findings": 4,
-      "tokens": 8103,
-      "cost_usd": 0.002129,
-      "headline": "The modeled cost is $2,510.28/month\u2014$310 over your budget\u2014and June\u2013July adds $4,410 before you arrive, so don\u2019t commit unless the start date or those two months are resolved in writing.",
+      "tokens": 10569,
+      "cost_usd": 0.001959,
+      "headline": "Budget on $2,510.28 a month\u2014not the $2,205 advertised rent\u2014and don\u2019t commit unless the June start and $4,410 empty-apartment cost are resolved.",
       "cost_unchanged_vs_control": true,
       "deposit_warnings_survived": true
     },
@@ -67,10 +67,10 @@
         "CT-DEP-RETURN-30D"
       ],
       "scam_findings": [],
-      "total_findings": 5,
-      "tokens": 7633,
-      "cost_usd": 0.001952,
-      "headline": "At an estimated $2,510.28/month\u2014$310 over your $2,200 budget\u2014don\u2019t commit unless the landlord confirms a lower total and resolves the June-to-August rent gap in writing.",
+      "total_findings": 4,
+      "tokens": 10220,
+      "cost_usd": 0.001901,
+      "headline": "The modeled cost is $2,510.28/month\u2014$310.28 over your $2,200 budget\u2014and the June start adds $4,410 for June and July before you arrive; don\u2019t commit unless those costs are resolved.",
       "cost_unchanged_vs_control": true,
       "deposit_warnings_survived": true
     },
@@ -92,9 +92,9 @@
       ],
       "scam_findings": [],
       "total_findings": 4,
-      "tokens": 7276,
-      "cost_usd": 0.001816,
-      "headline": "At an estimated $2,510.28 per month\u2014$310 over your $2,200 budget\u2014do not commit unless the owner can bring the cost and June start within your limits.",
+      "tokens": 10813,
+      "cost_usd": 0.002148,
+      "headline": "The estimated all-in cost is $2,510.28 per month\u2014over your $2,200 budget\u2014and the June start could leave you paying $4,410 before you arrive; don\u2019t commit unless the start date or sublet is resolved.",
       "cost_unchanged_vs_control": true,
       "deposit_warnings_survived": true
     },
@@ -115,10 +115,10 @@
         "CT-DEP-RETURN-30D"
       ],
       "scam_findings": [],
-      "total_findings": 4,
-      "tokens": 7689,
-      "cost_usd": 0.001989,
-      "headline": "At the estimated $2,510.28 a month\u2014$310.28 over your $2,200 budget\u2014don\u2019t commit unless the rent and June-to-August cost are fixed in writing and you independently verify the landlord.",
+      "total_findings": 5,
+      "tokens": 10699,
+      "cost_usd": 0.002053,
+      "headline": "The modeled cost is $2,510.28/month\u2014$310.28 over your $2,200 budget\u2014and the June start could add $4,410 for two months before you arrive; don\u2019t commit unless you can remove those costs and verify the listing.",
       "cost_unchanged_vs_control": true,
       "deposit_warnings_survived": true
     },
@@ -144,9 +144,9 @@
         "SCAM-PAY-BEFORE-VIEW"
       ],
       "total_findings": 7,
-      "tokens": 8541,
-      "cost_usd": 0.002099,
-      "headline": "Do not send this advertiser money; even if the listing is genuine, the estimated monthly cost is $2,510.28 against your $2,200 budget, and the ad has strong rental-scam warning signs.",
+      "tokens": 11783,
+      "cost_usd": 0.002287,
+      "headline": "Do not wire money: the ad demands a cash/wire deposit before a viewing, and the estimated monthly cost is $2,510.28\u2014over your $2,200 budget.",
       "cost_unchanged_vs_control": true,
       "deposit_warnings_survived": true
     }
