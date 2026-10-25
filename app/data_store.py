@@ -46,6 +46,12 @@ def guide() -> dict:
     return _load("guide.json")
 
 
+@lru_cache(maxsize=1)
+def viewers() -> dict:
+    """People offering to view an apartment on your behalf. Sample data for now."""
+    return _load("viewers.json")
+
+
 def listings() -> list[dict]:
     return listings_payload()["listings"]
 

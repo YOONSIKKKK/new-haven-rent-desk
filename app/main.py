@@ -90,6 +90,52 @@ def guide() -> dict:
     return store.guide()
 
 
+@app.get("/api/viewers")
+def viewers(service: str = "", language: str = "", max_price: int | None = None) -> dict:
+    """Who will go and look at the apartment for you.
+
+    Sample profiles for now. Real providers would replace data/viewers.json;
+    nothing about them is hard-coded here.
+    """
+    payload = store.viewers()
+    people = payload["viewers"]
+
+    if service:
+        people = [v for v in people if any(s["code"] == service for s in v["services"])]
+    if language:
+        want = language.strip().lower()
+        people = [v for v in people
+                  if any(want == lang.lower() for lang in v["languages"])]
+    if max_price is not None:
+        # The price filter has to apply to the service being asked for. Checking
+        # it against any service lets a $140 lease review through because the
+        # same person also does a $55 walkthrough.
+        people = [
+            v for v in people
+            if any(s["price_usd"] <= max_price
+                   for s in v["services"]
+                   if not service or s["code"] == service)
+        ]
+
+    def cheapest(v):
+        relevant = [s for s in v["services"] if not service or s["code"] == service]
+        return min(s["price_usd"] for s in relevant or v["services"])
+
+    people = sorted(people, key=lambda v: (-v["rating"], cheapest(v)))
+    languages = sorted({lang for v in payload["viewers"] for lang in v["languages"]})
+
+    return {
+        "status": payload["status"],
+        "note": payload["note"],
+        "disclosure": payload["disclosure"],
+        "service_types": payload["service_types"],
+        "languages": languages,
+        "count": len(people),
+        "total": len(payload["viewers"]),
+        "viewers": people,
+    }
+
+
 @app.get("/api/destinations")
 def destinations(q: str = "", limit: int = 10) -> dict:
     """Type-ahead over the committed gazetteer. No network call, no key.

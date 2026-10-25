@@ -1,0 +1,203 @@
+{
+  "note": "SAMPLE DATA. These are not real people and nobody can be booked. The marketplace is built so that real providers can be added later by replacing this file; the app reads it, it does not hard-code anyone. Avatars are generated initials rather than photographs on purpose - a profile that carries a 'verified' badge should not also carry a stock photo of someone who does not exist.",
+  "status": "demonstration",
+  "last_reviewed": "2026-10-24",
+
+  "service_types": [
+    {
+      "code": "video",
+      "label": "Live video walkthrough",
+      "summary": "They go to the apartment and walk you through it on a live call, pointing the camera where you ask."
+    },
+    {
+      "code": "in_person",
+      "label": "In-person viewing with a written report",
+      "summary": "They view it, take photographs, and write up what they found against your question list."
+    },
+    {
+      "code": "lease",
+      "label": "Lease reading and negotiation help",
+      "summary": "They read the lease with you, explain what each clause commits you to, and help you ask for changes."
+    },
+    {
+      "code": "full",
+      "label": "Everything until you have keys",
+      "summary": "Viewing, lease, deposit, utilities and move-in, handled with you from abroad."
+    }
+  ],
+
+  "disclosure": "The Rent Desk does not employ, vet or guarantee anyone listed here, and takes no payment. Agree what you are paying for in writing before you pay it, and never send a deposit for an apartment to a viewer.",
+
+  "viewers": [
+    {
+      "id": "v-001",
+      "name": "Jiwon P.",
+      "initials": "JP",
+      "headline": "Yale GSAS, four winters in East Rock",
+      "about": "I moved here from Seoul in 2022 and got the heating thing wrong in my first apartment, which is why I started doing this. I will tell you what a third-floor walk-up actually feels like in February.",
+      "languages": ["English", "Korean"],
+      "based_in": "East Rock",
+      "years_in_new_haven": 4,
+      "affiliation": "Yale Graduate School, PhD candidate",
+      "verified": { "identity": true, "yale_email": true, "background_check": false },
+      "rating": 4.9,
+      "reviews": 23,
+      "jobs_done": 41,
+      "responds_in": "under 2 hours",
+      "availability": "Evenings and weekends",
+      "services": [
+        { "code": "video", "price_usd": 40, "duration": "30-45 min" },
+        { "code": "in_person", "price_usd": 65, "duration": "same day report" },
+        { "code": "lease", "price_usd": 90, "duration": "1 hour call" }
+      ]
+    },
+    {
+      "id": "v-002",
+      "name": "Marcus T.",
+      "initials": "MT",
+      "headline": "Former leasing agent, nine years in New Haven",
+      "about": "I worked the other side of this desk for six years, so I know which questions landlords dislike and which ones they will answer. I do not take referral fees from anyone.",
+      "languages": ["English", "Spanish"],
+      "based_in": "Downtown",
+      "years_in_new_haven": 9,
+      "affiliation": "Independent",
+      "verified": { "identity": true, "yale_email": false, "background_check": true },
+      "rating": 4.8,
+      "reviews": 67,
+      "jobs_done": 112,
+      "responds_in": "under 1 hour",
+      "availability": "Weekdays, 9-6",
+      "services": [
+        { "code": "video", "price_usd": 55, "duration": "45 min" },
+        { "code": "in_person", "price_usd": 85, "duration": "next day report" },
+        { "code": "lease", "price_usd": 140, "duration": "90 min, includes a redline" },
+        { "code": "full", "price_usd": 320, "duration": "until keys" }
+      ]
+    },
+    {
+      "id": "v-003",
+      "name": "Mei L.",
+      "initials": "ML",
+      "headline": "Yale SOM '26, does this for incoming students",
+      "about": "I arrived without seeing my apartment and it went badly. I take photographs of everything, including the things people forget to ask about: water pressure, window seals, what the basement smells like.",
+      "languages": ["English", "Mandarin", "Cantonese"],
+      "based_in": "Dixwell",
+      "years_in_new_haven": 2,
+      "affiliation": "Yale School of Management",
+      "verified": { "identity": true, "yale_email": true, "background_check": false },
+      "rating": 5.0,
+      "reviews": 14,
+      "jobs_done": 19,
+      "responds_in": "under 4 hours",
+      "availability": "Weekends",
+      "services": [
+        { "code": "video", "price_usd": 35, "duration": "30 min" },
+        { "code": "in_person", "price_usd": 60, "duration": "same day report" }
+      ]
+    },
+    {
+      "id": "v-004",
+      "name": "Priya R.",
+      "initials": "PR",
+      "headline": "Housing caseworker, reads leases for a living",
+      "about": "I spend my working week on tenancy problems, so I know what a bad clause looks like before it becomes a dispute. I will not tell you an apartment is fine if the lease is not.",
+      "languages": ["English", "Hindi", "Tamil"],
+      "based_in": "Westville",
+      "years_in_new_haven": 7,
+      "affiliation": "Independent",
+      "verified": { "identity": true, "yale_email": false, "background_check": true },
+      "rating": 4.9,
+      "reviews": 38,
+      "jobs_done": 54,
+      "responds_in": "same day",
+      "availability": "Evenings",
+      "services": [
+        { "code": "lease", "price_usd": 110, "duration": "1 hour, written notes" },
+        { "code": "full", "price_usd": 280, "duration": "until keys" }
+      ]
+    },
+    {
+      "id": "v-005",
+      "name": "Daniel O.",
+      "initials": "DO",
+      "headline": "Cheapest video walkthrough, no frills",
+      "about": "Undergraduate, bike, phone with a good camera. I will go and show you the apartment. I do not read leases and I will say so rather than guess.",
+      "languages": ["English"],
+      "based_in": "Downtown",
+      "years_in_new_haven": 3,
+      "affiliation": "Yale College",
+      "verified": { "identity": true, "yale_email": true, "background_check": false },
+      "rating": 4.6,
+      "reviews": 51,
+      "jobs_done": 88,
+      "responds_in": "under 2 hours",
+      "availability": "Most afternoons",
+      "services": [
+        { "code": "video", "price_usd": 25, "duration": "20-30 min" }
+      ]
+    },
+    {
+      "id": "v-006",
+      "name": "Ana S.",
+      "initials": "AS",
+      "headline": "Full service, start to keys, for families",
+      "about": "I help people arriving with children, so I look at the things a single student would not: the walk to the school, whether the windows open safely, where the nearest clinic is.",
+      "languages": ["English", "Portuguese", "Spanish"],
+      "based_in": "Wooster Square",
+      "years_in_new_haven": 11,
+      "affiliation": "Independent",
+      "verified": { "identity": true, "yale_email": false, "background_check": true },
+      "rating": 4.9,
+      "reviews": 29,
+      "jobs_done": 46,
+      "responds_in": "under 3 hours",
+      "availability": "Weekdays and weekends",
+      "services": [
+        { "code": "in_person", "price_usd": 95, "duration": "detailed report, 24h" },
+        { "code": "lease", "price_usd": 130, "duration": "1 hour call" },
+        { "code": "full", "price_usd": 350, "duration": "until keys, includes utilities setup" }
+      ]
+    },
+    {
+      "id": "v-007",
+      "name": "Kenji N.",
+      "initials": "KN",
+      "headline": "Postdoc, knows Science Hill and the medical campus",
+      "about": "I live between the two campuses and view mostly in that corridor. I will time the actual walk for you rather than reading it off a map.",
+      "languages": ["English", "Japanese"],
+      "based_in": "Prospect Hill",
+      "years_in_new_haven": 5,
+      "affiliation": "Yale School of Medicine, postdoctoral fellow",
+      "verified": { "identity": true, "yale_email": true, "background_check": false },
+      "rating": 4.7,
+      "reviews": 18,
+      "jobs_done": 26,
+      "responds_in": "same day",
+      "availability": "Early mornings and weekends",
+      "services": [
+        { "code": "video", "price_usd": 45, "duration": "40 min, includes the walk" },
+        { "code": "in_person", "price_usd": 75, "duration": "same day report" }
+      ]
+    },
+    {
+      "id": "v-008",
+      "name": "Grace A.",
+      "initials": "GA",
+      "headline": "Lease review only, and blunt about it",
+      "about": "I do not view apartments. I read the document you are about to sign and tell you what it actually says about deposits, repairs, subletting and getting out early.",
+      "languages": ["English", "French"],
+      "based_in": "Fair Haven",
+      "years_in_new_haven": 6,
+      "affiliation": "Independent",
+      "verified": { "identity": true, "yale_email": false, "background_check": true },
+      "rating": 5.0,
+      "reviews": 22,
+      "jobs_done": 31,
+      "responds_in": "under 6 hours",
+      "availability": "By appointment",
+      "services": [
+        { "code": "lease", "price_usd": 95, "duration": "written notes within 24h" }
+      ]
+    }
+  ]
+}

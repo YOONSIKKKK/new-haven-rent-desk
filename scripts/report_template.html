@@ -121,9 +121,9 @@ footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--line);
   h4{margin:15px 0 5px;font-size:13.8px}
   p{margin-bottom:8px}
   li{margin-bottom:4px}
-  figure{margin:13px 0}
-  figure img{max-height:88mm;width:auto;max-width:100%;margin:0 auto}
-  figcaption{font-size:11.5px;margin-top:6px}
+  figure{margin:11px 0}
+  figure img{max-height:78mm;width:auto;max-width:100%;margin:0 auto}
+  figcaption{font-size:11px;margin-top:5px;line-height:1.45}
   table{margin:14px 0;font-size:12.5px}
   th,td{padding:6px 8px}
   .callout{padding:13px 17px;margin:16px 0}
@@ -391,6 +391,31 @@ dismissed for the day or reopened from the header, and its text lives in
   <figcaption><b>The tab that exists because the rest of the app assumes too much.</b>
   A landlord asking for a social security number is routine; not having one is also
   routine, and knowing that is the difference between a sentence and a panic.</figcaption>
+</figure>
+
+<h4>And when the answer is &ldquo;someone has to go and look&rdquo;</h4>
+
+<p>The app's whole premise is that you cannot visit, and there is a limit to how far
+that can be solved by arithmetic. Past that limit the honest answer is to send a human,
+so the app carries a marketplace of people who will: a live video walkthrough, an
+in-person viewing with a written report, a lease read line by line, or everything
+through to keys. Each profile states what the person has done, how long they have been
+here, which languages they work in, and a price per service; the renter filters and
+chooses.</p>
+
+<p>The profiles are sample data and the app says so on the panel. They live in
+<code>data/viewers.json</code> and nothing about them is hard-coded, so real providers
+replace a file rather than a release. Two deliberate choices in a listing that carries
+a &ldquo;verified&rdquo; badge: the avatars are generated initials rather than photographs
+of people who do not exist, and the footer states plainly that the Rent Desk does not
+employ, vet, guarantee or take payment from anyone, and that a deposit for an apartment
+should never be sent to a viewer.</p>
+
+<figure>
+  <img src="{{IMG:16-viewers-top}}" alt="The marketplace of people who will view a listing for you">
+  <figcaption><b>Where arithmetic runs out.</b> Filtered by what you need, the language
+  you want it in, and what you will pay. The questions the app generates are written to
+  be handed to exactly this person.</figcaption>
 </figure>
 
 <h4>Where the shortlist actually is</h4>

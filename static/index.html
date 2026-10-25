@@ -20,6 +20,7 @@
     </div>
   </div>
   <button type="button" class="guide-open" id="guide-open">Guide</button>
+  <button type="button" class="guide-open viewers-open" id="viewers-open">Find a viewer</button>
   <div class="status" id="status">
     <span class="pill pill-muted">checking setup&hellip;</span>
   </div>
@@ -41,6 +42,42 @@
       <div class="modal-actions">
         <button type="button" class="btn btn-ghost" id="guide-hide">Hide for today</button>
         <button type="button" class="btn btn-primary" id="guide-close">Close</button>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="viewers-backdrop" hidden>
+  <div class="modal modal-wide" role="dialog" aria-modal="true" aria-labelledby="viewers-title">
+    <header class="modal-head">
+      <div>
+        <h2 id="viewers-title">Someone to go and look at it</h2>
+        <p>You cannot be in New Haven. These people can, and will tell you what they
+        find. Choose what you want done, and what you want to pay.</p>
+      </div>
+      <button type="button" class="modal-x" id="viewers-x" aria-label="Close">&times;</button>
+    </header>
+
+    <div class="viewer-filters">
+      <label>What you need
+        <select id="vf-service"><option value="">Anything</option></select>
+      </label>
+      <label>Language
+        <select id="vf-language"><option value="">Any language</option></select>
+      </label>
+      <label>Up to
+        <div class="input-prefix"><span>$</span>
+          <input type="number" id="vf-price" placeholder="any" step="10" min="0"></div>
+      </label>
+      <span class="viewer-count" id="viewer-count"></span>
+    </div>
+
+    <div class="modal-body" id="viewers-body"></div>
+
+    <footer class="modal-foot">
+      <small id="viewers-note"></small>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="viewers-close">Close</button>
       </div>
     </footer>
   </div>

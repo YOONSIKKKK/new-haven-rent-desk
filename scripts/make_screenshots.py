@@ -112,6 +112,14 @@ def main() -> None:
             page.locator("#guide-close").click()
             page.wait_for_timeout(400)
 
+        # ---------------------------------------------------- 0b. the marketplace
+        print("capturing the viewer marketplace")
+        page.locator("#viewers-open").click()
+        page.wait_for_timeout(1200)
+        shot(page, ".modal-wide", "16-viewers")
+        page.locator("#viewers-close").click()
+        page.wait_for_timeout(400)
+
         # ---------------------------------------------------- 1. the app at rest
         print("capturing the input screen")
         shot(page, "body", "01-home")

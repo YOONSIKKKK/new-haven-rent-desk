@@ -605,6 +605,141 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && !$("guide-backdrop").hidden) closeGuide();
 });
 
+/* ------------------------------------------------------------ viewers */
+let viewerData = null;
+const AVATAR_HUES = [206, 268, 338, 24, 158, 196, 300, 44];
+
+function avatar(initials, i) {
+  const h = AVATAR_HUES[i % AVATAR_HUES.length];
+  return `<span class="v-avatar" style="background:hsl(${h} 72% 93%);color:hsl(${h} 62% 38%)"
+           aria-hidden="true">${esc(initials)}</span>`;
+}
+
+function serviceLabel(code) {
+  const t = (viewerData.service_types || []).find((s) => s.code === code);
+  return t ? t.label : code;
+}
+
+function renderViewers(d) {
+  viewerData = d;
+  $("viewer-count").textContent =
+    d.count === d.total ? `${d.total} people` : `${d.count} of ${d.total}`;
+  $("viewers-note").textContent = d.disclosure;
+
+  if (!$("vf-service").dataset.filled) {
+    $("vf-service").innerHTML = `<option value="">Anything</option>` +
+      d.service_types.map((t) => `<option value="${esc(t.code)}">${esc(t.label)}</option>`).join("");
+    $("vf-language").innerHTML = `<option value="">Any language</option>` +
+      d.languages.map((l) => `<option value="${esc(l)}">${esc(l)}</option>`).join("");
+    $("vf-service").dataset.filled = "1";
+  }
+
+  if (!d.viewers.length) {
+    $("viewers-body").innerHTML =
+      `<p class="muted">Nobody matches that yet. Widen the filters.</p>`;
+    return;
+  }
+
+  $("viewers-body").innerHTML =
+    `<p class="sample-banner">Sample profiles. Nobody here can actually be booked yet —
+      this is how the marketplace will work once real viewers sign up.</p>` +
+    d.viewers.map((v, i) => `
+    <article class="v-card">
+      <div class="v-top">
+        ${avatar(v.initials, i)}
+        <div class="v-id">
+          <div class="v-name">${esc(v.name)}
+            ${v.verified.identity ? `<span class="v-badge" title="Identity checked">ID checked</span>` : ""}
+            ${v.verified.yale_email ? `<span class="v-badge">Yale email</span>` : ""}
+            ${v.verified.background_check ? `<span class="v-badge">Background check</span>` : ""}
+          </div>
+          <div class="v-head">${esc(v.headline)}</div>
+          <div class="v-meta">
+            <span class="v-rating">&#9733; ${v.rating.toFixed(1)}</span>
+            <span>${v.reviews} reviews</span>
+            <span>${v.jobs_done} jobs</span>
+            <span>${esc(v.based_in)}</span>
+            <span>replies ${esc(v.responds_in)}</span>
+          </div>
+        </div>
+      </div>
+      <p class="v-about">${esc(v.about)}</p>
+      <div class="v-langs">${v.languages.map((l) =>
+        `<span class="v-lang">${esc(l)}</span>`).join("")}</div>
+      <ul class="v-services">
+        ${v.services.map((s) => `
+          <li>
+            <div>
+              <strong>${esc(serviceLabel(s.code))}</strong>
+              <span class="v-dur">${esc(s.duration)}</span>
+            </div>
+            <div class="v-buy">
+              <span class="v-price">${money(s.price_usd)}</span>
+              <button class="btn btn-primary v-req" data-v="${esc(v.id)}"
+                      data-s="${esc(s.code)}">Request</button>
+            </div>
+          </li>`).join("")}
+      </ul>
+    </article>`).join("");
+
+  $("viewers-body").querySelectorAll(".v-req").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const v = d.viewers.find((x) => x.id === btn.dataset.v);
+      const s = v.services.find((x) => x.code === btn.dataset.s);
+      const listing = selectedListingId
+        ? document.querySelector(`.rec-card[data-id="${selectedListingId}"] .rec-addr`)?.textContent
+        : null;
+      btn.closest(".v-card").insertAdjacentHTML("beforeend", `
+        <div class="v-sent">
+          <strong>This is where the request would go to ${esc(v.name.replace(/\.$/, ""))}.</strong>
+          ${esc(serviceLabel(s.code))}, ${money(s.price_usd)}${
+            listing ? `, for ${esc(listing)}` : ", with no listing selected yet"}.
+          Nothing was sent — these are sample profiles.
+        </div>`);
+      btn.disabled = true;
+      btn.textContent = "Requested";
+    });
+  });
+}
+
+async function loadViewers() {
+  const params = new URLSearchParams();
+  if ($("vf-service").value) params.set("service", $("vf-service").value);
+  if ($("vf-language").value) params.set("language", $("vf-language").value);
+  if ($("vf-price").value) params.set("max_price", $("vf-price").value);
+  try {
+    renderViewers(await (await fetch("/api/viewers?" + params)).json());
+  } catch (e) {
+    $("viewers-body").innerHTML = `<p class="muted">Could not load: ${esc(e.message)}</p>`;
+  }
+}
+
+function openViewers() {
+  $("viewers-backdrop").hidden = false;
+  document.body.classList.add("modal-open");
+  loadViewers();
+}
+function closeViewers() {
+  $("viewers-backdrop").hidden = true;
+  document.body.classList.remove("modal-open");
+}
+
+$("viewers-open").addEventListener("click", openViewers);
+$("viewers-x").addEventListener("click", closeViewers);
+$("viewers-close").addEventListener("click", closeViewers);
+$("viewers-backdrop").addEventListener("click", (e) => {
+  if (e.target === $("viewers-backdrop")) closeViewers();
+});
+["vf-service", "vf-language"].forEach((id) =>
+  $(id).addEventListener("change", loadViewers));
+$("vf-price").addEventListener("input", () => {
+  clearTimeout(window.__vfT);
+  window.__vfT = setTimeout(loadViewers, 220);
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !$("viewers-backdrop").hidden) closeViewers();
+});
+
 loadStatus();
 loadGuide();
 loadDestinations().then(rankListings);

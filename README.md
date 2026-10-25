@@ -87,6 +87,13 @@ people renting from abroad — what a landlord will ask for, what to do with no 
 history, and what must be true before any money moves. Dismiss it for the day, or
 reopen it any time from **Guide** in the header. Its text is in `data/guide.json`.
 
+**Find a viewer** in the header opens a marketplace of people who will go and look at
+the apartment for you — a live video walkthrough, an in-person viewing with a written
+report, a lease read line by line, or everything through to keys. Filter by what you
+need, the language you want it in, and what you will pay. *The profiles are sample data
+for now;* they live in `data/viewers.json` and nothing is hard-coded, so real providers
+replace a file rather than a release.
+
 Fill in **About you** — budget, when you actually arrive, whether you have a car.
 Every figure is scored against those, not against an average renter.
 
@@ -145,6 +152,7 @@ gives the same numbers twice, and why hostile text in a listing cannot move a pr
 | `data/listings.json` | 152 New Haven listings, Yale off-campus marketplace, captured 2026-10-24 |
 | `data/rent_baseline.json` | U.S. Census ACS 2023, 133 tracts: median gross rent, contract rent, rent by bedroom count |
 | `data/ct_rental_rules.json` | The Connecticut rules the app is permitted to assert, with sources |
+| `data/viewers.json` | The viewer marketplace. Sample profiles today; replacing this file is how real providers get added |
 | `data/guide.json` | The introduction's four tabs, as data so the wording can be corrected without touching code |
 | `data/places.json` | 758 searchable destinations: 50 curated Yale places resolved and bounds-checked at build time, plus 708 harvested from OpenStreetMap |
 | `data/destinations.json` | The original six quick picks, kept as a fallback |
