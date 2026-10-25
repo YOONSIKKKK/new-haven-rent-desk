@@ -13,6 +13,9 @@ __pycache__/
 node_modules/
 dist/
 
+# Runtime submissions, not source. Created by the app's own form.
+output/viewer_applications.json
+
 # Scratch from build and verification runs
 output/_*
 

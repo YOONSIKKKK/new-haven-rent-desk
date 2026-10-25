@@ -250,6 +250,36 @@ class RecommendationResult(BaseModel):
 
 
 # --------------------------------------------------------------------------
+# 8. Someone offering to view apartments on a renter's behalf
+# --------------------------------------------------------------------------
+class ViewerService(BaseModel):
+    code: Literal["video", "in_person", "lease", "full"]
+    price_usd: int = Field(ge=0, le=2000)
+    duration: str = Field("", max_length=60)
+
+
+class ViewerApplication(BaseModel):
+    """What someone fills in to list themselves.
+
+    Lengths are capped so a form post cannot grow the stored file without
+    bound, and the renderer escapes everything, so nothing here is trusted
+    markup.
+    """
+
+    name: str = Field(min_length=2, max_length=60)
+    headline: str = Field(min_length=4, max_length=110)
+    about: str = Field(min_length=20, max_length=600)
+    languages: list[str] = Field(min_length=1, max_length=8)
+    based_in: str = Field(min_length=2, max_length=60)
+    years_in_new_haven: int = Field(ge=0, le=70)
+    affiliation: str = Field("", max_length=90)
+    availability: str = Field("", max_length=90)
+    responds_in: str = Field("", max_length=40)
+    contact: str = Field(min_length=3, max_length=120)
+    services: list[ViewerService] = Field(min_length=1, max_length=4)
+
+
+# --------------------------------------------------------------------------
 # Envelope returned to the browser
 # --------------------------------------------------------------------------
 class TokenUsage(BaseModel):

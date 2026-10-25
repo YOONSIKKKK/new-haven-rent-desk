@@ -644,20 +644,22 @@ function renderViewers(d) {
     `<p class="sample-banner">Sample profiles. Nobody here can actually be booked yet —
       this is how the marketplace will work once real viewers sign up.</p>` +
     d.viewers.map((v, i) => `
-    <article class="v-card">
+    <article class="v-card${v.pending ? " v-card-pending" : ""}">
       <div class="v-top">
         ${avatar(v.initials, i)}
         <div class="v-id">
           <div class="v-name">${esc(v.name)}
+            ${v.pending ? `<span class="v-badge v-pending">Pending review</span>` : ""}
             ${v.verified.identity ? `<span class="v-badge" title="Identity checked">ID checked</span>` : ""}
             ${v.verified.yale_email ? `<span class="v-badge">Yale email</span>` : ""}
             ${v.verified.background_check ? `<span class="v-badge">Background check</span>` : ""}
           </div>
           <div class="v-head">${esc(v.headline)}</div>
           <div class="v-meta">
-            <span class="v-rating">&#9733; ${v.rating.toFixed(1)}</span>
-            <span>${v.reviews} reviews</span>
-            <span>${v.jobs_done} jobs</span>
+            ${v.rating != null
+              ? `<span class="v-rating">&#9733; ${v.rating.toFixed(1)}</span>
+                 <span>${v.reviews} reviews</span><span>${v.jobs_done} jobs</span>`
+              : `<span class="v-new">no reviews yet</span>`}
             <span>${esc(v.based_in)}</span>
             <span>replies ${esc(v.responds_in)}</span>
           </div>
@@ -714,9 +716,117 @@ async function loadViewers() {
   }
 }
 
+/* ---- listing yourself as a viewer ---- */
+function serviceRow(i) {
+  const opts = (viewerData?.service_types || [])
+    .map((t) => `<option value="${esc(t.code)}">${esc(t.label)}</option>`).join("");
+  return `<div class="v-srow" data-i="${i}">
+    <label>Service<select name="code">${opts}</select></label>
+    <label>Price<div class="input-prefix"><span>$</span>
+      <input name="price_usd" type="number" min="0" max="2000" step="5" value="50"></div></label>
+    <label>How long / what they get
+      <input name="duration" maxlength="60" placeholder="30-45 min"></label>
+    <button type="button" class="v-srow-x" aria-label="Remove">&times;</button>
+  </div>`;
+}
+
+function addServiceRow() {
+  const rows = $("v-service-rows");
+  rows.insertAdjacentHTML("beforeend", serviceRow(rows.children.length));
+  rows.lastElementChild.querySelector(".v-srow-x").addEventListener("click", (e) => {
+    if (rows.children.length > 1) e.target.closest(".v-srow").remove();
+  });
+}
+
+const VIEWER_COPY = {
+  browse: ["Someone to go and look at it",
+           "You cannot be in New Haven. These people can, and will tell you what they " +
+           "find. Choose what you want done, and what you want to pay."],
+  form: ["List yourself as a viewer",
+         "Tell people what you will do, what you will not, and what you charge. " +
+         "Be specific — the renter is deciding whether to trust you with a year of rent."],
+};
+
+function showViewerForm(show) {
+  $("viewers-body").hidden = show;
+  $("v-form-body").hidden = !show;
+  $("viewer-filters").hidden = show;      // the filters belong to the list, not the form
+  $("v-form-cancel").hidden = !show;
+  $("v-form-submit").hidden = !show;
+  const [title, sub] = VIEWER_COPY[show ? "form" : "browse"];
+  $("viewers-title").textContent = title;
+  $("viewers-sub").textContent = sub;
+  $("v-form-error").hidden = true;
+  if (show) {
+    $("v-form-body").scrollTop = 0;
+    if (!$("v-service-rows").children.length) addServiceRow();
+  }
+}
+
+async function submitViewerForm() {
+  const f = $("v-form");
+  const val = (n) => (f.elements[n]?.value || "").trim();
+  const services = [...$("v-service-rows").querySelectorAll(".v-srow")].map((row) => ({
+    code: row.querySelector("[name=code]").value,
+    price_usd: Number(row.querySelector("[name=price_usd]").value) || 0,
+    duration: row.querySelector("[name=duration]").value.trim(),
+  }));
+
+  const body = {
+    name: val("name"),
+    headline: val("headline"),
+    about: val("about"),
+    languages: val("languages").split(",").map((x) => x.trim()).filter(Boolean),
+    based_in: val("based_in"),
+    years_in_new_haven: Number(val("years_in_new_haven")) || 0,
+    affiliation: val("affiliation"),
+    availability: val("availability"),
+    responds_in: val("responds_in"),
+    contact: val("contact"),
+    services,
+  };
+
+  const err = $("v-form-error");
+  const btn = $("v-form-submit");
+  btn.disabled = true; btn.textContent = "Submitting…";
+  try {
+    const r = await fetch("/api/viewers/apply", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    const d = await r.json();
+    if (!r.ok) {
+      const detail = Array.isArray(d.detail)
+        ? d.detail.map((x) => `${(x.loc || []).slice(-1)[0]}: ${x.msg}`).join(" · ")
+        : (d.detail || "Could not submit.");
+      throw new Error(detail);
+    }
+    f.reset();
+    $("v-service-rows").innerHTML = "";
+    showViewerForm(false);
+    await loadViewers();
+    $("viewers-body").insertAdjacentHTML("afterbegin",
+      `<div class="v-sent"><strong>${esc(d.message)}</strong></div>`);
+    $("viewers-body").scrollTop = 0;
+  } catch (e) {
+    err.hidden = false;
+    err.textContent = e.message;
+  } finally {
+    btn.disabled = false; btn.textContent = "Submit profile";
+  }
+}
+
+$("v-list-me").addEventListener("click", () => showViewerForm(true));
+$("v-form-cancel").addEventListener("click", () => showViewerForm(false));
+$("v-form-submit").addEventListener("click", submitViewerForm);
+$("v-add-service").addEventListener("click", () => {
+  if ($("v-service-rows").children.length < 4) addServiceRow();
+});
+
 function openViewers() {
   $("viewers-backdrop").hidden = false;
   document.body.classList.add("modal-open");
+  showViewerForm(false);
   loadViewers();
 }
 function closeViewers() {

@@ -117,6 +117,12 @@ def main() -> None:
         page.locator("#viewers-open").click()
         page.wait_for_timeout(1200)
         shot(page, ".modal-wide", "16-viewers")
+        page.locator("#v-list-me").click()
+        page.wait_for_timeout(600)
+        shot(page, ".modal-wide", "17-viewer-form")
+        print("  17-viewer-form.png")
+        page.locator("#v-form-cancel").click()
+        page.wait_for_timeout(300)
         page.locator("#viewers-close").click()
         page.wait_for_timeout(400)
 

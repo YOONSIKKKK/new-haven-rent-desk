@@ -16,9 +16,15 @@ from pydantic import BaseModel, Field
 
 from . import data_store as store
 from . import recommend as rec
+from . import viewer_store
 from . import tools
 from .config import MAX_AD_TEXT_CHARS, ROOT, key_status
-from .models import Evaluation, RecommendationResult, RenterProfile
+from .models import (
+    Evaluation,
+    RecommendationResult,
+    RenterProfile,
+    ViewerApplication,
+)
 from .orchestrator import evaluate
 
 STATIC_DIR = ROOT / "static"
@@ -98,7 +104,9 @@ def viewers(service: str = "", language: str = "", max_price: int | None = None)
     nothing about them is hard-coded here.
     """
     payload = store.viewers()
-    people = payload["viewers"]
+    # Curated profiles first, then whatever the form has received. An
+    # application never outranks a reviewed profile.
+    people = payload["viewers"] + viewer_store.applications()
 
     if service:
         people = [v for v in people if any(s["code"] == service for s in v["services"])]
@@ -121,7 +129,10 @@ def viewers(service: str = "", language: str = "", max_price: int | None = None)
         relevant = [s for s in v["services"] if not service or s["code"] == service]
         return min(s["price_usd"] for s in relevant or v["services"])
 
-    people = sorted(people, key=lambda v: (-v["rating"], cheapest(v)))
+    people = sorted(
+        people,
+        key=lambda v: (v.get("pending", False), -(v.get("rating") or 0), cheapest(v)),
+    )
     languages = sorted({lang for v in payload["viewers"] for lang in v["languages"]})
 
     return {
@@ -131,8 +142,29 @@ def viewers(service: str = "", language: str = "", max_price: int | None = None)
         "service_types": payload["service_types"],
         "languages": languages,
         "count": len(people),
-        "total": len(payload["viewers"]),
+        "total": len(payload["viewers"]) + len(viewer_store.applications()),
+        "pending": sum(1 for v in people if v.get("pending")),
         "viewers": people,
+    }
+
+
+@app.post("/api/viewers/apply")
+def apply_as_viewer(application: ViewerApplication) -> dict:
+    """List yourself as someone who will view apartments for other people.
+
+    Stored apart from the curated profiles and shown as pending. Nothing here
+    claims a rating, a job count or a verification - those are outputs of a
+    review process, not of a form.
+    """
+    record = viewer_store.add(application)
+    return {
+        "ok": True,
+        "id": record["id"],
+        "status": "pending review",
+        "message": (
+            "Saved. Your profile is listed as pending, below the reviewed ones, "
+            "until someone checks it. Nothing was published on your behalf."
+        ),
     }
 
 

@@ -52,13 +52,13 @@
     <header class="modal-head">
       <div>
         <h2 id="viewers-title">Someone to go and look at it</h2>
-        <p>You cannot be in New Haven. These people can, and will tell you what they
-        find. Choose what you want done, and what you want to pay.</p>
+        <p id="viewers-sub">You cannot be in New Haven. These people can, and will tell
+        you what they find. Choose what you want done, and what you want to pay.</p>
       </div>
       <button type="button" class="modal-x" id="viewers-x" aria-label="Close">&times;</button>
     </header>
 
-    <div class="viewer-filters">
+    <div class="viewer-filters" id="viewer-filters">
       <label>What you need
         <select id="vf-service"><option value="">Anything</option></select>
       </label>
@@ -70,13 +70,73 @@
           <input type="number" id="vf-price" placeholder="any" step="10" min="0"></div>
       </label>
       <span class="viewer-count" id="viewer-count"></span>
+      <button type="button" class="btn btn-ghost v-list-me" id="v-list-me">List yourself</button>
     </div>
 
     <div class="modal-body" id="viewers-body"></div>
 
+    <div class="modal-body" id="v-form-body" hidden>
+      <p class="sample-banner">Your profile is stored as <strong>pending</strong> and
+      shown below the reviewed ones. Nothing claims a rating, a job count or a
+      verification &mdash; those come from a review, not from a form.</p>
+
+      <form id="v-form" novalidate>
+        <div class="v-form-grid">
+          <label>Your name
+            <input name="name" maxlength="60" required placeholder="Jiwon P.">
+          </label>
+          <label>Where you are based
+            <input name="based_in" maxlength="60" required placeholder="East Rock">
+          </label>
+          <label>Years in New Haven
+            <input name="years_in_new_haven" type="number" min="0" max="70" required value="1">
+          </label>
+          <label>Usual reply time
+            <input name="responds_in" maxlength="40" placeholder="under 2 hours">
+          </label>
+        </div>
+
+        <label>One line about you
+          <input name="headline" maxlength="110" required
+                 placeholder="Yale GSAS, four winters in East Rock">
+        </label>
+
+        <label>What people should know
+          <textarea name="about" rows="4" maxlength="600" required
+            placeholder="What you check, what you will not do, and why someone should trust you with this."></textarea>
+        </label>
+
+        <div class="v-form-grid">
+          <label>Languages you work in
+            <input name="languages" maxlength="120" required placeholder="English, Korean">
+            <span class="v-hint">Separated by commas</span>
+          </label>
+          <label>Affiliation <span class="v-opt">optional</span>
+            <input name="affiliation" maxlength="90" placeholder="Yale School of Management">
+          </label>
+          <label>When you are available <span class="v-opt">optional</span>
+            <input name="availability" maxlength="90" placeholder="Evenings and weekends">
+          </label>
+          <label>How people reach you
+            <input name="contact" maxlength="120" required placeholder="Email or phone">
+          </label>
+        </div>
+
+        <fieldset class="v-form-services">
+          <legend>What you offer, and what you charge</legend>
+          <div id="v-service-rows"></div>
+          <button type="button" class="btn btn-ghost v-add" id="v-add-service">Add another service</button>
+        </fieldset>
+
+        <p class="v-form-error" id="v-form-error" hidden></p>
+      </form>
+    </div>
+
     <footer class="modal-foot">
       <small id="viewers-note"></small>
       <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="v-form-cancel" hidden>Back to the list</button>
+        <button type="button" class="btn btn-primary" id="v-form-submit" hidden>Submit profile</button>
         <button type="button" class="btn btn-ghost" id="viewers-close">Close</button>
       </div>
     </footer>

@@ -94,6 +94,12 @@ need, the language you want it in, and what you will pay. *The profiles are samp
 for now;* they live in `data/viewers.json` and nothing is hard-coded, so real providers
 replace a file rather than a release.
 
+Providers list themselves through **List yourself** in the same panel. A submission is
+stored in `output/viewer_applications.json` — separate from the curated file, not
+committed — and appears with a **pending review** badge below everything reviewed, with
+no rating, job count or verification ticks. Those are outputs of a review, not of a
+form.
+
 Fill in **About you** — budget, when you actually arrive, whether you have a car.
 Every figure is scored against those, not against an average renter.
 
