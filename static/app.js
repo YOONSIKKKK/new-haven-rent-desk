@@ -747,7 +747,11 @@ const VIEWER_COPY = {
          "Be specific — the renter is deciding whether to trust you with a year of rent."],
 };
 
-function showViewerForm(show) {
+async function showViewerForm(show) {
+  // The service dropdown is built from the loaded service types. Opening the
+  // form before they arrive gives an empty select and a submission the server
+  // has to reject.
+  if (show && !viewerData) await loadViewers();
   $("viewers-body").hidden = show;
   $("v-form-body").hidden = !show;
   $("viewer-filters").hidden = show;      // the filters belong to the list, not the form
@@ -766,7 +770,14 @@ function showViewerForm(show) {
 async function submitViewerForm() {
   const f = $("v-form");
   const val = (n) => (f.elements[n]?.value || "").trim();
-  const services = [...$("v-service-rows").querySelectorAll(".v-srow")].map((row) => ({
+  const rows = [...$("v-service-rows").querySelectorAll(".v-srow")];
+  if (rows.some((row) => !row.querySelector("[name=code]").value)) {
+    const err = $("v-form-error");
+    err.hidden = false;
+    err.textContent = "The service list has not finished loading. Give it a moment and try again.";
+    return;
+  }
+  const services = rows.map((row) => ({
     code: row.querySelector("[name=code]").value,
     price_usd: Number(row.querySelector("[name=price_usd]").value) || 0,
     duration: row.querySelector("[name=duration]").value.trim(),
@@ -823,11 +834,11 @@ $("v-add-service").addEventListener("click", () => {
   if ($("v-service-rows").children.length < 4) addServiceRow();
 });
 
-function openViewers() {
+async function openViewers() {
   $("viewers-backdrop").hidden = false;
   document.body.classList.add("modal-open");
   showViewerForm(false);
-  loadViewers();
+  await loadViewers();
 }
 function closeViewers() {
   $("viewers-backdrop").hidden = true;
@@ -849,6 +860,13 @@ $("vf-price").addEventListener("input", () => {
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && !$("viewers-backdrop").hidden) closeViewers();
 });
+
+// Deep link from the review screen's empty state, so the loop is one click.
+if (new URLSearchParams(location.search).has("list-yourself")) {
+  try { localStorage.setItem(GUIDE_KEY, new Date().toISOString().slice(0, 10)); }
+  catch (e) {}
+  openViewers().then(() => showViewerForm(true));
+}
 
 loadStatus();
 loadGuide();

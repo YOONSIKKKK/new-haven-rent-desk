@@ -197,6 +197,8 @@ def list_applications(x_admin_token: str | None = Header(None)) -> dict:
     _check_admin(x_admin_token)
     return {
         "protected": admin_token() is not None,
+        "store_path": str(viewer_store.STORE.relative_to(ROOT)).replace("\\", "/"),
+        "store_exists": viewer_store.STORE.is_file(),
         "counts": viewer_store.counts(),
         "applications": viewer_store.applications(),
     }

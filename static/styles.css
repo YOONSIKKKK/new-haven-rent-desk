@@ -703,3 +703,8 @@ body.modal-open{overflow:hidden}
 .adm-auth{display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;max-width:460px}
 .adm-auth p{flex:1 0 100%;font-size:13.5px;color:var(--g700);line-height:1.6;margin-bottom:4px}
 .adm-auth label{flex:1;min-width:180px}
+
+.adm-empty{background:var(--g50);border-radius:var(--r-lg);padding:26px 28px}
+.adm-empty p{font-size:14px;line-height:1.65;margin-bottom:10px;max-width:62ch}
+.adm-empty .muted{font-size:13px}
+.adm-empty .btn{display:inline-block;margin-top:8px;text-decoration:none}

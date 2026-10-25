@@ -155,9 +155,18 @@ async function load() {
       : d.applications.filter((a) => (a.status || "pending") === filter);
 
     if (!rows.length) {
-      $("admin-list").innerHTML =
-        `<p class="muted">Nothing ${filter === "all" ? "submitted" : filter} yet. Submissions
-         arrive from <strong>List yourself</strong> in the app's viewer panel.</p>`;
+      const nothingAtAll = (d.counts.total || 0) === 0;
+      $("admin-list").innerHTML = nothingAtAll
+        ? `<div class="adm-empty">
+             <p><strong>The queue is empty, and that is the expected state.</strong>
+             Nobody has submitted a profile yet, so there is nothing to review.</p>
+             <p class="muted">The screen itself is working: it reached the server and
+             got back a count of zero. Submissions are stored in
+             <code>${esc(d.store_path || "output/viewer_applications.json")}</code>, which
+             is created on the first one.</p>
+             <a class="btn btn-primary" href="/?list-yourself=1">Submit a test profile</a>
+           </div>`
+        : `<p class="muted">Nothing is ${esc(filter)} right now. Try another tab.</p>`;
       return;
     }
 

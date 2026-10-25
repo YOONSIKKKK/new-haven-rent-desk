@@ -107,8 +107,15 @@ def add(application: ViewerApplication) -> dict:
     data = _read()
     existing = data.setdefault("applications", [])
 
+    # A monotonic counter, not len(existing). Once the store hits MAX_STORED the
+    # oldest rows are dropped, so len() goes back down and starts handing out ids
+    # that are already in use - and then a review decision lands on the wrong
+    # application.
+    next_number = data.get("next_id", 0) + 1
+    data["next_id"] = next_number
+
     record = {
-        "id": f"p-{len(existing) + 1:03d}",
+        "id": f"p-{next_number:03d}",
         "name": application.name.strip(),
         "initials": _initials(application.name),
         "headline": application.headline.strip(),
