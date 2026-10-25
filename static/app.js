@@ -528,5 +528,83 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
+/* ------------------------------------------------------------ intro guide */
+const GUIDE_KEY = "rentdesk.guide.hiddenUntil";
+
+function hiddenForToday() {
+  try {
+    return localStorage.getItem(GUIDE_KEY) === new Date().toISOString().slice(0, 10);
+  } catch (e) { return false; }
+}
+
+function hideGuideForToday() {
+  try { localStorage.setItem(GUIDE_KEY, new Date().toISOString().slice(0, 10)); }
+  catch (e) { /* private browsing: it just reopens next time */ }
+  closeGuide();
+}
+
+function openGuide() {
+  $("guide-backdrop").hidden = false;
+  document.body.classList.add("modal-open");
+  const first = document.querySelector(".modal-tab");
+  if (first) first.focus();
+}
+
+function closeGuide() {
+  $("guide-backdrop").hidden = true;
+  document.body.classList.remove("modal-open");
+}
+
+function renderGuide(g) {
+  $("guide-title").textContent = g.title;
+  $("guide-sub").textContent = g.subtitle;
+  $("guide-footer").textContent = g.footer;
+
+  $("guide-tabs").innerHTML = g.tabs.map((t, i) =>
+    `<button class="modal-tab${i === 0 ? " active" : ""}" role="tab"
+             data-gt="${esc(t.id)}">${esc(t.label)}</button>`).join("");
+
+  $("guide-body").innerHTML = g.tabs.map((t, i) => `
+    <div class="guide-pane${i === 0 ? " active" : ""}" data-gp="${esc(t.id)}">
+      <p class="guide-lead">${esc(t.lead)}</p>
+      ${t.sections.map((sec) => `
+        <section class="guide-sec">
+          <h3>${esc(sec.heading)}</h3>
+          <dl>${sec.items.map(([term, body]) =>
+            `<dt>${esc(term)}</dt><dd>${esc(body)}</dd>`).join("")}</dl>
+        </section>`).join("")}
+    </div>`).join("");
+
+  $("guide-tabs").querySelectorAll(".modal-tab").forEach((tab) => {
+    tab.addEventListener("click", () => {
+      $("guide-tabs").querySelectorAll(".modal-tab")
+        .forEach((t) => t.classList.toggle("active", t === tab));
+      $("guide-body").querySelectorAll(".guide-pane")
+        .forEach((p) => p.classList.toggle("active", p.dataset.gp === tab.dataset.gt));
+      $("guide-body").scrollTop = 0;
+    });
+  });
+}
+
+async function loadGuide() {
+  try {
+    const g = await (await fetch("/api/guide")).json();
+    renderGuide(g);
+    if (!hiddenForToday()) openGuide();
+  } catch (e) { /* the app works without it */ }
+}
+
+$("guide-open").addEventListener("click", openGuide);
+$("guide-x").addEventListener("click", closeGuide);
+$("guide-close").addEventListener("click", closeGuide);
+$("guide-hide").addEventListener("click", hideGuideForToday);
+$("guide-backdrop").addEventListener("click", (e) => {
+  if (e.target === $("guide-backdrop")) closeGuide();
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !$("guide-backdrop").hidden) closeGuide();
+});
+
 loadStatus();
+loadGuide();
 loadDestinations().then(rankListings);

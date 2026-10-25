@@ -1,0 +1,208 @@
+{
+  "note": "Content for the intro dialogue. Kept as data so it can be corrected without touching code. Written for someone renting in the United States for the first time, often from abroad, who has not been told any of this.",
+  "last_reviewed": "2026-10-24",
+  "title": "Before you start looking",
+  "subtitle": "Four things nobody tells you until it has already cost you money.",
+
+  "tabs": [
+    {
+      "id": "how",
+      "label": "How to use this",
+      "lead": "Three steps. The first two are free and instant; only the third spends anything.",
+      "sections": [
+        {
+          "heading": "1 · Tell it about you",
+          "items": [
+            ["Monthly budget", "Give the figure you can actually pay in total, not the rent you were hoping to see. Everything is scored against this number."],
+            ["When you actually arrive", "Not when the lease starts. The gap between the two is one of the most expensive things on this page."],
+            ["Where you need to get to", "A Yale school, a residential college, a hospital, a neighbourhood, or any street address. 758 places are known by name, so \"divinity school\" or \"med school\" is enough."]
+          ]
+        },
+        {
+          "heading": "2 · Read the shortlist",
+          "items": [
+            ["Ranked by twelve-month cost", "Not by advertised rent. A cheaper headline often loses over a year."],
+            ["On the map", "Numbered pins match the list. Click a pin or a card to pair them. Full screen puts the list beside the map."],
+            ["Why each one ranked", "Ticks and warnings under every card. A score you cannot interrogate is a score you should not trust."]
+          ]
+        },
+        {
+          "heading": "3 · Open one",
+          "items": [
+            ["The full analysis", "Twelve-month cost broken down, how the price compares with census rents for that exact census tract, legal and scam risk, and a fit score."],
+            ["Questions to ask", "Generated from what the advertisement never said. Take them to the viewing, or send them to whoever is viewing it for you."]
+          ]
+        },
+        {
+          "heading": "Reading the numbers",
+          "items": [
+            ["Advertised → Actually", "The struck-through figure is what the ad says. The blue one is what the month really costs."],
+            ["Blue dot vs grey dot", "Blue is measured from public data. Grey is an assumption, and it says so. Nothing is hidden behind a confident number."],
+            ["Unknown is a value", "If the ad does not say, the app leaves it blank and tells you. A guess that looks like a fact is the thing that hurts you."]
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "matters",
+      "label": "What actually costs you",
+      "lead": "If you remember one thing: the advertised rent is not the price.",
+      "sections": [
+        {
+          "heading": "Utilities are the hidden half",
+          "items": [
+            ["$247 a month, median", "That is the gap between what New Haven tenants pay in total and what they pay in rent alone, from U.S. Census data."],
+            ["$0 to $579, depending on the block", "Across census tracts in this region. At the top of that range it is nearly half the median rent. Two apartments at the same advertised price are not the same price."],
+            ["\"Heat included\" is the big one", "Connecticut winters are long. Heat is the single largest utility line, and whether the landlord pays it can decide which apartment is actually cheaper."]
+          ]
+        },
+        {
+          "heading": "The lease calendar trap",
+          "items": [
+            ["Leases here start 1 June", "The academic year starts in late August. Sign the standard lease and you pay for two months of an empty apartment."],
+            ["Roughly $3,000–$4,400", "On a typical two-bedroom. Most people find out after signing."],
+            ["Ask before you sign", "Can the start date move? Can you sublet June and July? Get the answer in writing."]
+          ]
+        },
+        {
+          "heading": "Money before the keys",
+          "items": [
+            ["First month plus a deposit", "Often two months' rent in total, sometimes more with fees. Budget for it as a lump sum, not a monthly cost."],
+            ["Fees that are not rent", "Application fee, broker fee, pet deposit, key or parking charges. Ask for the full list in writing before you commit."]
+          ]
+        },
+        {
+          "heading": "Costs the rent never mentions",
+          "items": [
+            ["Internet", "Usually your own account, around $70 a month in New Haven."],
+            ["Laundry", "If it is not in the unit, budget for coin or card machines — roughly $35 a month."],
+            ["Renters insurance", "Often required by the lease. Cheap, but real."],
+            ["Furniture", "If you are flying in, you own nothing. A bed, a desk and a kitchen add up fast."],
+            ["Parking", "If you have a car and the building has no space, a paid spot near campus is a serious monthly line."]
+          ]
+        },
+        {
+          "heading": "Things a listing photograph will not tell you",
+          "items": [
+            ["Which floor, and is there a lift", "Much of New Haven's stock is the three-storey wooden house known locally as a triple decker. Third floor usually means walk-up, and the highest heating bill in the building."],
+            ["The walk in January", "Twenty minutes in September is not twenty minutes in a Connecticut winter."],
+            ["What the neighbours are", "Ask whoever views it for you what they can hear."]
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "words",
+      "label": "The words",
+      "lead": "American rental vocabulary, for people who have never met it. Getting one of these wrong costs money.",
+      "sections": [
+        {
+          "heading": "Price words",
+          "items": [
+            ["Rent", "The monthly payment to the landlord. By itself it tells you very little."],
+            ["Contract rent", "Rent alone, with no utilities. What most listings quote."],
+            ["Gross rent", "Rent plus utilities — the figure that actually leaves your account. This app compares like with like by using gross rent on both sides."],
+            ["Utilities included", "Rarely means all of them. Ask which ones, by name. \"Heat included\" does not imply hot water, cooking gas or electricity."],
+            ["Per person vs per unit", "Some listings price a room, not the apartment. A five-bedroom at $900 is almost certainly $900 each."]
+          ]
+        },
+        {
+          "heading": "Money you hand over",
+          "items": [
+            ["Security deposit", "Held against damage and returned at the end. In Connecticut it is capped at two months' rent (one month if you are 62 or older)."],
+            ["Escrow", "Your deposit must sit in a separate account at a Connecticut financial institution. It is not the landlord's money to spend. Ask which institution holds it."],
+            ["Deposit interest", "Connecticut landlords owe you interest on the deposit, at a rate the Banking Commissioner publishes each year. Most tenants never ask."],
+            ["Application fee", "A non-refundable charge to process your application. Ask the amount before you apply."],
+            ["Broker fee", "A commission, often a month's rent, paid to the agent who showed you the apartment. \"No fee\" means there is none."],
+            ["First and last", "Some landlords ask for the first and last month's rent up front, on top of the deposit."]
+          ]
+        },
+        {
+          "heading": "Paperwork words",
+          "items": [
+            ["Lease", "The contract. Usually twelve months, fixed. Read the whole thing; most of what goes wrong lives in here, not in the advertisement."],
+            ["Term", "How long the lease runs, and the exact start and end dates. A start month with no year is a real ambiguity, not a typo."],
+            ["Guarantor / co-signer", "Someone who promises to pay if you do not. Landlords frequently ask international students for one."],
+            ["Credit check", "A look at your American borrowing history. If you have just arrived you have none, which is not the same as bad."],
+            ["Sublet", "Renting your apartment to someone else for part of your term. Whether you may is written in the lease — check before you count on it."],
+            ["Month-to-month", "No fixed term; either side can end it with notice. More flexible, usually more expensive, and harder to rely on."]
+          ]
+        },
+        {
+          "heading": "Building words",
+          "items": [
+            ["Triple decker", "A three-storey wooden house split into three flats. Very common here."],
+            ["Walk-up", "No lift. Ask which floor."],
+            ["Studio", "One room, with the kitchen in it. Counted as zero bedrooms."],
+            ["In-unit laundry", "Washer and dryer inside your apartment, as opposed to a shared machine in the basement or a laundromat down the road."],
+            ["Heat included", "The landlord pays for heating. In Connecticut this is the most valuable two words in a listing."]
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "international",
+      "label": "Renting from abroad",
+      "lead": "Written for someone signing a year's lease for an apartment they have never seen, in a system nobody has explained to them.",
+      "sections": [
+        {
+          "heading": "What you can do before you fly",
+          "items": [
+            ["Shortlist on total cost", "Use this app to narrow twenty listings to three or four, before you talk to anybody."],
+            ["Ask for a live video walkthrough", "Not a recording, and not photographs. A live call where you can ask someone to point the camera at the boiler, the windows and the laundry."],
+            ["Send the questions ahead", "The question list this app generates is designed to be forwarded. Written answers are worth far more than spoken ones."]
+          ]
+        },
+        {
+          "heading": "What they will ask you for",
+          "items": [
+            ["Identification", "Passport, and usually your I-20 or DS-2019 plus your Yale admission or appointment letter."],
+            ["Proof you can pay", "Bank statements, a funding or scholarship letter, or an employment offer."],
+            ["A guarantor", "Someone in the United States who co-signs. Many international students do not have one."],
+            ["A social security number", "You will not have one before you arrive, and you may never need one. Say so plainly rather than leaving the field blank."]
+          ]
+        },
+        {
+          "heading": "No SSN, no credit history — what actually works",
+          "items": [
+            ["Say it early", "\"I am an incoming international student, so I have no US credit history yet\" is a normal sentence to a New Haven landlord. They hear it every year."],
+            ["Offer documents instead", "Admission letter, funding letter, bank statement. These answer the question credit history was being used to answer."],
+            ["Paying more up front", "Some landlords will accept extra months in advance. Connecticut's deposit cap still applies — extra rent paid early is not the same as a larger deposit, and the cap is two months."],
+            ["Guarantor services", "Companies will act as your guarantor for a fee. Read what they charge and what they commit to before using one."]
+          ]
+        },
+        {
+          "heading": "Never send money until all three are true",
+          "items": [
+            ["There is a signed lease", "A written contract with the address, the dates, the rent and the deposit on it."],
+            ["Someone has seen the actual unit", "You, a friend, or a live video walkthrough of that apartment — not a similar one."],
+            ["You know who you are paying", "A landlord who cannot meet, cannot show the place, and wants an untraceable payment is the standard rental scam script. Cash, wire, gift cards and crypto cannot be reversed."]
+          ]
+        },
+        {
+          "heading": "The law is on your side here",
+          "items": [
+            ["Deposit cap", "Two months' rent, one month if you are 62 or older. A landlord asking for three is asking for something Connecticut does not allow."],
+            ["Escrow and interest", "Your deposit sits in a Connecticut account and earns interest that is yours."],
+            ["Thirty days", "After you move out the landlord has thirty days to return the unused deposit with interest, or give you an itemised list of deductions. Withholding it wrongly can cost them double."],
+            ["This is not legal advice", "It is a summary from the Connecticut Department of Banking. If something goes wrong, a tenants' rights service is free and knows more than any app."]
+          ]
+        },
+        {
+          "heading": "Once you arrive",
+          "items": [
+            ["Set up the utilities in your name", "In New Haven electricity is United Illuminating and natural gas is Southern Connecticut Gas. Confirm with them what the account needs; the landlord will tell you which services are yours."],
+            ["Photograph everything on day one", "Every room, every mark on the wall, timestamped. This is what you will want when the deposit comes back."],
+            ["Get renters insurance", "Often required by the lease, and inexpensive."],
+            ["Keep everything in writing", "Email, not phone calls. A record is what turns a disagreement into a resolved one."]
+          ]
+        }
+      ]
+    }
+  ],
+
+  "footer": "Not legal advice. Connecticut deposit rules summarised from the Connecticut Department of Banking; rent and utility figures from the U.S. Census Bureau's American Community Survey."
+}

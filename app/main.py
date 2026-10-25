@@ -84,6 +84,12 @@ class RecommendRequest(BaseModel):
     limit: int = 12
 
 
+@app.get("/api/guide")
+def guide() -> dict:
+    """Content for the intro dialogue. Data, so it can be corrected without a deploy."""
+    return store.guide()
+
+
 @app.get("/api/destinations")
 def destinations(q: str = "", limit: int = 10) -> dict:
     """Type-ahead over the committed gazetteer. No network call, no key.

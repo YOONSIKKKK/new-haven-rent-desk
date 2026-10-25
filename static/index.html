@@ -19,10 +19,32 @@
       <p class="tagline">What the apartment actually costs &mdash; for people who cannot go and look at it.</p>
     </div>
   </div>
+  <button type="button" class="guide-open" id="guide-open">Guide</button>
   <div class="status" id="status">
     <span class="pill pill-muted">checking setup&hellip;</span>
   </div>
 </header>
+
+<div class="modal-backdrop" id="guide-backdrop" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="guide-title">
+    <header class="modal-head">
+      <div>
+        <h2 id="guide-title"></h2>
+        <p id="guide-sub"></p>
+      </div>
+      <button type="button" class="modal-x" id="guide-x" aria-label="Close">&times;</button>
+    </header>
+    <div class="modal-tabs" id="guide-tabs" role="tablist"></div>
+    <div class="modal-body" id="guide-body"></div>
+    <footer class="modal-foot">
+      <small id="guide-footer"></small>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="guide-hide">Hide for today</button>
+        <button type="button" class="btn btn-primary" id="guide-close">Close</button>
+      </div>
+    </footer>
+  </div>
+</div>
 
 <main>
 

@@ -41,6 +41,11 @@ def assumptions() -> dict:
     return _load("cost_assumptions.json")
 
 
+@lru_cache(maxsize=1)
+def guide() -> dict:
+    return _load("guide.json")
+
+
 def listings() -> list[dict]:
     return listings_payload()["listings"]
 

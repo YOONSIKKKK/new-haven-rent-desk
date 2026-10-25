@@ -88,7 +88,29 @@ def main() -> None:
         except Exception as exc:
             sys.exit(f"Could not reach {BASE}. Is the app running?  ({exc})")
 
-        page.wait_for_timeout(1200)
+        page.wait_for_timeout(1600)
+
+        # ---------------------------------------------------- 0. the intro guide
+        # It opens on first visit, so it has to be captured and dismissed before
+        # anything else can be photographed.
+        # Wait for it rather than sampling once: it appears after a fetch, and
+        # a CSS :not([hidden]) check proved unreliable here.
+        guide_open = False
+        for _ in range(20):
+            if page.evaluate("!document.getElementById('guide-backdrop').hidden"):
+                guide_open = True
+                break
+            page.wait_for_timeout(250)
+
+        if guide_open:
+            print("capturing the intro guide")
+            for tab, name in [("international", "15-guide-international"),
+                              ("how", "15-guide-how")]:
+                page.locator(f'.modal-tab[data-gt="{tab}"]').click()
+                page.wait_for_timeout(400)
+                shot(page, ".modal", name)
+            page.locator("#guide-close").click()
+            page.wait_for_timeout(400)
 
         # ---------------------------------------------------- 1. the app at rest
         print("capturing the input screen")

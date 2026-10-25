@@ -374,6 +374,25 @@ that is the same threshold <code>SCAM-PRICE-TOO-GOOD</code> uses, and in this sn
 catches eight listings that are per-room prices quoted as whole-unit rent. They are
 demoted and labelled, not hidden.</p>
 
+<h4>Telling someone what they are looking at</h4>
+
+<p>Most of what this app knows is useless to a person who has never rented in the
+United States, because they do not yet have the words. An introduction opens on the
+first visit with four tabs: how the three steps work, what actually costs money, a
+glossary of the vocabulary - gross rent against contract rent, escrow, guarantor,
+triple decker, walk-up - and a tab written specifically for someone signing from
+abroad: what a landlord will ask them for, what to do with no American credit history,
+and the three conditions that must all be true before any money moves. It can be
+dismissed for the day or reopened from the header, and its text lives in
+<code>data/guide.json</code> so it can be corrected without a deploy.</p>
+
+<figure>
+  <img src="{{IMG:15-guide-international}}" alt="The introduction, on the tab for international renters">
+  <figcaption><b>The tab that exists because the rest of the app assumes too much.</b>
+  A landlord asking for a social security number is routine; not having one is also
+  routine, and knowing that is the difference between a sentence and a panic.</figcaption>
+</figure>
+
 <h4>Where the shortlist actually is</h4>
 
 <p>Rent is a geographic question and a ranked list hides that. The shortlist is

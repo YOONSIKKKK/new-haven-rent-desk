@@ -81,6 +81,12 @@ key was found before you try anything.
 
 ## Using it
 
+**An introduction opens on your first visit** with four tabs: how the three steps work,
+what actually costs money, a glossary of American rental vocabulary, and a tab for
+people renting from abroad — what a landlord will ask for, what to do with no US credit
+history, and what must be true before any money moves. Dismiss it for the day, or
+reopen it any time from **Guide** in the header. Its text is in `data/guide.json`.
+
 Fill in **About you** — budget, when you actually arrive, whether you have a car.
 Every figure is scored against those, not against an average renter.
 
@@ -139,6 +145,7 @@ gives the same numbers twice, and why hostile text in a listing cannot move a pr
 | `data/listings.json` | 152 New Haven listings, Yale off-campus marketplace, captured 2026-10-24 |
 | `data/rent_baseline.json` | U.S. Census ACS 2023, 133 tracts: median gross rent, contract rent, rent by bedroom count |
 | `data/ct_rental_rules.json` | The Connecticut rules the app is permitted to assert, with sources |
+| `data/guide.json` | The introduction's four tabs, as data so the wording can be corrected without touching code |
 | `data/places.json` | 758 searchable destinations: 50 curated Yale places resolved and bounds-checked at build time, plus 708 harvested from OpenStreetMap |
 | `data/destinations.json` | The original six quick picks, kept as a fallback |
 | `data/listing_history.json` | One row per listing per refresh — how long it has been advertised, and whether the price moved |

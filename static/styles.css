@@ -489,3 +489,80 @@ body.map-open .actions{display:none}
   body.map-open .rec-list{display:none}
   body.map-open .map-wrap.fullscreen{padding-left:16px}
 }
+
+/* ---------------------------------------------------------- intro guide */
+.guide-open{
+  padding:7px 14px;border:0;border-radius:999px;cursor:pointer;
+  background:var(--blue-weak);color:var(--blue-press);
+  font:inherit;font-size:12.5px;font-weight:700;letter-spacing:-.015em;
+  transition:background .15s;
+}
+.guide-open:hover{background:#d6e8ff}
+
+body.modal-open{overflow:hidden}
+/* display:flex overrides what the hidden attribute does by default, so the
+   backdrop kept swallowing every click on the page once the dialogue closed.
+   This has to come first, and it has to be explicit. */
+.modal-backdrop[hidden]{display:none}
+.modal-backdrop{
+  position:fixed;inset:0;z-index:300;background:rgba(25,31,40,.42);
+  backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:24px;
+  animation:fade .16s ease-out;
+}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.modal{
+  background:#fff;border-radius:22px;width:min(760px,100%);max-height:min(86vh,860px);
+  display:flex;flex-direction:column;box-shadow:0 20px 70px rgba(25,31,40,.3);overflow:hidden;
+  animation:rise .2s cubic-bezier(.22,1,.36,1);
+}
+@keyframes rise{from{transform:translateY(14px);opacity:.6}to{transform:none;opacity:1}}
+
+.modal-head{display:flex;align-items:flex-start;gap:16px;padding:28px 30px 18px}
+.modal-head h2{font-size:23px;font-weight:700;letter-spacing:-.035em;line-height:1.25}
+.modal-head p{color:var(--g600);font-size:14px;margin-top:6px;line-height:1.5}
+.modal-x{
+  flex:none;width:34px;height:34px;border:0;border-radius:10px;cursor:pointer;
+  background:var(--g100);color:var(--g600);font-size:21px;line-height:1;
+  transition:background .15s,color .15s;
+}
+.modal-x:hover{background:var(--g200);color:var(--g900)}
+
+.modal-tabs{display:flex;gap:4px;padding:0 30px;border-bottom:1px solid var(--g100);flex-wrap:wrap}
+.modal-tab{
+  padding:11px 14px;border:0;background:transparent;cursor:pointer;
+  color:var(--g600);font:inherit;font-size:13.5px;font-weight:650;letter-spacing:-.015em;
+  border-bottom:2.5px solid transparent;margin-bottom:-1px;transition:color .15s,border-color .15s;
+}
+.modal-tab:hover{color:var(--g900)}
+.modal-tab:focus{outline:none}
+.modal-tab:focus-visible{outline:2px solid var(--blue);outline-offset:-2px;border-radius:6px}
+.modal-tab.active{color:var(--blue);border-bottom-color:var(--blue)}
+
+.modal-body{overflow-y:auto;padding:22px 30px 26px;flex:1}
+.guide-pane{display:none}
+.guide-pane.active{display:block}
+.guide-lead{font-size:15px;line-height:1.6;color:var(--g800);margin-bottom:22px;
+  padding-left:14px;border-left:3px solid var(--blue)}
+.guide-sec{margin-bottom:24px}
+.guide-sec:last-child{margin-bottom:0}
+.guide-sec h3{font-size:13px;font-weight:700;color:var(--blue-press);
+  letter-spacing:-.01em;margin-bottom:11px}
+.guide-sec dl{display:grid;grid-template-columns:minmax(132px,auto) 1fr;gap:9px 18px;margin:0}
+.guide-sec dt{font-weight:700;font-size:13.5px;letter-spacing:-.02em;line-height:1.5}
+.guide-sec dd{margin:0;font-size:13.5px;line-height:1.6;color:var(--g700)}
+@media(max-width:620px){
+  .guide-sec dl{grid-template-columns:1fr;gap:3px 0}
+  .guide-sec dd{margin-bottom:11px}
+  .modal-head,.modal-tabs,.modal-body,.modal-foot{padding-left:18px;padding-right:18px}
+}
+
+/* The page-level `footer` rule centres itself and caps its width; without
+   these resets it dragged the dialogue's footer inwards. */
+.modal .modal-foot{
+  display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;
+  margin:0;max-width:none;width:100%;
+  padding:16px 30px 20px;border-top:1px solid var(--g100);background:var(--g50);
+}
+.modal-foot small{color:var(--g500);font-size:11.5px;line-height:1.5;max-width:46ch}
+.modal-actions{display:flex;gap:9px;margin-left:auto}
+.modal-actions .btn{padding:11px 19px;font-size:14px}
