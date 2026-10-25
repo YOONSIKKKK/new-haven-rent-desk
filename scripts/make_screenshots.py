@@ -177,6 +177,13 @@ def main() -> None:
             shot(page, "#verdict-panel", "10-attack-verdict")
             shot(page, "#risk-panel", "11-attack-risk")
 
+        # ---------------------------------------------------- 5. the review queue
+        print("capturing the review queue")
+        page.goto(f"{BASE}/admin", wait_until="networkidle", timeout=30_000)
+        page.wait_for_timeout(1400)
+        if page.locator(".adm-card").count() or page.locator("#admin-list p").count():
+            shot(page, "main", "18-admin")
+
         browser.close()
 
     print()

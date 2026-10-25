@@ -100,6 +100,16 @@ committed — and appears with a **pending review** badge below everything revie
 no rating, job count or verification ticks. Those are outputs of a review, not of a
 form.
 
+**Review queue:** open **http://127.0.0.1:8000/admin** to approve or reject what has
+been submitted. It shows the applicant's contact details — which the renter-facing
+listing deliberately hides — and the reviewer ticks only what they actually verified.
+Approving publishes the profile with those ticks; rejecting removes it from the
+listing.
+
+> The review screen has **no authentication** unless `ADMIN_TOKEN` is set in `.env`, and
+> it says so on the page. That is a reasonable default on localhost, and the app needs
+> no configuration to run. Set the token before putting this app on a network.
+
 Fill in **About you** — budget, when you actually arrive, whether you have a car.
 Every figure is scored against those, not against an average renter.
 

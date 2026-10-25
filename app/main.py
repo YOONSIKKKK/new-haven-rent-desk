@@ -9,16 +9,18 @@ from __future__ import annotations
 import traceback
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, Header, HTTPException
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
+from typing import Literal
+
 from pydantic import BaseModel, Field
 
 from . import data_store as store
 from . import recommend as rec
 from . import viewer_store
 from . import tools
-from .config import MAX_AD_TEXT_CHARS, ROOT, key_status
+from .config import MAX_AD_TEXT_CHARS, ROOT, admin_token, key_status
 from .models import (
     Evaluation,
     RecommendationResult,
@@ -106,7 +108,7 @@ def viewers(service: str = "", language: str = "", max_price: int | None = None)
     payload = store.viewers()
     # Curated profiles first, then whatever the form has received. An
     # application never outranks a reviewed profile.
-    people = payload["viewers"] + viewer_store.applications()
+    people = payload["viewers"] + viewer_store.public_profiles()
 
     if service:
         people = [v for v in people if any(s["code"] == service for s in v["services"])]
@@ -142,7 +144,7 @@ def viewers(service: str = "", language: str = "", max_price: int | None = None)
         "service_types": payload["service_types"],
         "languages": languages,
         "count": len(people),
-        "total": len(payload["viewers"]) + len(viewer_store.applications()),
+        "total": len(payload["viewers"]) + len(viewer_store.public_profiles()),
         "pending": sum(1 for v in people if v.get("pending")),
         "viewers": people,
     }
@@ -166,6 +168,66 @@ def apply_as_viewer(application: ViewerApplication) -> dict:
             "until someone checks it. Nothing was published on your behalf."
         ),
     }
+
+
+# --------------------------------------------------------------------------
+# Review screen. Local-only by design; see config.admin_token.
+# --------------------------------------------------------------------------
+class ReviewDecision(BaseModel):
+    status: Literal["approved", "rejected", "pending"]
+    note: str = Field("", max_length=300)
+    identity: bool = False
+    yale_email: bool = False
+    background_check: bool = False
+
+
+def _check_admin(token: str | None) -> None:
+    required = admin_token()
+    if required and token != required:
+        raise HTTPException(
+            status_code=401,
+            detail="ADMIN_TOKEN is set, so the review screen needs it in the "
+                   "X-Admin-Token header.",
+        )
+
+
+@app.get("/api/admin/applications")
+def list_applications(x_admin_token: str | None = Header(None)) -> dict:
+    """Everything submitted, including the contact details the listing hides."""
+    _check_admin(x_admin_token)
+    return {
+        "protected": admin_token() is not None,
+        "counts": viewer_store.counts(),
+        "applications": viewer_store.applications(),
+    }
+
+
+@app.post("/api/admin/applications/{application_id}")
+def review_application(
+    application_id: str,
+    decision: ReviewDecision,
+    x_admin_token: str | None = Header(None),
+) -> dict:
+    """Approve or reject one application, and record what was verified."""
+    _check_admin(x_admin_token)
+    record = viewer_store.set_status(
+        application_id,
+        decision.status,
+        verified={
+            "identity": decision.identity,
+            "yale_email": decision.yale_email,
+            "background_check": decision.background_check,
+        },
+        note=decision.note,
+    )
+    if record is None:
+        raise HTTPException(status_code=404, detail=f"No application {application_id}")
+    return {"ok": True, "application": record, "counts": viewer_store.counts()}
+
+
+@app.get("/admin")
+def admin_page():
+    return FileResponse(STATIC_DIR / "admin.html")
 
 
 @app.get("/api/destinations")

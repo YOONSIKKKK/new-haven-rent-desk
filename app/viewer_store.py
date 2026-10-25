@@ -39,9 +39,68 @@ def _initials(name: str) -> str:
     return (letters or name[:2]).upper()
 
 
-def applications() -> list[dict]:
-    """Stored applications, newest first, shaped like a viewer profile."""
-    return list(reversed(_read().get("applications", [])))
+# Fields that belong to the review process, never to a public listing.
+PRIVATE_FIELDS = ("contact", "submitted_at", "reviewed_at", "review_note", "status")
+
+
+def applications(status: str | None = None) -> list[dict]:
+    """Stored applications, newest first. Pass a status to filter."""
+    rows = list(reversed(_read().get("applications", [])))
+    if status:
+        rows = [r for r in rows if r.get("status", "pending") == status]
+    return rows
+
+
+def public_profiles() -> list[dict]:
+    """Applications as the renter-facing listing should see them.
+
+    Strips the applicant's contact details and the review bookkeeping. A person
+    who offers to view apartments has not agreed to publish their email to
+    anybody who loads the page.
+    """
+    out = []
+    for row in applications():
+        status = row.get("status", "pending")
+        if status == "rejected":
+            continue
+        profile = {k: v for k, v in row.items() if k not in PRIVATE_FIELDS}
+        profile["pending"] = status != "approved"
+        out.append(profile)
+    return out
+
+
+def set_status(application_id: str, status: str, verified: dict | None = None,
+               note: str = "") -> dict | None:
+    """Approve or reject one application. Returns the updated record."""
+    if status not in ("pending", "approved", "rejected"):
+        raise ValueError(f"unknown status: {status}")
+
+    data = _read()
+    for row in data.get("applications", []):
+        if row.get("id") != application_id:
+            continue
+        row["status"] = status
+        row["pending"] = status != "approved"
+        row["reviewed_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+        row["review_note"] = (note or "")[:300]
+        if verified is not None:
+            row["verified"] = {
+                "identity": bool(verified.get("identity")),
+                "yale_email": bool(verified.get("yale_email")),
+                "background_check": bool(verified.get("background_check")),
+            }
+        STORE.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
+        return row
+    return None
+
+
+def counts() -> dict:
+    rows = _read().get("applications", [])
+    out = {"pending": 0, "approved": 0, "rejected": 0}
+    for row in rows:
+        out[row.get("status", "pending")] = out.get(row.get("status", "pending"), 0) + 1
+    out["total"] = len(rows)
+    return out
 
 
 def add(application: ViewerApplication) -> dict:
@@ -68,6 +127,7 @@ def add(application: ViewerApplication) -> dict:
         "reviews": 0,
         "jobs_done": 0,
         "pending": True,
+        "status": "pending",
         "submitted_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "services": [s.model_dump() for s in application.services],
     }

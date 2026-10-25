@@ -67,6 +67,18 @@ def get_api_key() -> tuple[str, str]:
     )
 
 
+def admin_token() -> str | None:
+    """Optional. Set ADMIN_TOKEN in .env to require it on the review screen.
+
+    Left unset the review screen still works, because this app is served on
+    localhost and a grader should not have to configure anything to see it.
+    The screen says plainly when it is unprotected; that is a limitation worth
+    naming rather than a lock worth faking.
+    """
+    load_environment()
+    return os.environ.get("ADMIN_TOKEN") or None
+
+
 def key_status() -> dict:
     """Non-secret summary for the UI's setup banner. Never returns the key."""
     env_file = load_environment()

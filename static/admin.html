@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Review queue — New Haven Rent Desk</title>
+<link rel="stylesheet" href="/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>&#128269;</text></svg>">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="mark"></span>
+    <div>
+      <h1>Review queue</h1>
+      <p class="tagline">Applications from people who want to view apartments for renters.</p>
+    </div>
+  </div>
+  <div class="status" id="admin-status"></div>
+  <a class="guide-open" href="/">Back to the app</a>
+</header>
+
+<main>
+  <div class="panel admin-warn" id="admin-warn" hidden></div>
+
+  <section class="panel">
+    <div class="panel-head">
+      <h2>Queue</h2>
+      <p>Approving publishes a profile to renters with the ticks you set below.
+      Rejecting hides it. Neither is reversible from the renter's side, so read
+      the contact details before you decide.</p>
+    </div>
+    <div class="admin-tabs" id="admin-tabs"></div>
+    <div id="admin-list"><p class="muted">Loading&hellip;</p></div>
+  </section>
+</main>
+
+<footer>
+  <span>Local review screen. Applications live in
+    <code>output/viewer_applications.json</code> and are never committed.</span>
+</footer>
+
+<script src="/admin.js"></script>
+</body>
+</html>

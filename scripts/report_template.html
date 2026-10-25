@@ -395,23 +395,26 @@ dismissed for the day or reopened from the header, and its text lives in
 
 <h4>And when the answer is &ldquo;someone has to go and look&rdquo;</h4>
 
-<p>The app's whole premise is that you cannot visit, and there is a limit to how far
-that can be solved by arithmetic. Past that limit the honest answer is to send a human,
-so the app carries a marketplace of people who will: a live video walkthrough, an
-in-person viewing with a written report, a lease read line by line, or everything
-through to keys. Each profile states what the person has done, how long they have been
-here, which languages they work in, and a price per service; the renter filters and
-chooses.</p>
+<p>The app's premise is that you cannot visit, and there is a limit to how far that
+can be solved by arithmetic. Past it the honest answer is to send a human, so the app
+carries a marketplace of people who will: a video walkthrough, an in-person viewing
+with a written report, a lease read line by line, or everything through to keys. Each
+profile states what the person has done, their languages, and a price per service.</p>
 
 <p>Providers list themselves through a form in the app. A submission is stored apart
 from the curated profiles, shows a <em>pending review</em> badge, sorts below everything
 reviewed, and arrives with no rating, no job count and no verification ticks &mdash; those
 are outputs of a review process, not of a form, and an unvetted entry must never look
-like a checked one. Two deliberate choices in a listing that carries
-a &ldquo;verified&rdquo; badge: the avatars are generated initials rather than photographs
-of people who do not exist, and the footer states plainly that the Rent Desk does not
-employ, vet, guarantee or take payment from anyone, and that a deposit for an apartment
-should never be sent to a viewer.</p>
+like a checked one. A review screen at <code>/admin</code> is where they become one: it
+shows the applicant's contact details, which the renter-facing listing deliberately does
+not, and whoever approves ticks only what they actually checked. It has no
+authentication unless <code>ADMIN_TOKEN</code> is set, and says so on the page in red
+rather than quietly.</p>
+
+<p>Two deliberate choices in a listing that carries a &ldquo;verified&rdquo; badge:
+avatars are generated initials, not photographs of people who do not exist; and the
+footer states that the Rent Desk does not employ, vet, guarantee or take payment from
+anyone, and that a deposit should never be sent to a viewer.</p>
 
 <figure>
   <img src="{{IMG:16-viewers-top}}" alt="The marketplace of people who will view a listing for you">
@@ -456,16 +459,8 @@ advertised at $2,205 a month, evaluated for someone on a $2,200 budget arriving 
 August from abroad.</p>
 
 <figure>
-  <img src="{{IMG:01-home-top}}" alt="The Rent Desk input screen">
-  <figcaption><b>Step 1 &mdash; the desk at rest.</b> The profile at the top is what every
-  later number is scored against. Below it, the 152-listing snapshot; the same screen
-  also accepts pasted text or an uploaded screenshot. The badges top right confirm the
-  model is reachable and the datasets loaded before the user tries anything.</figcaption>
-</figure>
-
-<figure>
   <img src="{{IMG:04-verdict}}" alt="Verdict panel showing advertised versus real cost">
-  <figcaption><b>Step 2 &mdash; the answer.</b> The advertised $2,205 is struck through. The
+  <figcaption><b>Step 1 &mdash; the answer.</b> The advertised $2,205 is struck through. The
   real figure is <b>$2,510 a month</b> and <b>$30,123</b> over the first year. The amber
   banner is the cost nobody mentions: a June lease against an August arrival is two
   months of rent for an empty apartment, <b>$4,410</b>.</figcaption>
@@ -473,7 +468,7 @@ August from abroad.</p>
 
 <figure>
   <img src="{{IMG:05-cost-and-fairprice}}" alt="Cost breakdown and census comparison">
-  <figcaption><b>Step 3 &mdash; where the money goes, and how it compares.</b> Each line
+  <figcaption><b>Step 2 &mdash; where the money goes, and how it compares.</b> Each line
   carries a dot: green for measured from public data, amber for an assumption. The
   utilities line cites its source &mdash; ACS tables B25064 and B25058 for census tract
   361401 &mdash; rather than asserting a number. On the right, the listing grossed up to
@@ -483,7 +478,7 @@ August from abroad.</p>
 
 <figure>
   <img src="{{IMG:07-questions}}" alt="Generated viewing questions">
-  <figcaption><b>Step 4 &mdash; what to do next.</b> The output a person who cannot visit
+  <figcaption><b>Step 3 &mdash; what to do next.</b> The output a person who cannot visit
   actually needs: questions tied to this listing's specific unknowns, each with the
   amount of money the answer moves. These are generated from the gaps the parser
   admitted, which is why admitting gaps is treated as a feature.</figcaption>
