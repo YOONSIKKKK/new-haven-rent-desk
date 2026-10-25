@@ -181,24 +181,32 @@ async function loadDestinations(query = "") {
 }
 
 /* ---- out to the places people already look ----
-   These are SEARCH links built from the address, not links to a listing page.
-   None of these sites exposes a per-listing URL we are allowed to collect -
-   Zillow returns 403 to anything automated - so the honest version is to hand
-   the address over and let the person look. */
+   These SEARCH an address; none of them opens the listing itself, and the
+   labels say so. There is no per-listing URL to link to: the Yale marketplace
+   serves the same page for every listing id, Zillow returns 403 to anything
+   automated and its property URLs need a zpid only its API hands out, and
+   nothing in the Facebook or Craigslist data we hold carries a stable link.
+   A real one-to-one link needs an agreement, not a cleverer URL. */
 function outboundLinks(x) {
-  const addr = encodeURIComponent(x.address || "");
-  const street = encodeURIComponent((x.address || "").split(",")[0]);
+  const addr = (x.address || "").replace(/,\s*USA$/i, "");
+  // Zillow's own search-by-address form is hyphenated; it lands on the property
+  // page when Zillow has that address, and on a search result when it does not.
+  const zillow = encodeURIComponent(addr.replace(/[,]/g, "").trim().replace(/\s+/g, "-"));
+  const q = encodeURIComponent(addr);
+  const street = encodeURIComponent(addr.split(",")[0]);
   const geo = x.lat != null && x.lng != null ? `${x.lat},${x.lng}` : null;
+
   const links = [
-    ["Maps", `https://www.google.com/maps/search/?api=1&query=${addr}`],
+    ["Map", `https://www.google.com/maps/search/?api=1&query=${q}`],
     geo ? ["Street View",
       `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${geo}`] : null,
-    ["Zillow", `https://www.zillow.com/homes/${addr}_rb/`],
-    ["Craigslist", `https://newhaven.craigslist.org/search/apa?query=${street}`],
+    ["Search Zillow", `https://www.zillow.com/homes/${zillow}_rb/`],
+    ["Search Craigslist", `https://newhaven.craigslist.org/search/apa?query=${street}`],
   ].filter(Boolean);
+
   return `<div class="rec-out">${links.map(([label, href]) =>
     `<a href="${href}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`
-  ).join("")}<span class="rec-out-note">searches this address on those sites</span></div>`;
+  ).join("")}<span class="rec-out-note" title="No source we can reach publishes a per-listing URL">searches the address &mdash; these sites have no link we can point at</span></div>`;
 }
 
 /* ------------------------------------------------------------ ranking */
