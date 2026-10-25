@@ -323,6 +323,32 @@ def _days_since(iso_date: str | None) -> int | None:
         return None
 
 
+def amenities_of(row: dict) -> dict:
+    """What the snapshot actually records about a listing's amenities.
+
+    Each value is True, False or None. None means the listing never said, which
+    is a different thing from a stated no and is scored more gently.
+    """
+    features = row.get("property_features") or {}
+    unit = " ".join(row.get("unit_features") or []).lower()
+
+    def flag(key: str, *words: str) -> bool | None:
+        if features.get(key):
+            return True
+        if any(w in unit for w in words):
+            return True
+        return None if not features else False
+
+    pets = row.get("pets_allowed")
+    return {
+        "parking": True if (features.get("parking") or row.get("parking_allowed")
+                            or "parking" in unit) else (False if features else None),
+        "ac": flag("ac", "air conditioning"),
+        "dishwasher": flag("dishwasher", "dishwasher"),
+        "pets": True if (features.get("pets-allowed") or pets) else (False if features else None),
+    }
+
+
 def _commute_minutes(km: float, kmh: float) -> int:
     return max(1, round(km * DETOUR_FACTOR / kmh * 60))
 
@@ -333,6 +359,8 @@ def score_listing(
     cost,
     fair,
     walk_minutes: int | None,
+    amenities: dict | None = None,
+    commute_minutes: int | None = None,
 ) -> tuple[int, list[str], list[str]]:
     """Rank on what the person said matters, and say why out loud.
 
@@ -349,7 +377,11 @@ def score_listing(
     # --- budget, against the real monthly cost rather than the advertised rent
     b = w["budget"]
     if profile.monthly_budget_usd and cost.monthly_total_usd:
-        budget = profile.monthly_budget_usd
+        # A budget given per person has to be compared against this person's
+        # share, not the whole unit's bill.
+        budget = profile.monthly_budget_usd * (
+            profile.household_size if profile.budget_is_per_person else 1
+        )
         over = cost.monthly_total_usd - budget
         if over <= 0:
             headroom = -over
@@ -398,9 +430,13 @@ def score_listing(
         else:
             reasons.append("priced about level with the neighbourhood")
 
-    # --- the commute they actually have
+    # --- the commute they actually have, by the mode they chose
     c = w["commute"]
-    if walk_minutes is not None:
+    mode = profile.commute_mode
+    minutes = commute_minutes if commute_minutes is not None else walk_minutes
+    mode_word = {"walk": "on foot", "bike": "by bike", "either": "to your destination"}[mode]
+    if minutes is not None:
+        walk_minutes = minutes
         limit = profile.max_walk_minutes
         if limit and walk_minutes <= limit:
             score += min(
@@ -408,17 +444,17 @@ def score_listing(
                 (limit - walk_minutes) * c["within_limit_per_minute_spare"]
                 + c["within_limit_base"],
             )
-            reasons.append(f"about {walk_minutes} min on foot to your destination")
+            reasons.append(f"about {walk_minutes} min {mode_word}")
         elif limit:
             score -= min(
                 c["over_limit_max_penalty"],
                 (walk_minutes - limit) * c["over_limit_per_minute"],
             )
             warnings.append(
-                f"about {walk_minutes} min on foot, past the {limit} min you set"
+                f"about {walk_minutes} min {mode_word}, past the {limit} min you set"
             )
         else:
-            reasons.append(f"about {walk_minutes} min on foot to your destination")
+            reasons.append(f"about {walk_minutes} min {mode_word}")
         if walk_minutes > c["long_walk_warning_minutes"] and not profile.has_car:
             warnings.append("a long walk in a New Haven winter, and you said no car")
 
@@ -438,6 +474,42 @@ def score_listing(
             warnings.append(
                 f"{listing.bedrooms} bedroom(s) for {profile.household_size} people"
             )
+
+    if profile.max_bedrooms and listing.bedrooms and listing.bedrooms > profile.max_bedrooms:
+        score -= r["too_many_bedrooms_penalty"]
+        warnings.append(
+            f"{listing.bedrooms} bedrooms, more than the {profile.max_bedrooms} you wanted"
+        )
+
+    a = amenities or {}
+
+    def want(flag_key: str, asked: bool, bonus_key: str, unknown_key: str,
+             yes_text: str, no_text: str, unknown_text: str) -> None:
+        if not asked:
+            return
+        state = a.get(flag_key)
+        nonlocal score
+        if state is True:
+            score += r[bonus_key]
+            reasons.append(yes_text)
+        elif state is False:
+            score -= r[bonus_key]
+            warnings.append(no_text)
+        else:
+            score -= r[unknown_key]
+            warnings.append(unknown_text)
+
+    want("parking", profile.needs_parking, "parking_bonus", "parking_unknown_penalty",
+         "parking available", "no parking", "the listing never mentions parking")
+    want("ac", profile.needs_air_conditioning, "air_conditioning_bonus",
+         "air_conditioning_unknown_penalty", "air conditioning",
+         "no air conditioning listed", "the listing never mentions air conditioning")
+    want("dishwasher", profile.needs_dishwasher, "dishwasher_bonus",
+         "dishwasher_unknown_penalty", "dishwasher",
+         "no dishwasher listed", "the listing never mentions a dishwasher")
+    want("pets", profile.has_pet, "pets_allowed_bonus", "pets_unknown_penalty",
+         "pets allowed", "pets not allowed",
+         "the listing never says whether pets are allowed")
 
     if profile.needs_in_unit_laundry:
         if listing.laundry == "in_unit":
@@ -527,7 +599,16 @@ def recommend(
             walk = _commute_minutes(km, WALK_KMH)
             bike = _commute_minutes(km, BIKE_KMH)
 
-        score, reasons, warnings = score_listing(listing, profile, cost, fair, walk)
+        if profile.commute_mode == "bike":
+            chosen = bike
+        elif profile.commute_mode == "either":
+            chosen = min(x for x in (walk, bike) if x is not None) if (walk or bike) else None
+        else:
+            chosen = walk
+        score, reasons, warnings = score_listing(
+            listing, profile, cost, fair, walk,
+            amenities=amenities_of(row), commute_minutes=chosen,
+        )
 
         results.append(Recommendation(
             listing_id=row["id"],

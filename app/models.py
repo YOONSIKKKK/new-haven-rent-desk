@@ -145,13 +145,29 @@ class RiskReport(BaseModel):
 # --------------------------------------------------------------------------
 class RenterProfile(BaseModel):
     monthly_budget_usd: int | None = None
+    budget_is_per_person: bool = Field(
+        False,
+        description="True when the budget is what this person pays, not the whole unit",
+    )
     destination: str = Field("Yale campus", description="Where they commute to")
     arrival_month: str | None = Field(None, description="When they actually need the place")
     has_car: bool = False
-    max_walk_minutes: int | None = None
+    commute_mode: Literal["walk", "bike", "either"] = Field(
+        "walk", description="Which travel time the limit applies to"
+    )
+    max_walk_minutes: int | None = Field(
+        None, description="Minutes by the chosen mode, not necessarily on foot"
+    )
     household_size: int = 1
+    max_bedrooms: int | None = None
+
     needs_furnished: bool = False
     needs_in_unit_laundry: bool = False
+    needs_parking: bool = False
+    needs_air_conditioning: bool = False
+    needs_dishwasher: bool = False
+    has_pet: bool = False
+
     is_international: bool = Field(
         False, description="Cannot view in person, unfamiliar with US rental norms"
     )

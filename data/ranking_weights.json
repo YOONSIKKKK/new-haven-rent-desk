@@ -1,10 +1,8 @@
 {
   "note": "Every number the recommendation ranking uses. Edit this file and reload the app - no code change, no restart of anything but the server. Scores start at base_score and move from there; the final value is clamped to 0-100. Raise a number to make that factor matter more.",
   "last_reviewed": "2026-10-24",
-
   "base_score": 60,
   "_base_score": "Where every listing starts before anything is known about it.",
-
   "budget": {
     "_what": "Scored against the REAL monthly cost, not the advertised rent. This is the heaviest factor on purpose: being over budget is the one thing that rules a place out.",
     "under_budget_base": 10,
@@ -16,7 +14,6 @@
     "_over_budget_per_budget_fraction": "Penalty scaled by how far over, as a fraction of budget. 10% over costs 0.10 x 110 = 11.",
     "over_budget_max_penalty": 45
   },
-
   "value_vs_baseline": {
     "_what": "How the listing's gross rent compares with U.S. Census rents for its own census tract and bedroom count.",
     "implausible_below_pct": -35,
@@ -29,7 +26,6 @@
     "slightly_expensive_at_or_above_pct": 10,
     "slightly_expensive_penalty": 5
   },
-
   "commute": {
     "_what": "Walking minutes to the address the person typed, from a straight-line distance with a detour allowance.",
     "within_limit_base": 4,
@@ -39,9 +35,9 @@
     "over_limit_per_minute": 1.2,
     "over_limit_max_penalty": 22,
     "long_walk_warning_minutes": 25,
-    "_long_walk_warning_minutes": "Above this, with no car, adds a warning but no score change."
+    "_long_walk_warning_minutes": "Above this, with no car, adds a warning but no score change.",
+    "_mode_note": "max_walk_minutes is read against whichever mode the renter chose; 'either' takes the faster of the two."
   },
-
   "requirements": {
     "_what": "Things the person explicitly asked for.",
     "too_few_bedrooms_penalty": 20,
@@ -52,15 +48,23 @@
     "laundry_unknown_penalty": 8,
     "_laundry_unknown_penalty": "Deliberately harsher than on-site: not knowing is worse than knowing something mediocre.",
     "furnished_bonus": 8,
-    "not_furnished_penalty": 12
+    "not_furnished_penalty": 12,
+    "_amenities_note": "Only amenities the snapshot actually records are scored. A listing that does not mention one is treated as unknown, not absent, so it is penalised less than a stated no.",
+    "parking_bonus": 7,
+    "parking_unknown_penalty": 5,
+    "air_conditioning_bonus": 6,
+    "air_conditioning_unknown_penalty": 4,
+    "dishwasher_bonus": 4,
+    "dishwasher_unknown_penalty": 2,
+    "pets_allowed_bonus": 9,
+    "pets_unknown_penalty": 7,
+    "too_many_bedrooms_penalty": 8
   },
-
   "calendar_gap": {
     "_what": "Months of rent paid before the person arrives, from the June-lease / August-arrival mismatch.",
     "penalty_per_month": 6,
     "max_penalty": 14
   },
-
   "completeness": {
     "_what": "How much the advertisement actually states. A ranking built on guesses should rank below one built on facts.",
     "many_unknowns_at": 7,

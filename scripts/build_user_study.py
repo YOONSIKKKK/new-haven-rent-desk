@@ -114,6 +114,9 @@ def summarise() -> dict | None:
             "learned_something_new": (s.get("reaction") or {}).get("learned_something_new"),
             "would_have_used_before_signing": (s.get("reaction") or {}).get("would_have_used_before_signing"),
             "would_recommend": (s.get("reaction") or {}).get("would_recommend_to_incoming_student"),
+            "what_was_new": (s.get("reaction") or {}).get("what_was_new"),
+            "whats_missing": (s.get("reaction") or {}).get("whats_missing"),
+            "liked": (s.get("reaction") or {}).get("liked") or [],
             "quote": (s.get("reaction") or {}).get("quote")
                      if (s.get("reaction") or {}).get("consented_to_anonymous_quote") else None,
         })
@@ -143,6 +146,9 @@ def summarise() -> dict | None:
         "would_have_used_before_signing": sum(1 for r in rows if r["would_have_used_before_signing"]),
         "would_recommend": sum(1 for r in rows if r["would_recommend"]),
         "quotes": [r["quote"] for r in rows if r["quote"]],
+        "what_was_new": [r["what_was_new"] for r in rows if r["what_was_new"]],
+        "whats_missing": [r["whats_missing"] for r in rows if r["whats_missing"]],
+        "liked": [item for r in rows for item in r["liked"]],
     }
 
     return {"summary": summary, "participants": rows}

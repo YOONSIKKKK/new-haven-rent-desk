@@ -112,6 +112,39 @@ def user_study_block(study: dict | None) -> str:
     n = s["sessions"]
     errors = s["prediction_error_pct"]["values"]
 
+    # With no comparable totals there is nothing to tabulate, and a table of
+    # dashes would imply the measurement was attempted and failed. Report what
+    # the sessions did establish, and say plainly what they did not.
+    if not errors:
+        liked = "".join(f"<li>{esc(x)}</li>" for x in s.get("liked", [])[:3])
+        missing = "".join(f"<li>{esc(x)}</li>" for x in s.get("whats_missing", []))
+        new_to_them = "".join(f"<p>{esc(x)}</p>" for x in s.get("what_was_new", []))
+        plural = "s" if n != 1 else ""
+        return f"""<h4>What a real user found</h4>
+<p>{n} incoming international student{plural} has used it and given feedback. This was a
+reaction session, not the full protocol: there is no recalled first-year total to
+compare the prediction against. What it establishes is narrower and still worth
+having.</p>
+
+<p><strong>It told them something they could not work out themselves.</strong></p>
+{new_to_them}
+
+<p>Of {n} participant{plural}, <strong>{s['learned_something_new']}</strong> said so,
+<strong>{s['would_have_used_before_signing']}</strong> would have used it before signing,
+and <strong>{s['would_recommend']}</strong> would send it to someone arriving next year.</p>
+
+{f'<p>What they singled out:</p><ul>{liked}</ul>' if liked else ''}
+{f'<p>What they wanted and did not get:</p><ul>{missing}</ul>' if missing else ''}
+
+<div class="callout">
+  <h4>What this is not</h4>
+  <p>One person, and no accuracy measurement. The number that would make this credible
+  to a housing office &mdash; the prediction against what a student actually paid &mdash;
+  still has not been taken. The protocol is in the repository and this section rewrites
+  itself when sessions carrying those figures exist.</p>
+</div>"""
+
+
     body = "".join(
         f"<tr><td>{esc(r['participant'])}</td>"
         f"<td class='num'>{r['hours_spent'] if r['hours_spent'] is not None else '&mdash;'}</td>"

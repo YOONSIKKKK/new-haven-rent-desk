@@ -1,0 +1,64 @@
+{
+  "summary": {
+    "sessions": 1,
+    "sample_is_small": true,
+    "with_a_comparable_total": 0,
+    "prediction_error_pct": {
+      "values": [],
+      "median": null,
+      "worst_absolute": null
+    },
+    "hours_spent_searching": {
+      "values": [],
+      "median": null
+    },
+    "monthly_cost_discovered_after_moving_in": {
+      "values": [],
+      "median": null
+    },
+    "learned_something_new": 1,
+    "would_have_used_before_signing": 1,
+    "would_recommend": 1,
+    "quotes": [],
+    "what_was_new": [
+      "Whether the advertised price was reasonable. As an international student they had no basis for judging this, and said the comparison against local rents made them feel they were not being taken advantage of."
+    ],
+    "whats_missing": [
+      "The map is hard to read and they would prefer something closer to Google Maps. They also want links out to Zillow and Facebook listings, while suspecting those sites block that."
+    ],
+    "liked": [
+      "The interface is direct: budget, where you commute to, and a few essential options produce a shortlist with no further work.",
+      "Pasting a listing seen in a Facebook group worked and was described as genuinely practical.",
+      "The price comparison answered a question they could not answer themselves.",
+      "Hiring someone to view an apartment was something they had wanted and could not find anywhere else."
+    ]
+  },
+  "participants": [
+    {
+      "participant": "P1",
+      "group": "international",
+      "hours_spent": null,
+      "monthly_rent_usd": null,
+      "surprise_costs": 0,
+      "surprise_monthly_usd": null,
+      "gap_months_paid": null,
+      "actual_first_year_usd": null,
+      "predicted_first_year_usd": null,
+      "prediction_error_pct": null,
+      "listing_used": "their own ad",
+      "corrections": 0,
+      "learned_something_new": true,
+      "would_have_used_before_signing": true,
+      "would_recommend": true,
+      "what_was_new": "Whether the advertised price was reasonable. As an international student they had no basis for judging this, and said the comparison against local rents made them feel they were not being taken advantage of.",
+      "whats_missing": "The map is hard to read and they would prefer something closer to Google Maps. They also want links out to Zillow and Facebook listings, while suspecting those sites block that.",
+      "liked": [
+        "The interface is direct: budget, where you commute to, and a few essential options produce a shortlist with no further work.",
+        "Pasting a listing seen in a Facebook group worked and was described as genuinely practical.",
+        "The price comparison answered a question they could not answer themselves.",
+        "Hiring someone to view an apartment was something they had wanted and could not find anywhere else."
+      ],
+      "quote": null
+    }
+  ]
+}

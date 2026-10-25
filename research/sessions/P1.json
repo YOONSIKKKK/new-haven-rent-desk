@@ -1,0 +1,73 @@
+{
+  "_recording_note": "Reaction session. The participant used the app and gave feedback on it, but was not taken through part A of the protocol, so there is no recalled first-year total to compare the prediction against. Numeric fields are left null rather than estimated. What this session does establish is whether the app told someone something they did not know, and what it is missing.",
+
+  "participant": "P1",
+  "date": "2026-10-25",
+  "group": "international",
+  "arrived": "2026-08",
+  "neighbourhood": null,
+  "viewed_in_person_before_signing": null,
+
+  "search": {
+    "hours_spent": null,
+    "places_seriously_considered": null,
+    "sources_used": ["facebook group"],
+    "hardest_part": "Judging whether an advertised price was reasonable at all, as someone arriving from abroad with nothing to compare against."
+  },
+
+  "what_they_signed": {
+    "monthly_rent_usd": null,
+    "bedrooms": null,
+    "lease_start_month": null,
+    "lease_length_months": null,
+    "deposit_months": null,
+    "broker_or_application_fee_usd": null,
+    "utilities_included": []
+  },
+
+  "surprises": {
+    "costs_discovered_after_moving_in": [],
+    "gap_months_paid": null,
+    "could_sublet_gap": null,
+    "would_choose_differently": null,
+    "would_choose_differently_why": null
+  },
+
+  "their_actual_first_year": {
+    "total_usd": null,
+    "confidence": null,
+    "basis": null
+  },
+
+  "app_said": {
+    "listing_used": "their own ad",
+    "_listing_used_note": "Pasted a listing they had seen in a Facebook group, which parsed correctly.",
+    "monthly_total_usd": null,
+    "first_year_total_usd": null,
+    "upfront_cash_usd": null,
+    "fair_price_delta_pct": null,
+    "fit_score": null,
+    "gap_months": null,
+    "risk_findings": [],
+    "corrections": []
+  },
+
+  "reaction": {
+    "learned_something_new": true,
+    "what_was_new": "Whether the advertised price was reasonable. As an international student they had no basis for judging this, and said the comparison against local rents made them feel they were not being taken advantage of.",
+    "would_have_used_before_signing": true,
+    "would_have_trusted_the_number": true,
+    "would_recommend_to_incoming_student": true,
+    "whats_missing": "The map is hard to read and they would prefer something closer to Google Maps. They also want links out to Zillow and Facebook listings, while suspecting those sites block that.",
+    "liked": [
+      "The interface is direct: budget, where you commute to, and a few essential options produce a shortlist with no further work.",
+      "Pasting a listing seen in a Facebook group worked and was described as genuinely practical.",
+      "The price comparison answered a question they could not answer themselves.",
+      "Hiring someone to view an apartment was something they had wanted and could not find anywhere else."
+    ],
+    "consented_to_anonymous_quote": false,
+    "quote": null
+  },
+
+  "researcher_note": "The feature they singled out as unavailable anywhere else was the viewer marketplace, which is the newest and least evidenced part of the app. The map, which took the most work, is the thing they liked least."
+}

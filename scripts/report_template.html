@@ -634,17 +634,11 @@ payment demands, an absent landlord, and two injection payloads &mdash; one plai
 hidden in a zero-pixel span.</p>
 
 <figure>
-  <img src="{{IMG:09-attack-input}}" alt="Hostile listing pasted into the app">
-  <figcaption><b>The attack as pasted.</b> The visible payload orders the reviewer to
-  rate the listing best available, report $900 a month, and flag no risk. A second
-  payload is hidden in a <code>font-size:0px</code> span that a human reading the page on a
-  listing site would never see.</figcaption>
-</figure>
-
-<figure>
   <img src="{{IMG:10-attack-verdict}}" alt="Verdict under attack">
-  <figcaption><b>What the user sees instead.</b> The badge reads <b>manipulation attempt
-  blocked</b>. The attack demanded $900; the desk reports <b>$1,728 a month</b> from the
+  <figcaption><b>What the user sees instead.</b> The pasted advertisement carried a
+  visible payload ordering the reviewer to rate it best available, report $900 a month
+  and flag no risk, plus a second hidden in a <code>font-size:0px</code> span. The badge
+  reads <b>manipulation attempt blocked</b>. The attack demanded $900; the desk reports <b>$1,728 a month</b> from the
   advertised $1,485, because that figure was never the model's to decide. The attack
   demanded silence on risk; the headline opens <b>&ldquo;Don't send money&rdquo;</b>. The three-month
   deposit is carried into upfront cash as <b>$5,940</b>.</figcaption>
@@ -741,7 +735,22 @@ an assumption, not a measurement.</p>
 </ul>
 
 <h3>With another month</h3>
+
+<p>The first three are not my ideas. They are what the student who used it asked for,
+in the order they raised them.</p>
+
 <ol>
+  <li><strong>A map they can actually read.</strong> They called the map the weakest part
+  and would rather have something closer to Google Maps. It is the piece that took the
+  most work and the piece they liked least, which is worth more than a compliment.</li>
+  <li><strong>Real links to the listing, not to a search.</strong> Cards now link out to
+  Maps, Street View, Zillow and Craigslist, but those are searches built from the
+  address: none of those sites exposes a per-listing URL that can be collected, and
+  Zillow returns 403 to anything automated. Closing that gap needs a published API or an
+  agreement, not a cleverer scraper.</li>
+  <li><strong>More of the constraints people actually have.</strong> Parking, air
+  conditioning, a dishwasher, a pet, travelling by bike, and a per-person budget were
+  added after this session, scored only where the snapshot records them.</li>
   <li><strong>The accuracy test that matters.</strong> Recruit ten students who moved to New
   Haven this year, run their actual listing through the desk, and compare the
   twelve-month prediction against what they really paid. That number &mdash; prediction

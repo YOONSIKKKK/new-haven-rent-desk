@@ -163,6 +163,12 @@
       <label>Monthly budget (all in)
         <div class="input-prefix"><span>$</span><input type="number" id="budget" value="2200" min="0" step="50"></div>
       </label>
+      <label>That budget is
+        <select id="budget-basis">
+          <option value="unit" selected>for the whole place</option>
+          <option value="person">per person</option>
+        </select>
+      </label>
       <label>You actually arrive in
         <select id="arrival">
           <option>January</option><option>February</option><option>March</option>
@@ -174,8 +180,18 @@
       <label>People in the household
         <input type="number" id="household" value="1" min="1" max="8">
       </label>
-      <label>Longest walk you accept
+      <label>You get there
+        <select id="commute-mode">
+          <option value="walk" selected>on foot</option>
+          <option value="bike">by bike</option>
+          <option value="either">either way</option>
+        </select>
+      </label>
+      <label>Longest trip you accept
         <div class="input-suffix"><input type="number" id="walk" value="20" min="1" max="60"><span>min</span></div>
+      </label>
+      <label>Most bedrooms you want <span class="v-opt">optional</span>
+        <input type="number" id="max-beds" placeholder="no limit" min="0" max="6">
       </label>
     </div>
     <div class="checks">
@@ -183,7 +199,13 @@
       <label class="check"><input type="checkbox" id="car"><span>I will have a car</span></label>
       <label class="check"><input type="checkbox" id="laundry"><span>I need in-unit laundry</span></label>
       <label class="check"><input type="checkbox" id="furnished"><span>I need it furnished</span></label>
+      <label class="check"><input type="checkbox" id="parking"><span>I need parking</span></label>
+      <label class="check"><input type="checkbox" id="ac"><span>I need air conditioning</span></label>
+      <label class="check"><input type="checkbox" id="dishwasher"><span>I want a dishwasher</span></label>
+      <label class="check"><input type="checkbox" id="pet"><span>I have a pet</span></label>
     </div>
+    <p class="profile-note">Only things the listings actually record are scored. Where a
+    listing never says, it is marked unknown rather than assumed absent.</p>
   </section>
 
   <!-- ------------------------------------------------ input -->

@@ -174,6 +174,7 @@ gives the same numbers twice, and why hostile text in a listing cannot move a pr
 | `data/destinations.json` | The original six quick picks, kept as a fallback |
 | `data/listing_history.json` | One row per listing per refresh — how long it has been advertised, and whether the price moved |
 | `data/ranking_weights.json` | Every number the recommendation ranking uses, so it can be retuned without touching code |
+| `research/sessions/P1.json` | The one user session recorded so far |
 | `data/cost_assumptions.json` | Measured figures and assumptions, kept separate and labelled as such |
 
 All four are committed. The app never calls the network except to reach the model.

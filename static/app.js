@@ -180,6 +180,27 @@ async function loadDestinations(query = "") {
   } catch (e) { /* the box still accepts a typed address */ }
 }
 
+/* ---- out to the places people already look ----
+   These are SEARCH links built from the address, not links to a listing page.
+   None of these sites exposes a per-listing URL we are allowed to collect -
+   Zillow returns 403 to anything automated - so the honest version is to hand
+   the address over and let the person look. */
+function outboundLinks(x) {
+  const addr = encodeURIComponent(x.address || "");
+  const street = encodeURIComponent((x.address || "").split(",")[0]);
+  const geo = x.lat != null && x.lng != null ? `${x.lat},${x.lng}` : null;
+  const links = [
+    ["Maps", `https://www.google.com/maps/search/?api=1&query=${addr}`],
+    geo ? ["Street View",
+      `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${geo}`] : null,
+    ["Zillow", `https://www.zillow.com/homes/${addr}_rb/`],
+    ["Craigslist", `https://newhaven.craigslist.org/search/apa?query=${street}`],
+  ].filter(Boolean);
+  return `<div class="rec-out">${links.map(([label, href]) =>
+    `<a href="${href}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`
+  ).join("")}<span class="rec-out-note">searches this address on those sites</span></div>`;
+}
+
 /* ------------------------------------------------------------ ranking */
 async function rankListings() {
   const box = $("listing-list");
@@ -227,7 +248,7 @@ async function rankListings() {
       const beds = x.bedrooms_min === x.bedrooms_max
         ? `${x.bedrooms_min ?? "?"} bed`
         : `${x.bedrooms_min ?? "?"}&ndash;${x.bedrooms_max ?? "?"} bed`;
-      return `<button class="rec-card${x.within_budget ? "" : " over"}" data-id="${x.listing_id}">
+      return `<div class="rec-card${x.within_budget ? "" : " over"}" data-id="${x.listing_id}" role="button" tabindex="0">
         <div class="rec-top">
           <span class="rec-rank">${i + 1}</span>
           <span class="rec-addr">${esc(x.address)}</span>
@@ -253,13 +274,23 @@ async function rankListings() {
           `<li class="good">${esc(s)}</li>`).join("")}</ul>` : ""}
         ${x.warnings.length ? `<ul class="rec-why">${x.warnings.map((s) =>
           `<li class="bad">${esc(s)}</li>`).join("")}</ul>` : ""}
-      </button>`;
+        ${outboundLinks(x)}
+      </div>`;
     }).join("");
 
     drawMap(d);
 
     box.querySelectorAll(".rec-card").forEach((card) => {
-      card.addEventListener("click", () => selectListing(Number(card.dataset.id)));
+      card.addEventListener("click", (e) => {
+        if (e.target.closest(".rec-out")) return;   // the link is the action
+        selectListing(Number(card.dataset.id));
+      });
+      card.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          selectListing(Number(card.dataset.id));
+        }
+      });
     });
   } catch (e) {
     box.innerHTML = `<p class="muted">Could not rank listings: ${esc(e.message)}</p>`;
@@ -289,6 +320,13 @@ $("ad-image").addEventListener("change", (e) => {
 function readProfile() {
   return {
     monthly_budget_usd: Number($("budget").value) || null,
+    budget_is_per_person: $("budget-basis").value === "person",
+    commute_mode: $("commute-mode").value,
+    max_bedrooms: Number($("max-beds").value) || null,
+    needs_parking: $("parking").checked,
+    needs_air_conditioning: $("ac").checked,
+    needs_dishwasher: $("dishwasher").checked,
+    has_pet: $("pet").checked,
     arrival_month: $("arrival").value,
     household_size: Number($("household").value) || 1,
     max_walk_minutes: Number($("walk").value) || null,
