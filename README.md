@@ -291,6 +291,25 @@ run the app:
 Both HTML files embed their images as base64 and open by double-clicking.
 `slides.html` loads reveal.js from a CDN: arrow keys to move, **F** for full screen.
 
+### The demo video
+
+```bash
+.venv/Scripts/python.exe run.py                       # in one terminal
+.venv/Scripts/python.exe scripts/record_demo.py       # in another
+```
+
+Writes `output/demo/rent-desk-demo.webm` (about 2:20) and `output/demo/cues.txt`.
+The recording drives the real app, with an injected cursor so the clicks are
+visible and captions so it reads with the sound off. Figures in the captions are
+taken off the page as it runs, so the video cannot quote a number the app did not
+produce. The narration script, timed against the cue sheet, is
+`research/demo_narration.md`.
+
+The video itself is not committed - 28 MB does not belong in a clone, and the
+script regenerates it. It is `.webm` because the only ffmpeg here is the stripped
+build Playwright ships, which cannot write H.264; with a real ffmpeg on `PATH`
+the script also writes an `.mp4`.
+
 ### Retuning the ranking
 
 Every number the ranking uses lives in `data/ranking_weights.json`, annotated with
@@ -371,11 +390,12 @@ app/
 static/                    index.html, styles.css, app.js — no build step
 data/                      listings, census baseline, rules, assumptions
 scripts/                   build-time data capture, test harnesses, deliverable builders
-research/                  user-study protocol, demo script, session records
+research/                  user-study protocol, demo and narration scripts, session records
 output/
   safety_test.json         red-team results
   cost_test.json           cost and quality, both configurations
   screenshots/             images embedded into report.html and slides.html
+  demo/cues.txt            caption timings the narration script is written against
 report.html                the report (generated)
 slides.html                the deck (generated)
 ```

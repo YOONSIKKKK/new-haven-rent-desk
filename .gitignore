@@ -19,6 +19,12 @@ output/viewer_applications.json
 # Scratch from build and verification runs
 output/_*
 
+# The demo recording itself. Thirty megabytes of video does not belong in a
+# clone: scripts/record_demo.py regenerates it, and output/demo/cues.txt keeps
+# the timings the narration script is written against.
+output/demo/*.webm
+output/demo/*.mp4
+
 # OS
 Thumbs.db
 desktop.ini
